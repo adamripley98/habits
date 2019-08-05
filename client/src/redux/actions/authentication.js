@@ -1,4 +1,6 @@
-// Actions which will be dispatched to the reducers (authReducer.js)
+import axios from 'axios';
+import { REGISTER_REQUEST, REGISTER_FAILURE, REGISTER_SUCCESS } from '../types';
+import { checkPassword, encryptPassword } from '../../utils/passwordUtils';
 
 // Dispatch login action, will call appropriate reducer (authReducer.js)
 export function login(userId, userType, name, location, profilePicture) {
@@ -14,17 +16,40 @@ export function login(userId, userType, name, location, profilePicture) {
 
 // Dispatch register action, will call appropriate reducer (authReducer.js)
 export function register(name, email, password, repeatPassword) {
-  console.log('enters register action');
-  if (password !== repeatPassword) {
-    // TODO REGISTER_FAILURE
-    return;
-  }
-  // TODO actually register
-  return {
-    type: 'REGISTER',
-    name,
-    email,
-    password,
+  // TODO send welcome email
+  // TODO axios request to backend
+  return (dispatch) => {
+    dispatch({
+      type: REGISTER_REQUEST,
+    });
+    const invalidPassword = checkPassword(password, repeatPassword);
+    if (!invalidPassword) {
+      const encryptedPassword = encryptPassword(password);
+      console.log('encrypted', encryptedPassword);
+      axios.post('/api/register', {
+        name,
+        email,
+        encryptedPassword,
+      })
+        .then((resp) => {
+
+        })
+        .catch((error) => {
+
+        });
+      dispatch({
+        type: REGISTER_SUCCESS,
+        name,
+        email,
+        password,
+        success: 'Registered!',
+      });
+    } else {
+      dispatch({
+        type: REGISTER_FAILURE,
+        error: invalidPassword,
+      });
+    }
   };
 }
 

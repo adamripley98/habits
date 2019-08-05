@@ -27,7 +27,7 @@ class SignUp extends Component {
     const {
       name, email, password, repeatPassword,
     } = this.state;
-    register(name, email, password, repeatPassword);
+    this.props.onRegister(name, email, password, repeatPassword);
   }
 
   render() {

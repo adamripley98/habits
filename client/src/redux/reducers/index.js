@@ -1,6 +1,5 @@
 import { persistCombineReducers } from 'redux-persist';
-import storage from 'redux-persist/es/storage';
-
+import storage from 'redux-persist/lib/storage';
 import authReducer from './authReducer';
 
 // Config necessary for state persistance
@@ -9,7 +8,6 @@ const config = {
   storage,
 };
 
-// Root reducer combines all separate reducers and calls appropriate one
 const rootReducer = persistCombineReducers(config, {
   authState: authReducer,
 });
