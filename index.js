@@ -1,10 +1,19 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 const app = express();
 
+// Import routes here
+const register = require('./backend/routes/auth/register')();
+
 // Serve the static files from the React app
+app.use(bodyParser.json({ limit: '150mb' }));
+app.use(bodyParser.urlencoded({ limit: '150mb', extended: true }));
 app.use(express.static(path.join(__dirname, 'client/build')));
+
+// Routes
+app.use('/api/', register);
 
 // An api endpoint that returns a short list of items
 app.get('/api/getList', (req, res) => {

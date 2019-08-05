@@ -25,7 +25,6 @@ export function register(name, email, password, repeatPassword) {
     const invalidPassword = checkPassword(password, repeatPassword);
     if (!invalidPassword) {
       const encryptedPassword = encryptPassword(password);
-      console.log('encrypted', encryptedPassword);
       axios.post('/api/register', {
         name,
         email,

@@ -17,11 +17,16 @@ export function checkPassword(password, repeatPassword) {
   return false;
 }
 
+// Helper function to encrypt password
 export function encryptPassword(password) {
   const hash = bcrypt.hashSync(password);
   return hash;
 }
 
+// Helper function to check hashed password during log in
 export function checkHashedPassword(password, hashedPassword) {
-  return false;
+  bcrypt.compare(password, hashedPassword, (err, res) => {
+    if (err) return false;
+    return res;
+  });
 }
