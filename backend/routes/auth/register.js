@@ -55,9 +55,6 @@ module.exports = () => {
           });
         });
     });
-    // TODO Check for valid name and email and password
-    // TODO Check to make sure user doesn't already exist
-    res.send({ success: true });
   });
 
   return router;

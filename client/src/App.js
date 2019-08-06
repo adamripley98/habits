@@ -4,6 +4,7 @@ import './App.css';
 import Home from './pages/Home';
 import List from './pages/List';
 import SignUp from './pages/auth/SignUp';
+import Login from './pages/auth/Login';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/list" component={List} />
           <Route path="/register" component={SignUp} />
+          <Route path="/login" component={Login} />
         </Switch>
       </div>
     );

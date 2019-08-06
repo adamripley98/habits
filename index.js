@@ -16,18 +16,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 // Routes
 app.use('/api/', register);
 
-// Connecting to mongo
-const options = {
-  useMongoClient: true,
-  // sets how many times to try reconnecting
-  reconnectTries: Number.MAX_VALUE,
-  // sets the delay between every retry (milliseconds)
-  reconnectInterval: 1000,
-};
-
-mongoose.Promise = global.Promise;
-
-mongoose.connect(process.env.MONGODB_URI, options);
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
 // An api endpoint that returns a short list of items
 app.get('/api/getList', (req, res) => {
