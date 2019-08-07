@@ -3,13 +3,14 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../../models/user');
+const { encryptPassword } = require('../../utils/passwordUtils');
 
 module.exports = () => {
   // Route to handle user registration
   router.post('/register', (req, res) => {
-    const { name, email, encryptedPassword } = req.body;
+    const { name, email, password } = req.body;
 
-    if (!name || !email || !encryptedPassword) {
+    if (!name || !email || !password) {
       res.send({
         success: false,
         error: 'Ensure all fields are filled in.',
@@ -32,11 +33,10 @@ module.exports = () => {
         });
         return;
       }
-
       const newUser = new User({
         email,
         name,
-        password: encryptedPassword,
+        password: encryptPassword(password),
       });
 
       newUser.save()

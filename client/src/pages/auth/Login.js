@@ -48,7 +48,7 @@ class Login extends Component {
   }
 }
 
-SignUp.propTypes = {
+Login.propTypes = {
   onLogin: PropTypes.func,
 };
 

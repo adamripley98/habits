@@ -1,16 +1,28 @@
 import axios from 'axios';
-import { REGISTER_REQUEST, REGISTER_FAILURE, REGISTER_SUCCESS } from '../types';
+import {
+  REGISTER_REQUEST, REGISTER_FAILURE, REGISTER_SUCCESS,
+  LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,
+} from '../types';
 import { checkPassword, encryptPassword } from '../../utils/passwordUtils';
 
 // Dispatch login action, will call appropriate reducer (authReducer.js)
-export function login(userId, userType, name, location, profilePicture) {
-  return {
-    type: 'LOGIN',
-    userId,
-    userType,
-    name,
-    location,
-    profilePicture,
+export function login(email, password) {
+  return (dispatch) => {
+    dispatch({
+      type: LOGIN_REQUEST,
+    });
+    if (email && password) {
+      axios.post('/api/login', {
+        email,
+        password,
+      })
+        .then((resp) => {
+
+        })
+        .catch((error) => {
+
+        });
+    }
   };
 }
 
@@ -24,11 +36,10 @@ export function register(name, email, password, repeatPassword) {
     });
     const invalidPassword = checkPassword(password, repeatPassword);
     if (!invalidPassword) {
-      const encryptedPassword = encryptPassword(password);
       axios.post('/api/register', {
         name,
         email,
-        encryptedPassword,
+        password,
       })
         .then((resp) => {
 

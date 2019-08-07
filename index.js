@@ -7,6 +7,7 @@ const app = express();
 
 // Import routes here
 const register = require('./backend/routes/auth/register')();
+const login = require('./backend/routes/auth/login')();
 
 // Serve the static files from the React app
 app.use(bodyParser.json({ limit: '150mb' }));
@@ -15,6 +16,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Routes
 app.use('/api/', register);
+app.use('/api/', login);
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
