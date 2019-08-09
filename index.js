@@ -2,12 +2,13 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 const app = express();
 
 // Import routes here
 const register = require('./backend/routes/auth/register')();
-const login = require('./backend/routes/auth/login')();
+const login = require('./backend/routes/auth/login');
 
 // Serve the static files from the React app
 app.use(bodyParser.json({ limit: '150mb' }));
@@ -16,9 +17,19 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Routes
 app.use('/api/', register);
-app.use('/api/', login);
+app.use('/api/', login(passport));
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+
+// Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+const initPassport = require('./backend/utils/passport/init');
+const useLocalStrategy = require('./backend/utils/passport/localStrategy');
+
+initPassport(passport);
+useLocalStrategy(passport);
 
 // An api endpoint that returns a short list of items
 app.get('/api/getList', (req, res) => {
