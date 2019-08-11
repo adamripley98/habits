@@ -8,10 +8,7 @@ function encryptPassword(password) {
 
 // Helper function to check hashed password during log in
 function checkHashedPassword(password, hashedPassword) {
-  bcrypt.compare(password, hashedPassword, (err, res) => {
-    if (err) return false;
-    return res;
-  });
+  return bcrypt.compareSync(password, hashedPassword);
 }
 
 module.exports = {

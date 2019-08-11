@@ -5,12 +5,11 @@ const { checkHashedPassword } = require('../passwordUtils');
 
 module.exports = (passport) => {
   passport.use('local', new LocalStrategy({
-    usernameField: 'username',
+    usernameField: 'email',
     passwordField: 'password',
   }, (username, password, done) => {
     // Find the user with the given username
     User.findOne({ email: username }, (err, user) => {
-      console.log('looking for user', username, password);
       // If there's an error, finish trying to authenticate (auth failed)
       if (err) {
         return done(err);
@@ -20,9 +19,9 @@ module.exports = (passport) => {
       if (!user) {
         return done(null, false, { message: 'Incorrect email.' });
       }
-
       // If passwords do not match, auth failed
-      if (!checkHashedPassword(user, password)) {
+      const passwordsMatch = checkHashedPassword(password, user.password);
+      if (!passwordsMatch) {
         return done(null, false, { message: 'Incorrect password.' });
       }
 

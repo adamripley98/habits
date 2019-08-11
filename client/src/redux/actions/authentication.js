@@ -17,10 +17,17 @@ export function login(email, password) {
         password,
       })
         .then((resp) => {
-
+          const { user } = resp.data;
+          dispatch({
+            type: LOGIN_SUCCESS,
+            user,
+          });
         })
         .catch((error) => {
-
+          dispatch({
+            type: LOGIN_FAILURE,
+            error,
+          });
         });
     }
   };
@@ -42,18 +49,16 @@ export function register(name, email, password, repeatPassword) {
         password,
       })
         .then((resp) => {
-
+          dispatch({
+            type: REGISTER_SUCCESS,
+            name,
+            email,
+            success: 'Registered!',
+          });
         })
         .catch((error) => {
 
         });
-      dispatch({
-        type: REGISTER_SUCCESS,
-        name,
-        email,
-        password,
-        success: 'Registered!',
-      });
     } else {
       dispatch({
         type: REGISTER_FAILURE,
