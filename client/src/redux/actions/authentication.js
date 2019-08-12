@@ -1,9 +1,11 @@
 import axios from 'axios';
 import {
   REGISTER_REQUEST, REGISTER_FAILURE, REGISTER_SUCCESS,
-  LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT,
+  LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,
+  LOGOUT_FAILURE, LOGOUT_REQUEST, LOGOUT_SUCCESS,
+  SYNC_FAILURE, SYNC_REQUEST, SYNC_SUCCESS,
 } from '../types';
-import { checkPassword, encryptPassword } from '../../utils/passwordUtils';
+import { checkPassword } from '../../utils/passwordUtils';
 
 // Dispatch login action, will call appropriate reducer (authReducer.js)
 export function login(email, password) {
@@ -17,12 +19,18 @@ export function login(email, password) {
         password,
       })
         .then((resp) => {
-          const { user } = resp.data;
-          console.log('user', user);
-          dispatch({
-            type: LOGIN_SUCCESS,
-            user,
-          });
+          if (resp.data.success) {
+            const { user } = resp.data;
+            dispatch({
+              type: LOGIN_SUCCESS,
+              user,
+            });
+          } else {
+            dispatch({
+              type: LOGIN_FAILURE,
+              error: resp.data.error,
+            });
+          }
         })
         .catch((error) => {
           dispatch({
@@ -50,14 +58,24 @@ export function register(name, email, password, repeatPassword) {
         password,
       })
         .then((resp) => {
-          const { user } = resp.data;
-          dispatch({
-            type: REGISTER_SUCCESS,
-            user,
-          });
+          if (resp.data.success) {
+            const { user } = resp.data;
+            dispatch({
+              type: REGISTER_SUCCESS,
+              user,
+            });
+          } else {
+            dispatch({
+              type: REGISTER_FAILURE,
+              error: resp.data.error,
+            });
+          }
         })
-        .catch((error) => {
-
+        .catch(() => {
+          dispatch({
+            type: REGISTER_FAILURE,
+            error: 'Error registering user.',
+          });
         });
     } else {
       dispatch({
@@ -68,9 +86,59 @@ export function register(name, email, password, repeatPassword) {
   };
 }
 
-// Dispatch logout action, will call appropriate reducer (authReducer.js)
+// Dispatch logout action
 export function logout() {
-  return {
-    type: LOGOUT,
+  return (dispatch) => {
+    dispatch({
+      type: LOGOUT_REQUEST,
+    });
+    axios.post('/api/logout')
+      .then((resp) => {
+        if (resp.data.success) {
+          dispatch({
+            type: LOGOUT_SUCCESS,
+          });
+        } else {
+          dispatch({
+            type: LOGOUT_FAILURE,
+            error: resp.data.error,
+          });
+        }
+      })
+      .catch(() => {
+        dispatch({
+          type: LOGOUT_FAILURE,
+          error: 'Error logging out.',
+        });
+      });
+  };
+}
+
+// Dispatch sync action, ensures backend and frontend auth states are in alignment
+export function sync() {
+  // TODO logout if states don't sync
+  return (dispatch) => {
+    dispatch({
+      type: SYNC_REQUEST,
+    });
+    axios.get('/api/sync')
+      .then((resp) => {
+        if (resp.data.success) {
+          dispatch({
+            type: SYNC_SUCCESS,
+          });
+        } else {
+          dispatch({
+            type: SYNC_FAILURE,
+            error: resp.data.error,
+          });
+        }
+      })
+      .catch(() => {
+        dispatch({
+          type: SYNC_FAILURE,
+          error: 'Error syncing states',
+        });
+      });
   };
 }
