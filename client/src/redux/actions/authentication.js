@@ -115,13 +115,12 @@ export function logout() {
 }
 
 // Dispatch sync action, ensures backend and frontend auth states are in alignment
-export function sync() {
-  // TODO logout if states don't sync
+export function sync(userId) {
   return (dispatch) => {
     dispatch({
       type: SYNC_REQUEST,
     });
-    axios.get('/api/sync')
+    axios.get(`/api/sync/${userId}`)
       .then((resp) => {
         if (resp.data.success) {
           dispatch({
@@ -132,6 +131,73 @@ export function sync() {
             type: SYNC_FAILURE,
             error: resp.data.error,
           });
+          // If states aren't synced, log user out
+          axios.post('/api/logout')
+            .then((res) => {
+              if (res.data.success) {
+                dispatch({
+                  type: LOGOUT_SUCCESS,
+                });
+              } else {
+                dispatch({
+                  type: LOGOUT_FAILURE,
+                  error: 'Error logging out',
+                });
+              }
+            })
+            .catch(() => {
+              dispatch({
+                type: LOGOUT_FAILURE,
+                error: 'Error logging out',
+              });
+            });
+        }
+      })
+      .catch(() => {
+        dispatch({
+          type: SYNC_FAILURE,
+          error: 'Error syncing states',
+        });
+      });
+  };
+}
+
+export function forgot(email) {
+  return (dispatch) => {
+    dispatch({
+      type: SYNC_REQUEST,
+    });
+    axios.get(`/api/sync/${userId}`)
+      .then((resp) => {
+        if (resp.data.success) {
+          dispatch({
+            type: SYNC_SUCCESS,
+          });
+        } else {
+          dispatch({
+            type: SYNC_FAILURE,
+            error: resp.data.error,
+          });
+          // If states aren't synced, log user out
+          axios.post('/api/logout')
+            .then((res) => {
+              if (res.data.success) {
+                dispatch({
+                  type: LOGOUT_SUCCESS,
+                });
+              } else {
+                dispatch({
+                  type: LOGOUT_FAILURE,
+                  error: 'Error logging out',
+                });
+              }
+            })
+            .catch(() => {
+              dispatch({
+                type: LOGOUT_FAILURE,
+                error: 'Error logging out',
+              });
+            });
         }
       })
       .catch(() => {

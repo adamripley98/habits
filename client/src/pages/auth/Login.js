@@ -33,7 +33,7 @@ class Login extends Component {
     return (
       <div className="container">
         {this.props.userId && <Redirect to="/" />}
-        <h1>Project Home</h1>
+        <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             Email address
@@ -47,6 +47,10 @@ class Login extends Component {
         </form>
         <Link to="/register">
           Register
+        </Link>
+        <br />
+        <Link to="/forgot">
+          Forgot Password
         </Link>
         <br />
       </div>

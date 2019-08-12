@@ -12,8 +12,10 @@ import requireLogin from './utils/requireLogin';
 import { sync } from './redux/actions/authentication';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.onSync();
+  componentDidUpdate(prevProps) {
+    if (!prevProps.userId && this.props.userId) {
+      this.props.onSync(this.props.userId);
+    }
   }
 
   render() {
@@ -38,18 +40,20 @@ class App extends Component {
 
 App.propTypes = {
   onSync: PropTypes.func,
+  userId: PropTypes.string,
 };
 
 // Allows us to access redux state as this.props.userId inside component
 const mapStateToProps = (state) => {
   return {
+    userId: state.authState.userId,
   };
 };
 
 // Allows us to dispatch a login event by calling this.props.onLogin
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSync: () => dispatch(sync()),
+    onSync: userId => dispatch(sync(userId)),
   };
 };
 
