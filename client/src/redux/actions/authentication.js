@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   REGISTER_REQUEST, REGISTER_FAILURE, REGISTER_SUCCESS,
-  LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,
+  LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT,
 } from '../types';
 import { checkPassword, encryptPassword } from '../../utils/passwordUtils';
 
@@ -18,6 +18,7 @@ export function login(email, password) {
       })
         .then((resp) => {
           const { user } = resp.data;
+          console.log('user', user);
           dispatch({
             type: LOGIN_SUCCESS,
             user,
@@ -49,11 +50,10 @@ export function register(name, email, password, repeatPassword) {
         password,
       })
         .then((resp) => {
+          const { user } = resp.data;
           dispatch({
             type: REGISTER_SUCCESS,
-            name,
-            email,
-            success: 'Registered!',
+            user,
           });
         })
         .catch((error) => {
@@ -71,6 +71,6 @@ export function register(name, email, password, repeatPassword) {
 // Dispatch logout action, will call appropriate reducer (authReducer.js)
 export function logout() {
   return {
-    type: 'LOGOUT',
+    type: LOGOUT,
   };
 }

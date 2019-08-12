@@ -40,12 +40,26 @@ module.exports = () => {
       });
 
       newUser.save()
-        .then(() => {
+        .then((usr) => {
           // TODO send welcome email
-          // TODO log user in
-          res.send({
-            success: true,
-            error: null,
+          req.login(usr, (errLogin) => {
+            if (errLogin) {
+              res.send({
+                success: false,
+                error: `Error logging in new user: ${errLogin}`,
+              });
+            } else {
+              // Send back user
+              res.send({
+                success: true,
+                error: null,
+                user: {
+                  email,
+                  name,
+                  userId: usr._id,
+                },
+              });
+            }
           });
         })
         .catch(() => {

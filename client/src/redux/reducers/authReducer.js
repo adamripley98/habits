@@ -1,6 +1,6 @@
 import {
   REGISTER_FAILURE, REGISTER_SUCCESS, REGISTER_REQUEST,
-  LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,
+  LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT,
 } from '../types';
 /**
  * Reducer which handles all events related to user authentication process
@@ -16,8 +16,10 @@ const authReducer = (state = {}, action) => {
     }
     case REGISTER_SUCCESS: {
       const newState = Object.assign({}, state);
-      newState.name = action.name;
-      newState.email = action.email;
+      newState.name = action.user.name;
+      newState.email = action.user.email;
+      newState.userId = action.user.userId;
+      newState.pending = false;
       newState.success = action.success;
       newState.error = null;
       return newState;
@@ -38,6 +40,9 @@ const authReducer = (state = {}, action) => {
     }
     case LOGIN_SUCCESS: {
       const newState = Object.assign({}, state);
+      newState.name = action.user.name;
+      newState.email = action.user.email;
+      newState.userId = action.user.userId;
       newState.pending = false;
       newState.success = action.success;
       newState.error = null;
@@ -48,6 +53,13 @@ const authReducer = (state = {}, action) => {
       newState.pending = false;
       newState.success = null;
       newState.error = action.error;
+      return newState;
+    }
+    case LOGOUT: {
+      const newState = Object.assign({}, state);
+      newState.name = null;
+      newState.email = null;
+      newState.userId = null;
       return newState;
     }
     default:

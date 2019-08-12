@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 import { register } from '../../redux/actions/authentication';
 
 class SignUp extends Component {
@@ -33,6 +34,7 @@ class SignUp extends Component {
   render() {
     return (
       <div className="container">
+        {this.props.userId && <Redirect to="/" />}
         <h1>Project Home</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -53,6 +55,9 @@ class SignUp extends Component {
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
+        <Link to="/login">
+          Login
+        </Link>
       </div>
     );
   }
@@ -60,11 +65,13 @@ class SignUp extends Component {
 
 SignUp.propTypes = {
   onRegister: PropTypes.func,
+  userId: PropTypes.string,
 };
 
 // Allows us to access redux state as this.props.userId inside component
 const mapStateToProps = (state) => {
   return {
+    userId: state.authState.userId,
   };
 };
 

@@ -20,10 +20,11 @@ module.exports = (passport) => {
           res.status(404).send({ error: loginErr });
           return;
         }
+        console.log('userId', user._id);
         const userData = {
           email: user.email,
           name: user.name,
-          id: user._id,
+          userId: user._id,
         };
         res.send({ user: userData });
       });

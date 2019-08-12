@@ -2,8 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const User = require('../../models/user');
-const { encryptPassword } = require('../../utils/passwordUtils');
+// const User = require('../../models/user');
 
 module.exports = () => {
   // Route to check if backend auth state and frontend state sync
@@ -11,8 +10,8 @@ module.exports = () => {
     console.log('session', req.session);
     res.send({
       success: false,
-      error: 'Not implemented'
-    })
+      error: 'Not implemented',
+    });
   });
 
   return router;
