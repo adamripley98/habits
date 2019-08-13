@@ -4,6 +4,7 @@ import {
   LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,
   LOGOUT_FAILURE, LOGOUT_REQUEST, LOGOUT_SUCCESS,
   SYNC_FAILURE, SYNC_REQUEST, SYNC_SUCCESS,
+  FORGOT_FAILURE, FORGOT_REQUEST, FORGOT_SUCCESS,
 } from '../types';
 import { checkPassword } from '../../utils/passwordUtils';
 
@@ -165,46 +166,35 @@ export function sync(userId) {
 export function forgot(email) {
   return (dispatch) => {
     dispatch({
-      type: SYNC_REQUEST,
+      type: FORGOT_REQUEST,
     });
-    axios.get(`/api/sync/${userId}`)
-      .then((resp) => {
-        if (resp.data.success) {
-          dispatch({
-            type: SYNC_SUCCESS,
-          });
-        } else {
-          dispatch({
-            type: SYNC_FAILURE,
-            error: resp.data.error,
-          });
-          // If states aren't synced, log user out
-          axios.post('/api/logout')
-            .then((res) => {
-              if (res.data.success) {
-                dispatch({
-                  type: LOGOUT_SUCCESS,
-                });
-              } else {
-                dispatch({
-                  type: LOGOUT_FAILURE,
-                  error: 'Error logging out',
-                });
-              }
-            })
-            .catch(() => {
-              dispatch({
-                type: LOGOUT_FAILURE,
-                error: 'Error logging out',
-              });
-            });
-        }
+    if (email) {
+      axios.post('/api/forgot', {
+        email,
       })
-      .catch(() => {
-        dispatch({
-          type: SYNC_FAILURE,
-          error: 'Error syncing states',
+        .then((resp) => {
+          if (resp.data.success) {
+            dispatch({
+              type: FORGOT_SUCCESS,
+            });
+          } else {
+            dispatch({
+              type: FORGOT_FAILURE,
+              error: resp.data.error,
+            });
+          }
+        })
+        .catch(() => {
+          dispatch({
+            type: FORGOT_FAILURE,
+            error: 'Error changing password',
+          });
         });
+    } else {
+      dispatch({
+        type: FORGOT_FAILURE,
+        error: 'Error changing password',
       });
+    }
   };
 }

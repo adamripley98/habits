@@ -13,6 +13,7 @@ const register = require('./backend/routes/auth/register')();
 const login = require('./backend/routes/auth/login');
 const sync = require('./backend/routes/auth/sync')();
 const logout = require('./backend/routes/auth/logout')();
+const forgot = require('./backend/routes/auth/forgot')();
 
 // Serve the static files from the React app
 app.use(bodyParser.json({ limit: '150mb' }));
@@ -47,6 +48,7 @@ app.use('/api/', register);
 app.use('/api/', login(passport));
 app.use('/api/', sync);
 app.use('/api/', logout);
+app.use('/api/', forgot);
 
 // An api endpoint that returns a short list of items
 app.get('/api/getList', (req, res) => {

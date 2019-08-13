@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { forgot } from '../../redux/actions/authentication';
 
-class SignUp extends Component {
+class Forgot extends Component {
   constructor(props) {
     super(props);
     this.state = {
