@@ -3,6 +3,8 @@ import {
   LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,
   LOGOUT_FAILURE, LOGOUT_REQUEST, LOGOUT_SUCCESS,
   SYNC_SUCCESS, SYNC_FAILURE, SYNC_REQUEST,
+  FORGOT_FAILURE, FORGOT_REQUEST, FORGOT_SUCCESS,
+  RESET_REQUEST, RESET_FAILURE, RESET_SUCCESS,
 } from '../types';
 /**
  * Reducer which handles all events related to user authentication process
@@ -106,6 +108,48 @@ const authReducer = (state = {}, action) => {
       newState.name = null;
       newState.email = null;
       newState.userId = null;
+      return newState;
+    }
+    case FORGOT_REQUEST: {
+      const newState = Object.assign({}, state);
+      newState.pending = true;
+      newState.error = null;
+      newState.success = null;
+      return newState;
+    }
+    case FORGOT_SUCCESS: {
+      const newState = Object.assign({}, state);
+      newState.pending = false;
+      newState.error = null;
+      newState.success = true;
+      return newState;
+    }
+    case FORGOT_FAILURE: {
+      const newState = Object.assign({}, state);
+      newState.pending = false;
+      newState.error = action.error;
+      newState.success = false;
+      return newState;
+    }
+    case RESET_REQUEST: {
+      const newState = Object.assign({}, state);
+      newState.pending = true;
+      newState.error = null;
+      newState.success = null;
+      return newState;
+    }
+    case RESET_SUCCESS: {
+      const newState = Object.assign({}, state);
+      newState.pending = false;
+      newState.error = null;
+      newState.success = true;
+      return newState;
+    }
+    case RESET_FAILURE: {
+      const newState = Object.assign({}, state);
+      newState.pending = false;
+      newState.error = action.error;
+      newState.success = false;
       return newState;
     }
     default:

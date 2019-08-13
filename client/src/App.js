@@ -9,6 +9,7 @@ import SignUp from './pages/auth/SignUp';
 import Login from './pages/auth/Login';
 import Nav from './components/Nav';
 import Forgot from './pages/auth/Forgot';
+import Reset from './pages/auth/Reset';
 import requireLogin from './utils/requireLogin';
 import { sync } from './redux/actions/authentication';
 
@@ -29,6 +30,7 @@ class App extends Component {
           <Route path="/register" component={SignUp} />
           <Route path="/login" component={Login} />
           <Route path="/forgot" component={Forgot} />
+          <Route path="/reset/:token" component={Reset} />
         </Switch>
       </div>
     );

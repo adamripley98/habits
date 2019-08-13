@@ -5,6 +5,7 @@ import {
   LOGOUT_FAILURE, LOGOUT_REQUEST, LOGOUT_SUCCESS,
   SYNC_FAILURE, SYNC_REQUEST, SYNC_SUCCESS,
   FORGOT_FAILURE, FORGOT_REQUEST, FORGOT_SUCCESS,
+  RESET_FAILURE, RESET_REQUEST, RESET_SUCCESS,
 } from '../types';
 import { checkPassword } from '../../utils/passwordUtils';
 
@@ -197,4 +198,12 @@ export function forgot(email) {
       });
     }
   };
+}
+
+export function reset(password, passwordConfirm) {
+  return (dispatch) => {
+    dispatch({
+      type: RESET_REQUEST,
+    });
+  }
 }
