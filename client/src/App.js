@@ -15,7 +15,7 @@ import { sync } from './redux/actions/authentication';
 
 class App extends Component {
   componentDidUpdate(prevProps) {
-    if (!prevProps.userId && this.props.userId) {
+    if (prevProps.userId !== this.props.userId) {
       this.props.onSync(this.props.userId);
     }
   }

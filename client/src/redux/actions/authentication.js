@@ -200,10 +200,39 @@ export function forgot(email) {
   };
 }
 
-export function reset(password, passwordConfirm) {
+export function reset(password, passwordConfirm, token) {
   return (dispatch) => {
     dispatch({
       type: RESET_REQUEST,
     });
-  }
+    const invalidPassword = checkPassword(password, passwordConfirm);
+    if (!invalidPassword) {
+      axios.post('/api/reset', {
+        token,
+        password,
+      })
+        .then((resp) => {
+          if (resp.data.success) {
+            dispatch({
+              type: RESET_SUCCESS,
+            });
+          } else {
+            dispatch({
+              type: RESET_FAILURE,
+              error: resp.data.error,
+            });
+          }
+        })
+        .catch(() => {
+          dispatch({
+            type: RESET_FAILURE,
+            error: 'Error resetting password.',
+          });
+        });
+    }
+    dispatch({
+      type: RESET_FAILURE,
+      error: invalidPassword,
+    });
+  };
 }

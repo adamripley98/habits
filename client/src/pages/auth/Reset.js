@@ -15,6 +15,26 @@ class Reset extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+    // Find the token in the url
+    const { token } = this.props.match.params;
+    // Call backend to make sure token is valid/not expired
+    axios.get(`/api/reset/${token}`)
+      .then((resp) => {
+        if (!resp.data.success) {
+          this.setState({
+            error: resp.data.error,
+          });
+        }
+      })
+      .catch((err) => {
+        this.setState({
+          error: err,
+        });
+      });
+  }
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
