@@ -23,6 +23,7 @@ module.exports = {
     "react/prefer-stateless-function": "off",
     "import/prefer-default-export": "off",
     "react/require-default-props": "off",
-    "react/destructuring-assignment": "off"
+    "react/destructuring-assignment": "off",
+    "react/forbid-prop-types": "off",
   },
 };

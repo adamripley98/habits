@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { reset } from '../../redux/actions/authentication';
+import { reset, loadReset } from '../../redux/actions/authentication';
 
 class Reset extends Component {
   constructor(props) {
@@ -19,20 +19,7 @@ class Reset extends Component {
     window.scrollTo(0, 0);
     // Find the token in the url
     const { token } = this.props.match.params;
-    // Call backend to make sure token is valid/not expired
-    axios.get(`/api/reset/${token}`)
-      .then((resp) => {
-        if (!resp.data.success) {
-          this.setState({
-            error: resp.data.error,
-          });
-        }
-      })
-      .catch((err) => {
-        this.setState({
-          error: err,
-        });
-      });
+    this.props.onLoadReset(token);
   }
 
   handleChange(e) {
@@ -75,7 +62,9 @@ class Reset extends Component {
 
 Reset.propTypes = {
   onReset: PropTypes.func,
+  onLoadReset: PropTypes.func,
   userId: PropTypes.string,
+  match: PropTypes.object,
 };
 
 // Allows us to access redux state as this.props.userId inside component
@@ -89,6 +78,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onReset: (password, passwordConfirm) => dispatch(reset(password, passwordConfirm)),
+    onLoadReset: token => dispatch(loadReset(token)),
   };
 };
 

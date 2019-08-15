@@ -6,6 +6,7 @@ import {
   SYNC_FAILURE, SYNC_REQUEST, SYNC_SUCCESS,
   FORGOT_FAILURE, FORGOT_REQUEST, FORGOT_SUCCESS,
   RESET_FAILURE, RESET_REQUEST, RESET_SUCCESS,
+  LOAD_RESET_REQUEST, LOAD_RESET_FAILURE, LOAD_RESET_SUCCESS,
 } from '../types';
 import { checkPassword } from '../../utils/passwordUtils';
 
@@ -234,5 +235,24 @@ export function reset(password, passwordConfirm, token) {
       type: RESET_FAILURE,
       error: invalidPassword,
     });
+  };
+}
+
+export function loadReset(token) {
+  return (dispatch) => {
+    dispatch({
+      type: LOAD_RESET_REQUEST,
+    });
+    axios.get(`/api/reset/${token}`)
+      .then((resp) => {
+        if (resp.data.success) {
+
+        } else {
+
+        }
+      })
+      .catch(() => {
+
+      });
   };
 }
