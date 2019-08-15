@@ -246,13 +246,21 @@ export function loadReset(token) {
     axios.get(`/api/reset/${token}`)
       .then((resp) => {
         if (resp.data.success) {
-
+          dispatch({
+            type: LOAD_RESET_SUCCESS,
+          });
         } else {
-
+          dispatch({
+            type: LOAD_RESET_FAILURE,
+            error: resp.data.error,
+          });
         }
       })
       .catch(() => {
-
+        dispatch({
+          type: LOAD_RESET_FAILURE,
+          error: 'Link is broken or has expired.',
+        });
       });
   };
 }

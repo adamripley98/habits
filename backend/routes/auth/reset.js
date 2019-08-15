@@ -38,10 +38,10 @@ module.exports = () => {
   });
 
   // Route to handle resetting a password
-  router.post('/reset/:token', (req, res) => {
+  router.post('/reset', (req, res) => {
     // Isolate variables
-    const { password } = req.body;
-    const { token } = req.params;
+    const { password, token } = req.body;
+    console.log(req.body);
     // Find given user with refresh token in Mongo, makes sure it isn't expired
     User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
       if (err) {

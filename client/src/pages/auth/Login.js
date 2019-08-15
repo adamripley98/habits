@@ -35,6 +35,13 @@ class Login extends Component {
         {this.props.userId && <Redirect to="/" />}
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
+          {
+          this.props.error && (
+            <div className="alert alert-danger" role="alert">
+              {this.props.error}
+            </div>
+          )
+          }
           <div className="form-group">
             Email address
             <input value={this.state.email} name="email" onChange={this.handleChange} type="email" className="form-control" placeholder="Enter email" />
@@ -61,12 +68,14 @@ class Login extends Component {
 Login.propTypes = {
   onLogin: PropTypes.func,
   userId: PropTypes.string,
+  error: PropTypes.string,
 };
 
 // Allows us to access redux state as this.props.userId inside component
 const mapStateToProps = (state) => {
   return {
     userId: state.authState.userId,
+    error: state.authState.error,
   };
 };
 

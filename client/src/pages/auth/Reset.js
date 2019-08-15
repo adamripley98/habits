@@ -10,6 +10,7 @@ class Reset extends Component {
     this.state = {
       password: '',
       passwordConfirm: '',
+      token: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,6 +20,7 @@ class Reset extends Component {
     window.scrollTo(0, 0);
     // Find the token in the url
     const { token } = this.props.match.params;
+    this.setState({ token });
     this.props.onLoadReset(token);
   }
 
@@ -31,9 +33,11 @@ class Reset extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const {
-      email,
+      password,
+      passwordConfirm,
+      token,
     } = this.state;
-    this.props.onReset(email);
+    this.props.onReset(password, passwordConfirm, token);
   }
 
   render() {
@@ -44,11 +48,11 @@ class Reset extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             Password
-            <input value={this.state.password} name="email" onChange={this.handleChange} type="password" className="form-control" placeholder="Enter password" />
+            <input value={this.state.password} name="password" onChange={this.handleChange} type="password" className="form-control" placeholder="Enter password" />
           </div>
           <div className="form-group">
             Confirm Password
-            <input value={this.state.passwordConfirm} name="email" onChange={this.handleChange} type="password" className="form-control" placeholder="Repeat password" />
+            <input value={this.state.passwordConfirm} name="passwordConfirm" onChange={this.handleChange} type="password" className="form-control" placeholder="Repeat password" />
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
@@ -77,7 +81,7 @@ const mapStateToProps = (state) => {
 // Allows us to dispatch a login event by calling this.props.onLogin
 const mapDispatchToProps = (dispatch) => {
   return {
-    onReset: (password, passwordConfirm) => dispatch(reset(password, passwordConfirm)),
+    onReset: (password, passwordConfirm, token) => dispatch(reset(password, passwordConfirm, token)),
     onLoadReset: token => dispatch(loadReset(token)),
   };
 };
