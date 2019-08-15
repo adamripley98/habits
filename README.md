@@ -15,4 +15,6 @@ What would your life look like, if according to your own terms, you were 100% op
 
 ## Features for later version
 - Influencer and company sponsored "habit competitions"
-- Micro-betting on goals with friends to create more friendly competition 
+- Micro-betting on goals with friends to create friendly competition
+- Customized UI depending on user preference
+- Advanced mood tracking data to share with therapists and psychiatrists
