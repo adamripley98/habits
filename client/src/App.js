@@ -10,6 +10,7 @@ import Login from './pages/auth/Login';
 import Nav from './components/Nav';
 import Forgot from './pages/auth/Forgot';
 import Reset from './pages/auth/Reset';
+import LandingPage from './pages/LandingPage';
 import requireLogin from './utils/requireLogin';
 import { sync } from './redux/actions/authentication';
 
@@ -25,7 +26,8 @@ class App extends Component {
       <div>
         <Nav />
         <Switch>
-          <Route exact path="/" component={requireLogin(Home)} />
+          <Route exact path="/" component={LandingPage} />
+          <Route path="/home" component={requireLogin(Home)} />
           <Route path="/list" component={List} />
           <Route path="/register" component={SignUp} />
           <Route path="/login" component={Login} />

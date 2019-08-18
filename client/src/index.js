@@ -7,6 +7,8 @@ import { persistStore } from 'redux-persist';
 import store from './redux/configureStore';
 import 'bootstrap/dist/css/bootstrap.css';
 
+import './styles/base.scss';
+
 import './index.css';
 import App from './App';
 
