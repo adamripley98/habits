@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logout } from '../redux/actions/authentication';
+import Logo from '../images/logo.png';
 
 class Nav extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class Nav extends Component {
     return (
       <div className="App">
         <nav className="navbar navbar-dark bg-dark mb-3">
+          <img src={Logo} alt="logo" className="logo"/>
           {this.props.userId ? this.loggedInLinks() : this.loggedOutLinks()}
         </nav>
       </div>

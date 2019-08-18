@@ -1,5 +1,20 @@
-h5 {
+@font-face {
+  font-family: 'Gilroy Bold';
+  src: local('Gilroy-ExtraBold'), url('../assets/fonts/Gilroy-ExtraBold.otf') format('otf');
+}
+
+.header-text {
   color: white;
+  margin-top: 5rem;
+  line-height: 5rem;
+  font-size: 4rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+.header-image {
+  width: 20rem;
+  margin-top: 2rem;
+  margin-left: 5rem;
 }
 
 .header-section {
@@ -14,4 +29,22 @@ h5 {
   transform: skewY(-6deg);
   transform-origin: top left;
   z-index: -1;
+}
+
+.about-image {
+  width: 10rem;
+  margin-bottom: 1rem;
+}
+
+.about {
+  margin: 14rem 0;
+  text-align: center;
+}
+
+.about-item {
+  padding: 0 2rem;
+}
+
+.gold-text {
+  color: $gold;
 }
