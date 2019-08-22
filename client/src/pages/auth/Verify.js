@@ -12,15 +12,6 @@ import { verify } from '../../redux/actions/authentication';
  * Component rendered to tell user that they've been verified
  */
 class Verify extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      verified: false,
-      error: '',
-      pending: true,
-    };
-  }
-
   componentDidMount() {
     const { token } = this.props.match.params;
     this.props.onVerify(token);
@@ -28,23 +19,15 @@ class Verify extends Component {
 
   render() {
     return (
-      <div className="card pad-1 marg-top-1">
+      <div className="container">
         <h2>
           Verification
         </h2>
         {
-          this.state.pending ? <Loading /> : (
-            <div>
-              { this.state.verified ? (
-                <div className="alert alert-success marg-bot-1">
-                  Your account has been verified!
-                </div>
-              ) : null }
-              <ErrorMessage error={this.state.error} />
-              <Link to="/" className="btn btn-primary full-width">
-                Back to home
-              </Link>
-            </div>
+          this.props.verified ? (
+            <p>Your account has been verified</p>
+          ) : (
+            <ErrorMessage error={this.props.error} />
           )
         }
       </div>
@@ -55,11 +38,15 @@ class Verify extends Component {
 Verify.propTypes = {
   match: PropTypes.object,
   onVerify: PropTypes.func,
+  error: PropTypes.string,
+  verified: PropTypes.bool,
 };
 
 // Allows us to access redux state as this.props.userId inside component
 const mapStateToProps = (state) => {
   return {
+    error: state.authState.error,
+    verified: state.authState.verified,
   };
 };
 

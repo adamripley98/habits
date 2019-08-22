@@ -6,7 +6,7 @@ import {
   FORGOT_FAILURE, FORGOT_REQUEST, FORGOT_SUCCESS,
   RESET_REQUEST, RESET_FAILURE, RESET_SUCCESS,
   LOAD_RESET_FAILURE, LOAD_RESET_REQUEST, LOAD_RESET_SUCCESS,
-  VERIFY_SUCCESS, VERIFY_FAILURE, VERIFY_REQUEST,
+  VERIFY_SUCCESS, VERIFY_FAILURE, VERIFY_REQUEST, CLEAR_ERRORS,
 } from '../types';
 /**
  * Reducer which handles all events related to user authentication process
@@ -187,6 +187,7 @@ const authReducer = (state = {}, action) => {
       newState.pending = false;
       newState.error = null;
       newState.success = true;
+      newState.verified = true;
       return newState;
     }
     case VERIFY_FAILURE: {
@@ -194,6 +195,13 @@ const authReducer = (state = {}, action) => {
       newState.pending = false;
       newState.error = action.error;
       newState.success = false;
+      return newState;
+    }
+    case CLEAR_ERRORS: {
+      const newState = Object.assign({}, state);
+      newState.pending = false;
+      newState.error = null;
+      newState.success = null;
       return newState;
     }
     default:

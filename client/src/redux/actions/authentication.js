@@ -8,6 +8,7 @@ import {
   RESET_FAILURE, RESET_REQUEST, RESET_SUCCESS,
   LOAD_RESET_REQUEST, LOAD_RESET_FAILURE, LOAD_RESET_SUCCESS,
   VERIFY_SUCCESS, VERIFY_FAILURE, VERIFY_REQUEST,
+  CLEAR_ERRORS,
 } from '../types';
 import { checkPassword } from '../../utils/passwordUtils';
 
@@ -290,5 +291,11 @@ export function verify(token) {
           error: 'Error verifying account.',
         });
       });
+  };
+}
+
+export function clearErrors() {
+  return {
+    type: CLEAR_ERRORS,
   };
 }

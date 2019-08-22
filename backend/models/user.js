@@ -8,7 +8,7 @@ const userSchema = new Schema({
   password: String,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
-  accountVerified: { type: Boolean, default: false },
+  accountVerified: Boolean,
   verificationToken: String,
 });
 

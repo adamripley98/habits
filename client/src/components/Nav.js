@@ -38,6 +38,7 @@ class Nav extends Component {
         <nav className="navbar navbar-dark bg-dark mb-3">
           <img src={Logo} alt="logo" className="logo" />
           <button type="button" className="btn-nav">JOIN WAITLIST</button>
+          {this.loggedInLinks()}
         </nav>
       </div>
     );

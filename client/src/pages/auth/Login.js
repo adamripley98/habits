@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { login } from '../../redux/actions/authentication';
+import { login, clearErrors } from '../../redux/actions/authentication';
+import ErrorMessage from '../../components/shared/ErrorMessage';
 
 class Login extends Component {
   constructor(props) {
@@ -13,6 +14,10 @@ class Login extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.props.onClearErrors();
   }
 
   handleChange(e) {
@@ -33,15 +38,9 @@ class Login extends Component {
     return (
       <div className="container">
         {this.props.userId && <Redirect to="/" />}
+        <ErrorMessage error={this.props.error} />
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          {
-          this.props.error && (
-            <div className="alert alert-danger" role="alert">
-              {this.props.error}
-            </div>
-          )
-          }
           <div className="form-group">
             Email address
             <input value={this.state.email} name="email" onChange={this.handleChange} type="email" className="form-control" placeholder="Enter email" />
@@ -67,6 +66,7 @@ class Login extends Component {
 
 Login.propTypes = {
   onLogin: PropTypes.func,
+  onClearErrors: PropTypes.func,
   userId: PropTypes.string,
   error: PropTypes.string,
 };
@@ -83,6 +83,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onLogin: (email, password) => dispatch(login(email, password)),
+    onClearErrors: () => dispatch(clearErrors()),
   };
 };
 

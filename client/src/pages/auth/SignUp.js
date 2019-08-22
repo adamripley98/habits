@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { register } from '../../redux/actions/authentication';
+import ErrorMessage from '../../components/shared/ErrorMessage';
 
 class SignUp extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class SignUp extends Component {
     return (
       <div className="container">
         {this.props.userId && <Redirect to="/" />}
+        <ErrorMessage error={this.props.error} />
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -66,12 +68,14 @@ class SignUp extends Component {
 SignUp.propTypes = {
   onRegister: PropTypes.func,
   userId: PropTypes.string,
+  error: PropTypes.string,
 };
 
 // Allows us to access redux state as this.props.userId inside component
 const mapStateToProps = (state) => {
   return {
     userId: state.authState.userId,
+    error: state.authState.error,
   };
 };
 

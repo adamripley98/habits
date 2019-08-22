@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { reset, loadReset } from '../../redux/actions/authentication';
+import ErrorMessage from '../../components/shared/ErrorMessage';
 
 class Reset extends Component {
   constructor(props) {
@@ -44,6 +45,7 @@ class Reset extends Component {
     return (
       <div className="container">
         {this.props.userId && <Redirect to="/" />}
+        <ErrorMessage error={this.props.error} />
         <h1>Reset Password</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -69,12 +71,14 @@ Reset.propTypes = {
   onLoadReset: PropTypes.func,
   userId: PropTypes.string,
   match: PropTypes.object,
+  error: PropTypes.string,
 };
 
 // Allows us to access redux state as this.props.userId inside component
 const mapStateToProps = (state) => {
   return {
     userId: state.authState.userId,
+    error: state.authState.error,
   };
 };
 
