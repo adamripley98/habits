@@ -9,7 +9,6 @@ class Nav extends Component {
     super(props);
     this.handleLogout = this.handleLogout.bind(this);
     this.loggedInLinks = this.loggedInLinks.bind(this);
-    // this.loggedOutLinks = this.loggedOutLinks.bind(this);
   }
 
   handleLogout() {
@@ -26,9 +25,7 @@ class Nav extends Component {
 
   loggedOutLinks() {
     return (
-      <button type="button">
-        Login
-      </button>
+      <button type="button" className="btn-nav">JOIN WAITLIST</button>
     );
   }
 
@@ -37,8 +34,7 @@ class Nav extends Component {
       <div className="App">
         <nav className="navbar navbar-dark bg-dark mb-3">
           <img src={Logo} alt="logo" className="logo" />
-          <button type="button" className="btn-nav">JOIN WAITLIST</button>
-          {this.loggedInLinks()}
+          {this.props.userId ? this.loggedInLinks() : this.loggedOutLinks()}
         </nav>
       </div>
     );

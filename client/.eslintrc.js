@@ -25,5 +25,8 @@ module.exports = {
     "react/require-default-props": "off",
     "react/destructuring-assignment": "off",
     "react/forbid-prop-types": "off",
+    "no-class-assign": "off",
+    "arrow-body-style": "off",
+    "max-len": "off",
   },
 };

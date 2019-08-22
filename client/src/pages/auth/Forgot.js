@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { forgot } from '../../redux/actions/authentication';
+import { forgot, clearErrors } from '../../redux/actions/authentication';
 
 class Forgot extends Component {
   constructor(props) {
@@ -12,6 +12,10 @@ class Forgot extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.props.onClearErrors();
   }
 
   handleChange(e) {
@@ -50,6 +54,7 @@ class Forgot extends Component {
 
 Forgot.propTypes = {
   onForgot: PropTypes.func,
+  onClearErrors: PropTypes.func,
   userId: PropTypes.string,
 };
 
@@ -64,13 +69,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onForgot: email => dispatch(forgot(email)),
+    onClearErrors: () => dispatch(clearErrors()),
   };
 };
 
 // Redux config
 Forgot = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Forgot);
 
 export default Forgot;

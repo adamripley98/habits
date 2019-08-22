@@ -37,7 +37,7 @@ class Login extends Component {
   render() {
     return (
       <div className="container">
-        {this.props.userId && <Redirect to="/" />}
+        {this.props.userId && <Redirect to="/home" />}
         <ErrorMessage error={this.props.error} />
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
@@ -90,7 +90,7 @@ const mapDispatchToProps = (dispatch) => {
 // Redux config
 Login = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Login);
 
 export default Login;

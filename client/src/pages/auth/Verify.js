@@ -1,11 +1,9 @@
 // Import frameworks
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Loading from '../../components/shared/Loading';
 import ErrorMessage from '../../components/shared/ErrorMessage';
-import { verify } from '../../redux/actions/authentication';
+import { verify, clearErrors } from '../../redux/actions/authentication';
 
 
 /**
@@ -15,6 +13,10 @@ class Verify extends Component {
   componentDidMount() {
     const { token } = this.props.match.params;
     this.props.onVerify(token);
+  }
+
+  componentWillUnmount() {
+    this.props.onClearErrors();
   }
 
   render() {
@@ -38,6 +40,7 @@ class Verify extends Component {
 Verify.propTypes = {
   match: PropTypes.object,
   onVerify: PropTypes.func,
+  onClearErrors: PropTypes.func,
   error: PropTypes.string,
   verified: PropTypes.bool,
 };
@@ -54,13 +57,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onVerify: verificationToken => dispatch(verify(verificationToken)),
+    onClearErrors: () => dispatch(clearErrors()),
   };
 };
 
 // Redux config
 Verify = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Verify);
 
 export default Verify;

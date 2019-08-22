@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { reset, loadReset } from '../../redux/actions/authentication';
+import { reset, loadReset, clearErrors } from '../../redux/actions/authentication';
 import ErrorMessage from '../../components/shared/ErrorMessage';
 
 class Reset extends Component {
@@ -18,11 +18,13 @@ class Reset extends Component {
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0);
-    // Find the token in the url
     const { token } = this.props.match.params;
     this.setState({ token });
     this.props.onLoadReset(token);
+  }
+
+  componentWillUnmount() {
+    this.props.onClearErrors();
   }
 
   handleChange(e) {
@@ -69,6 +71,7 @@ class Reset extends Component {
 Reset.propTypes = {
   onReset: PropTypes.func,
   onLoadReset: PropTypes.func,
+  onClearErrors: PropTypes.func,
   userId: PropTypes.string,
   match: PropTypes.object,
   error: PropTypes.string,
@@ -86,6 +89,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onReset: (password, passwordConfirm, token) => dispatch(reset(password, passwordConfirm, token)),
+    onClearErrors: () => dispatch(clearErrors()),
     onLoadReset: token => dispatch(loadReset(token)),
   };
 };
@@ -93,7 +97,7 @@ const mapDispatchToProps = (dispatch) => {
 // Redux config
 Reset = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Reset);
 
 export default Reset;

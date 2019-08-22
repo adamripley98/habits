@@ -3,10 +3,18 @@ import React, { Component } from 'react';
 class Home extends Component {
   render() {
     return (
-      <div className="App">
-        <h1>Project Home</h1>
-        <div className="circle">
-          76
+      <div className="container">
+        <h1>Dashboard</h1>
+        <div className="row">
+          <div className="col-lg-4 dash-card">
+            Weekly sales
+          </div>
+          <div className="col-lg-4 dash-card">
+            Weekly orders
+          </div>
+          <div className="col-lg-4 dash-card">
+            Visitors online
+          </div>
         </div>
       </div>
     );
