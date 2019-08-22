@@ -7,6 +7,7 @@ import {
   FORGOT_FAILURE, FORGOT_REQUEST, FORGOT_SUCCESS,
   RESET_FAILURE, RESET_REQUEST, RESET_SUCCESS,
   LOAD_RESET_REQUEST, LOAD_RESET_FAILURE, LOAD_RESET_SUCCESS,
+  VERIFY_SUCCESS, VERIFY_FAILURE, VERIFY_REQUEST,
 } from '../types';
 import { checkPassword } from '../../utils/passwordUtils';
 
@@ -260,6 +261,33 @@ export function loadReset(token) {
         dispatch({
           type: LOAD_RESET_FAILURE,
           error: 'Link is broken or has expired.',
+        });
+      });
+  };
+}
+
+export function verify(token) {
+  return (dispatch) => {
+    dispatch({
+      type: VERIFY_REQUEST,
+    });
+    axios.get(`/api/verify/${token}`)
+      .then((resp) => {
+        if (resp.data.success) {
+          dispatch({
+            type: VERIFY_SUCCESS,
+          });
+        } else {
+          dispatch({
+            type: VERIFY_FAILURE,
+            error: resp.data.error,
+          });
+        }
+      })
+      .catch(() => {
+        dispatch({
+          type: VERIFY_FAILURE,
+          error: 'Error verifying account.',
         });
       });
   };

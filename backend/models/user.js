@@ -8,6 +8,8 @@ const userSchema = new Schema({
   password: String,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
+  accountVerified: { type: Boolean, default: false },
+  verificationToken: String,
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -15,6 +15,7 @@ const sync = require('./backend/routes/auth/sync')();
 const logout = require('./backend/routes/auth/logout')();
 const forgot = require('./backend/routes/auth/forgot')();
 const reset = require('./backend/routes/auth/reset')();
+const verify = require('./backend/routes/auth/verify')();
 
 // Serve the static files from the React app
 app.use(bodyParser.json({ limit: '150mb' }));
@@ -51,13 +52,7 @@ app.use('/api/', sync);
 app.use('/api/', logout);
 app.use('/api/', forgot);
 app.use('/api/', reset);
-
-// An api endpoint that returns a short list of items
-app.get('/api/getList', (req, res) => {
-  const list = ['item1', 'item2', 'item3'];
-  res.json(list);
-  console.log('Sent list of items');
-});
+app.use('/api/', verify);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {

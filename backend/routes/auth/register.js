@@ -4,6 +4,7 @@ const router = express.Router();
 
 const User = require('../../models/user');
 const { encryptPassword } = require('../../utils/passwordUtils');
+const { sendWelcomeEmail } = require('../../utils/sendEmail');
 
 module.exports = () => {
   // Route to handle user registration
@@ -37,37 +38,49 @@ module.exports = () => {
         email,
         name,
         password: encryptPassword(password),
+        accountVerified: false,
       });
 
-      newUser.save()
-        .then((usr) => {
-          // TODO send welcome email
-          req.login(usr, (errLogin) => {
-            if (errLogin) {
-              res.send({
-                success: false,
-                error: `Error logging in new user: ${errLogin}`,
-              });
-            } else {
-              // Send back user
-              res.send({
-                success: true,
-                error: null,
-                user: {
-                  email,
-                  name,
-                  userId: usr._id,
-                },
-              });
-            }
-          });
-        })
-        .catch(() => {
+      // Send welcome email to new user
+      sendWelcomeEmail(newUser, (resp) => {
+        if (!resp.success) {
           res.send({
             success: false,
-            error: 'Error registering user.',
+            error: resp.error,
           });
-        });
+          return;
+        }
+        // No error, save user
+        newUser.verificationToken = resp.token;
+        newUser.save()
+          .then((usr) => {
+            req.login(usr, (errLogin) => {
+              if (errLogin) {
+                res.send({
+                  success: false,
+                  error: `Error logging in new user: ${errLogin}`,
+                });
+              } else {
+                // Send back user
+                res.send({
+                  success: true,
+                  error: null,
+                  user: {
+                    email,
+                    name,
+                    userId: usr._id,
+                  },
+                });
+              }
+            });
+          })
+          .catch(() => {
+            res.send({
+              success: false,
+              error: 'Error registering user.',
+            });
+          });
+      });
     });
   });
 

@@ -21,6 +21,31 @@ class LandingPage extends Component {
             <img className="header-image" src={DummyImage} alt="dummy" />
           </div>
         </div>
+        <div className="row about-block">
+          <div className="col-lg-8">
+            <p className="about-paragraph">
+            In an increasingly digital age, we seem to have a place online for
+            everything. We have social networks specific for our friends, our careers,
+            our dating lives, and our hobbies. Yet, at the same time, we don’t have a
+            social network targeted toward being our
+              <span className="gold-text">
+              &nbsp;best, most productive selves.&nbsp;
+              </span>
+            </p>
+            <p className="about-paragraph">
+            That’s where Dayli comes in. What would your life look like if, according
+            to your own terms, you were 100% optimized? Dayli aims to bridge
+              <span className="gold-text">
+              &nbsp;self-discipline and social accountability&nbsp;
+              </span>
+            in a platform where you can use the power of a tight-knit
+            community to stay on top of your daily goals and habits.
+            </p>
+          </div>
+          <div className="col-lg-4">
+            <img className="header-image" src={DummyImage} alt="dummy" />
+          </div>
+        </div>
         <div className="about">
           <div className="row">
             <div className="col-lg-4">

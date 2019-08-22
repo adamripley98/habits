@@ -36,8 +36,8 @@ class Nav extends Component {
     return (
       <div className="App">
         <nav className="navbar navbar-dark bg-dark mb-3">
-          <img src={Logo} alt="logo" className="logo"/>
-          {this.props.userId ? this.loggedInLinks() : this.loggedOutLinks()}
+          <img src={Logo} alt="logo" className="logo" />
+          <button type="button" className="btn-nav">JOIN WAITLIST</button>
         </nav>
       </div>
     );

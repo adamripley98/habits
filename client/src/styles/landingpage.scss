@@ -1,8 +1,3 @@
-@font-face {
-  font-family: 'Gilroy Bold';
-  src: local('Gilroy-ExtraBold'), url('../assets/fonts/Gilroy-ExtraBold.otf') format('otf');
-}
-
 .header-text {
   color: white;
   margin-top: 5rem;
@@ -45,6 +40,13 @@
   padding: 0 2rem;
 }
 
-.gold-text {
-  color: $gold;
+.about-paragraph {
+  font-size: 1.6rem;
+  color: $navy;
+  line-height: 2.8rem;
+  margin-bottom: 2rem;
+}
+
+.about-block {
+  margin: 14rem 0;
 }

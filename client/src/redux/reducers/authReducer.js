@@ -6,6 +6,7 @@ import {
   FORGOT_FAILURE, FORGOT_REQUEST, FORGOT_SUCCESS,
   RESET_REQUEST, RESET_FAILURE, RESET_SUCCESS,
   LOAD_RESET_FAILURE, LOAD_RESET_REQUEST, LOAD_RESET_SUCCESS,
+  VERIFY_SUCCESS, VERIFY_FAILURE, VERIFY_REQUEST,
 } from '../types';
 /**
  * Reducer which handles all events related to user authentication process
@@ -168,6 +169,27 @@ const authReducer = (state = {}, action) => {
       return newState;
     }
     case LOAD_RESET_FAILURE: {
+      const newState = Object.assign({}, state);
+      newState.pending = false;
+      newState.error = action.error;
+      newState.success = false;
+      return newState;
+    }
+    case VERIFY_REQUEST: {
+      const newState = Object.assign({}, state);
+      newState.pending = true;
+      newState.error = null;
+      newState.success = null;
+      return newState;
+    }
+    case VERIFY_SUCCESS: {
+      const newState = Object.assign({}, state);
+      newState.pending = false;
+      newState.error = null;
+      newState.success = true;
+      return newState;
+    }
+    case VERIFY_FAILURE: {
       const newState = Object.assign({}, state);
       newState.pending = false;
       newState.error = action.error;

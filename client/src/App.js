@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './App.css';
 import Home from './pages/Home';
-import List from './pages/List';
 import SignUp from './pages/auth/SignUp';
 import Login from './pages/auth/Login';
 import Nav from './components/Nav';
 import Forgot from './pages/auth/Forgot';
 import Reset from './pages/auth/Reset';
+import Verify from './pages/auth/Verify';
 import LandingPage from './pages/LandingPage';
 import requireLogin from './utils/requireLogin';
 import { sync } from './redux/actions/authentication';
@@ -28,11 +28,11 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/home" component={requireLogin(Home)} />
-          <Route path="/list" component={List} />
           <Route path="/register" component={SignUp} />
           <Route path="/login" component={Login} />
           <Route path="/forgot" component={Forgot} />
           <Route path="/reset/:token" component={Reset} />
+          <Route path="/verify/:token" component={Verify} />
         </Switch>
       </div>
     );
