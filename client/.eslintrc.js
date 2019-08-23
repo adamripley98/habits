@@ -28,5 +28,6 @@ module.exports = {
     "no-class-assign": "off",
     "arrow-body-style": "off",
     "max-len": "off",
+    "class-methods-use-this": "off",
   },
 };
