@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SideNav from '../components/SideNav';
+import SideNav from '../../components/SideNav';
 
 class Home extends Component {
 

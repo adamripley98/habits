@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logout } from '../redux/actions/authentication';
 import Logo from '../images/logo.png';
+import Default from '../images/default-profile.jpg';
 
 class Nav extends Component {
   constructor(props) {
@@ -17,9 +18,12 @@ class Nav extends Component {
 
   loggedInLinks() {
     return (
-      <button type="button" onClick={this.handleLogout}>
-        Logout
-      </button>
+      <div className="dropdown">
+        <img src={Default} alt="default" className="profile-pic dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a className="dropdown-item" href="#i">Logout</a>
+        </div>
+      </div>
     );
   }
 

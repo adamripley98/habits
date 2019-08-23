@@ -8,24 +8,26 @@ class SideNav extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-sm-2 side-nav">
+          <div className="col-lg-2 col-md-3 col-sm-4 side-nav">
             <nav clasNames="navbar navbar-default navbar-fixed-side">
-              <h4 className="gold-text">Personal</h4>
-              <Link to="/stats" className="nav-link">Stats</Link>
+              <h5 className="gold-text bold">Personal</h5>
+              <Link to="/home" className="nav-link">Home</Link>
               <Link to="/habits" className="nav-link">Habits</Link>
               <Link to="/todolist" className="nav-link">To Do List</Link>
               <Link to="/goals" className="nav-link">Goals</Link>
               <Link to="/journal" className="nav-link">Journal</Link>
-              <h4 className="gold-text">Social</h4>
+              <br />
+              <h5 className="gold-text bold">Social</h5>
               <Link to="/feed" className="nav-link">Feed</Link>
               <Link to="/addfriends" className="nav-link">Add friends</Link>
               <Link to="/thoughts" className="nav-link">Thoughts</Link>
-              <h4 className="gold-text">Account</h4>
+              <br />
+              <h5 className="gold-text bold">Account</h5>
               <Link to="/customize" className="nav-link">Customize Dashboard</Link>
               <Link to="/settings" className="nav-link">Account Settings</Link>
             </nav>
           </div>
-          <div className="col-sm-10">
+          <div className="col-lg-10 col-md-9 col-sm-8">
             {this.props.component}
           </div>
         </div>
