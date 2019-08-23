@@ -3,3 +3,11 @@
   background: $turquoise;
   margin: 1rem;
 }
+
+.circle {
+  border: 6px solid $gold;
+  border-radius: 50%;
+  padding: 1rem;
+  width: 4rem;
+  height: 4rem;
+}

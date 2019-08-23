@@ -1,12 +1,24 @@
 .logo {
-  margin: 2rem;
-  width: 10rem;
+  margin: 1rem;
+  width: 7rem;
 }
 
 .navbar-dark {
-  background: none !important;
+  background: $navy !important;
 }
 
 .navbar {
-  border-bottom: 3px solid $turquoise;
+  border-bottom: 10px solid $turquoise;
+}
+
+.side-nav {
+  margin-top: -1rem;
+  border-right: 1px solid $turquoise;
+  background: white;
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
 }

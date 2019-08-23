@@ -32,7 +32,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/forgot" component={Forgot} />
           <Route path="/reset/:token" component={Reset} />
-          <Route path="/verify/:token" component={Verify} />
+          <Route path="/verify/:token" component={requireLogin(Verify)} />
         </Switch>
       </div>
     );
