@@ -1,28 +1,50 @@
 import React, { Component } from 'react';
+import {
+  XYPlot, XAxis, YAxis, VerticalBarSeries, LabelSeries,
+} from 'react-vis';
 import SideNav from '../../components/SideNav';
+import data from '../../dummydata/fitness.json';
 
 class Home extends Component {
+
+  constructor(props) {
+    super(props);
+    this.displayTest = this.displayTest.bind(this);
+    this.displayGraph = this.displayGraph.bind(this);
+  }
+
+  displayGraph() {
+    const chartWidth = 600;
+    const chartHeight = 100;
+    const chartDomain = [0, chartHeight];
+    return (
+      <XYPlot
+        xType="ordinal"
+        width={chartWidth}
+        height={chartHeight}
+        yDomain={chartDomain}
+        className="chart"
+      >
+        <XAxis />
+        <VerticalBarSeries
+          data={data}
+          color="#F7BE16"
+        />
+        <LabelSeries
+          data={data.map((obj) => {
+            return { ...obj, label: obj.y.toString() };
+          })}
+          labelAnchorX="middle"
+          labelAnchorY="text-after-edge"
+        />
+      </XYPlot>
+    );
+  }
 
   displayTest() {
     return (
       <div className="container">
-        <div className="dash-card">
-          helo
-        </div>
-        <div className="row">
-          <div className="col-lg-6 dash-card">
-            Total optimization
-            <div className="circle">
-              76
-            </div>
-          </div>
-          <div className="col-lg-5 dash-card">
-            Weekly orders
-          </div>
-          <div className="col-lg-4 dash-card">
-            Visitors online
-          </div>
-        </div>
+        {this.displayGraph()}
       </div>
     );
   }

@@ -13,12 +13,6 @@
   margin-top: -1rem;
 }
 
-.navbar {
-  -webkit-box-shadow: 0 8px 6px -6px #999;
-  -moz-box-shadow: 0 8px 6px -6px #999;
-  box-shadow: 0 8px 6px -6px #999;
-}
-
 .profile-pic {
   height: 3rem;
   border-radius: 50%;
@@ -29,5 +23,12 @@
 }
 
 .nav-link:hover {
-  color: $gold;
+  color: white;
+}
+
+.nav-section {
+  margin: 0 -1rem;
+}
+.nav-section:hover {
+  background-color: $gold;
 }

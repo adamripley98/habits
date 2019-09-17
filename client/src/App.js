@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './App.css';
 import Home from './pages/Home/Home';
+import Habits from './pages/Home/Habits';
 import SignUp from './pages/auth/SignUp';
 import Login from './pages/auth/Login';
 import Nav from './components/Nav';
@@ -28,6 +29,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/home" component={requireLogin(Home)} />
+          <Route path="/habits" component={requireLogin(Habits)} />
           <Route path="/register" component={SignUp} />
           <Route path="/login" component={Login} />
           <Route path="/forgot" component={Forgot} />

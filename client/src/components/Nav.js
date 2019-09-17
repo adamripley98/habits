@@ -18,7 +18,7 @@ class Nav extends Component {
 
   loggedInLinks() {
     return (
-      <div className="dropdown">
+      <div className="dropdown dropleft">
         <img src={Default} alt="default" className="profile-pic dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a className="dropdown-item" href="#i">Logout</a>
