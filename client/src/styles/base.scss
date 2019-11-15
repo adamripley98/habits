@@ -4,8 +4,13 @@
 @import './nav';
 @import './home';
 
+@font-face {
+  font-family: 'Apercu';
+  src: url('../assets/fonts/Apercu_Regular.otf') format('woff'), /* Pretty Modern Browsers */
+}
+
 body {
-  font-family: 'Nunito', sans-serif !important;
+  font-family: 'Apercu' !important;
 }
 
 .bold {

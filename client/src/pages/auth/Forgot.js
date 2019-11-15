@@ -58,14 +58,12 @@ Forgot.propTypes = {
   userId: PropTypes.string,
 };
 
-// Allows us to access redux state as this.props.userId inside component
 const mapStateToProps = (state) => {
   return {
     userId: state.authState.userId,
   };
 };
 
-// Allows us to dispatch a login event by calling this.props.onLogin
 const mapDispatchToProps = (dispatch) => {
   return {
     onForgot: email => dispatch(forgot(email)),
@@ -73,7 +71,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-// Redux config
 Forgot = connect(
   mapStateToProps,
   mapDispatchToProps,
