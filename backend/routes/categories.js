@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const Category = require('../models/category');
+const Habit = require('../models/habit');
 const UserCheck = require('../utils/authChecking');
 
 module.exports = () => {
@@ -119,6 +120,57 @@ module.exports = () => {
               error: 'Error updating category.',
             });
           });
+      });
+    });
+  });
+
+  /*
+  Route to handle deleting a habit category
+  NOTE: deleting habit category deletes its children habits as well
+  */
+  router.delete('/', (req, res) => {
+    // Check to make sure user is logged in
+    UserCheck(req, (authRes) => {
+      if (!authRes.success) {
+        res.send({
+          success: false,
+          error: authRes.error,
+        });
+        return;
+      }
+      // Check to make sure params are provided (color, name)
+      const { name } = req.body;
+      if (!name) {
+        res.send({
+          success: false,
+          error: 'Provide a name and a color.',
+        });
+        return;
+      }
+      const userId = req.session.passport.user;
+      // Search by userId and category name, delete category
+      Category.findOneAndRemove({ userId, name }, (err, category) => {
+        if (err || !category) {
+          res.send({
+            success: false,
+            error: 'Error deleting category.',
+          });
+          return;
+        }
+        // Search habits by categoryId and delete any belonging to that category
+        Habit.deleteMany({ userId, categoryId: category._id }, (error) => {
+          if (error) {
+            res.send({
+              success: false,
+              error: 'Error deleting category.',
+            });
+            return;
+          }
+          res.send({
+            success: true,
+            error: false,
+          });
+        });
       });
     });
   });
