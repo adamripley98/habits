@@ -68,7 +68,7 @@ const mapDispatchToProps = (dispatch) => {
 // Redux config
 App = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(App);
 
 export default App;

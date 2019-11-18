@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SideNav from '../../components/SideNav';
-// import Spline from '../../components/charts/Spline';
 
 class Habits extends Component {
 
