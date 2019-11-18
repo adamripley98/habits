@@ -1,3 +1,4 @@
+// Authentication types
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILURE = 'REGISTER_FAILURE';
@@ -23,3 +24,11 @@ export const VERIFY_REQUEST = 'VERIFY_REQUEST';
 export const VERIFY_SUCCESS = 'VERIFY_SUCCESS';
 export const VERIFY_FAILURE = 'VERIFY_FAILURE';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+
+// Category and habits types
+export const ADD_CAT_REQUEST = 'ADD_CAT_REQUEST';
+export const ADD_CAT_SUCCESS = 'ADD_CAT_SUCCESS';
+export const ADD_CAT_FAILURE = 'ADD_CAT_FAILURE';
+export const LOAD_HABITS_REQUEST = 'LOAD_HABITS_REQUEST';
+export const LOAD_HABITS_SUCCESS = 'LOAD_HABITS_SUCCESS';
+export const LOAD_HABITS_FAILURE = 'LOAD_HABITS_FAILURE';

@@ -1,16 +1,17 @@
 const express = require('express');
+const async = require('async');
 
 const router = express.Router();
 
 const Category = require('../models/category');
 const Habit = require('../models/habit');
-const UserCheck = require('../utils/authChecking');
+const { UserCheck } = require('../utils/authChecking');
 
 module.exports = () => {
   /*
   Route to handle posting a new habit category
   */
-  router.post('/add', (req, res) => {
+  router.post('/category/add', (req, res) => {
     // Check to see if user is logged in
     UserCheck(req, (authRes) => {
       if (!authRes.success) {
@@ -59,6 +60,7 @@ module.exports = () => {
             res.send({
               success: true,
               error: false,
+              newCategory: name,
             });
           })
           .catch(() => {
@@ -170,6 +172,47 @@ module.exports = () => {
             success: true,
             error: false,
           });
+        });
+      });
+    });
+  });
+
+  /*
+  Route to pull all of a user's habits
+  */
+  router.get('/habits', (req, res) => {
+    // Check to ensure user is logged in
+    UserCheck(req, (authRes) => {
+      if (!authRes.success) {
+        res.send({
+          success: false,
+          error: authRes.error,
+        });
+        return;
+      }
+      const userId = req.session.passport.user;
+      const habits = {};
+      // Pull all categories by userId
+      Category.find({ userId }, (err, categories) => {
+        // Loop through each category and pull all habits from each
+        async.each(categories, (category, cb) => {
+          Habit.find({ userId, categoryId: category._id }, (err2, habs) => {
+            habits[category.name] = habs;
+            cb();
+          });
+        }, (err3) => {
+          if (err3) {
+            res.send({
+              success: false,
+              error: 'Error pulling habits.',
+            });
+          } else {
+            res.send({
+              success: true,
+              error: false,
+              habits,
+            });
+          }
         });
       });
     });

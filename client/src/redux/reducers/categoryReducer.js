@@ -1,0 +1,59 @@
+import {
+  ADD_CAT_REQUEST, ADD_CAT_SUCCESS, ADD_CAT_FAILURE,
+  LOAD_HABITS_REQUEST, LOAD_HABITS_SUCCESS, LOAD_HABITS_FAILURE,
+} from '../types';
+/**
+ * Reducer which handles all events related to user authentication process
+ */
+const categoryReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADD_CAT_REQUEST: {
+      const newState = Object.assign({}, state);
+      newState.pending = true;
+      newState.success = null;
+      newState.error = null;
+      return newState;
+    }
+    case ADD_CAT_SUCCESS: {
+      const newState = Object.assign({}, state);
+      newState.habits[action.newCategory] = [];
+      newState.pending = false;
+      newState.success = action.success;
+      newState.error = null;
+      return newState;
+    }
+    case ADD_CAT_FAILURE: {
+      const newState = Object.assign({}, state);
+      newState.pending = false;
+      newState.success = null;
+      newState.error = action.error;
+      return newState;
+    }
+    case LOAD_HABITS_REQUEST: {
+      const newState = Object.assign({}, state);
+      newState.pending = true;
+      newState.success = null;
+      newState.error = null;
+      return newState;
+    }
+    case LOAD_HABITS_SUCCESS: {
+      const newState = Object.assign({}, state);
+      newState.habits = action.habits;
+      newState.pending = false;
+      newState.success = action.success;
+      newState.error = null;
+      return newState;
+    }
+    case LOAD_HABITS_FAILURE: {
+      const newState = Object.assign({}, state);
+      newState.pending = false;
+      newState.success = null;
+      newState.error = action.error;
+      return newState;
+    }
+    default:
+      return state;
+  }
+};
+
+export default categoryReducer;

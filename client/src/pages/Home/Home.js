@@ -11,6 +11,7 @@ class Home extends Component {
     return (
       <div className="container">
         hello world
+        <input type="button" name="" value="Enter Today's Habits" />
       </div>
     );
   }

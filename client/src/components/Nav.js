@@ -20,7 +20,7 @@ class Nav extends Component {
     return (
       <div className="dropdown dropleft">
         <img src={Default} alt="default" className="profile-pic dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton" onClick={this.handleLogout}>
           <a className="dropdown-item" href="#i">Logout</a>
         </div>
       </div>
