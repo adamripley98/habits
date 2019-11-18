@@ -11,7 +11,7 @@ module.exports = () => {
   Route to handle posting a new category
   */
   router.post('/add', (req, res) => {
-    // Check if user is logged in
+    // Check to see if user is logged in
     UserCheck(req, (authRes) => {
       if (!authRes.success) {
         res.send({
@@ -20,7 +20,7 @@ module.exports = () => {
         });
         return;
       }
-
+      // Ensure parameters are provided
       const { name, color } = req.body;
       if (!name || !color) {
         res.send({
@@ -29,23 +29,9 @@ module.exports = () => {
         });
         return;
       }
-
-      User.findById(req.session.passport.user, (err, user) => {
-        if (err || !user) {
-          res.send({
-            success: false,
-            error: 'Error adding category.',
-          });
-          return;
-        }
-        let categoryAlreadyExists = false;
-        // TODO need to make this async
-        user.categories.forEach(category => {
-          if (category)
-        })
-      });
-
-      Category.findOne({ name }, (err, category) => {
+      const userId = req.session.passport.user;
+      // Search by userId and categoryName to ensure category doesn't already exist
+      Category.findOne({ userId, name }, (err, category) => {
         if (err) {
           res.send({
             success: false,
@@ -57,14 +43,30 @@ module.exports = () => {
         if (category) {
           res.send({
             success: false,
-            error: `A category with the name ${name} already exists.`,
+            error: `Category with name ${name} already exists.`,
           });
           return;
         }
+        // If it doesn't exist, create a new category with name, color, and userId
         const newCategory = new Category({
           name,
           color,
+          userId,
         });
+        // Save category in DB
+        newCategory.save()
+          .then(() => {
+            res.send({
+              success: true,
+              error: false,
+            });
+          })
+          .catch(() => {
+            res.send({
+              success: false,
+              error: 'Error adding category.',
+            });
+          });
       });
     });
   });
