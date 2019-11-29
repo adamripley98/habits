@@ -1,7 +1,7 @@
 import { persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import authReducer from './authReducer';
-import categoryReducer from './categoryReducer';
+import habitReducer from './habitReducer';
 
 // Config necessary for state persistance
 const config = {
@@ -11,7 +11,7 @@ const config = {
 
 const rootReducer = persistCombineReducers(config, {
   authState: authReducer,
-  categoryState: categoryReducer,
+  habitState: habitReducer,
 });
 
 export default rootReducer;

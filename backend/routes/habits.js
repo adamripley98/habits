@@ -206,13 +206,13 @@ module.exports = () => {
               success: false,
               error: 'Error pulling habits.',
             });
-          } else {
-            res.send({
-              success: true,
-              error: false,
-              habits,
-            });
+            return;
           }
+          res.send({
+            success: true,
+            error: false,
+            habits,
+          });
         });
       });
     });

@@ -16,7 +16,7 @@ const logout = require('./backend/routes/auth/logout')();
 const forgot = require('./backend/routes/auth/forgot')();
 const reset = require('./backend/routes/auth/reset')();
 const verify = require('./backend/routes/auth/verify')();
-const categories = require('./backend/routes/categories')();
+const habits = require('./backend/routes/habits')();
 
 // Serve the static files from the React app
 app.use(bodyParser.json({ limit: '150mb' }));
@@ -54,7 +54,7 @@ app.use('/api/', logout);
 app.use('/api/', forgot);
 app.use('/api/', reset);
 app.use('/api/', verify);
-app.use('/api/', categories);
+app.use('/api/', habits);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {

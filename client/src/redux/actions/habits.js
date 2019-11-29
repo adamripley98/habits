@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   ADD_CAT_REQUEST, ADD_CAT_SUCCESS, ADD_CAT_FAILURE,
   LOAD_HABITS_REQUEST, LOAD_HABITS_SUCCESS, LOAD_HABITS_FAILURE,
+  ADD_HABIT_REQUEST, ADD_HABIT_SUCCESS, ADD_HABIT_FAILURE,
 } from '../types';
 
 /*
@@ -34,6 +35,44 @@ export function addCategory(name, color) {
         .catch((error) => {
           dispatch({
             type: ADD_CAT_FAILURE,
+            error,
+          });
+        });
+    }
+  };
+}
+
+/*
+Action to add a habit
+*/
+export function addHabit(name, categoryName) {
+  return (dispatch) => {
+    dispatch({
+      type: ADD_HABIT_REQUEST,
+    });
+    if (name && categoryName) {
+      axios.post('/api/habit/add', {
+        name,
+        categoryName,
+      })
+        .then((resp) => {
+          if (resp.data.success) {
+            const { newHabit, category } = resp.data;
+            dispatch({
+              type: ADD_HABIT_SUCCESS,
+              newHabit,
+              category,
+            });
+          } else {
+            dispatch({
+              type: ADD_HABIT_FAILURE,
+              error: resp.data.error,
+            });
+          }
+        })
+        .catch((error) => {
+          dispatch({
+            type: ADD_HABIT_FAILURE,
             error,
           });
         });
