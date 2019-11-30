@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import {
-  addCategory, loadHabits, addHabit, checkHabit, loadHabitDataByDate,
+  addCategory, addHabit, checkHabit, loadHabitDataByDate,
 } from '../../redux/actions/habits';
 import SideNav from '../../components/SideNav';
 
@@ -31,7 +31,6 @@ class Habits extends Component {
 
   // Initially load all habits from the backend
   componentDidMount() {
-    this.props.onLoadHabits();
     this.props.onLoadHabitDataByDate(new Date());
   }
 
@@ -59,12 +58,12 @@ class Habits extends Component {
 
   handleClickLeft() {
     const tempDate = this.props.selectedDate;
-    this.props.onLoadHabitDataByDate(moment(tempDate).add(1, 'days'));
+    this.props.onLoadHabitDataByDate(moment(tempDate).subtract(1, 'days').format(''));
   }
 
   handleClickRight() {
     const tempDate = this.props.selectedDate;
-    this.props.onLoadHabitDataByDate(moment(tempDate).add(1, 'days'));
+    this.props.onLoadHabitDataByDate(moment(tempDate).add(1, 'days').format(''));
   }
 
   // Helper method to check or uncheck habit
@@ -76,16 +75,43 @@ class Habits extends Component {
   }
 
   displayHabits() {
-    if (this.props.habits) {
-      return Object.keys(this.props.habits).sort().map(category => (
+    if (this.props.habits && this.props.habits.length) {
+      // Sort alphabetically by category name
+      const sortedCategories = this.props.habits.sort((a, b) => {
+        const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
+
+      // TODO sort habit names alphabetically
+
+      return sortedCategories.map(category => (
         <div className="col-lg-6">
           <div className="category-card">
-            <h4 className="underline">{category}</h4>
+            <h4 className="underline">{category.name}</h4>
             <ul>
               {
-                this.props.habits[category].map(habit => (
+                category.habits.sort((a, b) => {
+                  const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+                  const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+                  if (nameA < nameB) {
+                    return -1;
+                  }
+                  if (nameA > nameB) {
+                    return 1;
+                  }
+                  // names must be equal
+                  return 0;
+                }).map(habit => (
                   <div className="individual-habit">
-                    <input type="checkbox" name="habit-check" value={habit._id} onClick={this.handleCheck} />
+                    <input type="checkbox" name="habit-check" value={habit.habitId} onClick={this.handleCheck} checked={habit.didComplete} />
                     <ul className="habit-text">{habit.name}</ul>
                   </div>
                 ))
@@ -207,7 +233,6 @@ class Habits extends Component {
 Habits.propTypes = {
   onAddCategory: PropTypes.func,
   onAddHabit: PropTypes.func,
-  onLoadHabits: PropTypes.func,
   onCheckHabit: PropTypes.func,
   onLoadHabitDataByDate: PropTypes.func,
   habits: PropTypes.object,
@@ -217,6 +242,7 @@ Habits.propTypes = {
 const mapStateToProps = (state) => {
   return {
     habits: state.habitState.habits,
+    selectedDate: state.habitState.selectedDate,
   };
 };
 
@@ -224,7 +250,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onAddCategory: (name, color) => dispatch(addCategory(name, color)),
     onAddHabit: (name, categoryName) => dispatch(addHabit(name, categoryName)),
-    onLoadHabits: () => dispatch(loadHabits()),
     onLoadHabitDataByDate: date => dispatch(loadHabitDataByDate(date)),
     onCheckHabit: (habitId, didComplete, date) => dispatch(checkHabit(habitId, didComplete, date)),
   };

@@ -127,6 +127,7 @@ export function loadHabitDataByDate(date) {
           dispatch({
             type: LOAD_HABIT_DATA_SUCCESS,
             habits: resp.data.habits,
+            date,
           });
         } else {
           dispatch({
@@ -152,6 +153,7 @@ export function checkHabit(habitId, didComplete, date) {
     dispatch({
       type: CHECK_HABIT_REQUEST,
     });
+    console.log('hab id', habitId, date);
     if (habitId && date) {
       axios.post('/api/habits/check', {
         habitId,
