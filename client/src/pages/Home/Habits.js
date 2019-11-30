@@ -13,12 +13,14 @@ class Habits extends Component {
     this.displaySelect = this.displaySelect.bind(this);
     this.handleChangeColor = this.handleChangeColor.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeSelect = this.handleChangeSelect.bind(this);
     this.handleSubmitAddCategory = this.handleSubmitAddCategory.bind(this);
     this.handleSubmitAddHabit = this.handleSubmitAddHabit.bind(this);
     this.state = {
       categoryName: '',
       categoryColor: '',
       habitName: '',
+      habitCategory: '',
     };
   }
 
@@ -39,23 +41,30 @@ class Habits extends Component {
     });
   }
 
+  handleChangeSelect(e) {
+    console.log('e', e.target.name);
+  }
+
   handleSubmitAddCategory() {
     const { categoryName, categoryColor } = this.state;
     this.props.onAddCategory(categoryName, categoryColor);
   }
 
   handleSubmitAddHabit() {
-    const { habitName } = this.state;
-    // TODO get categoryName
-    this.props.onAddHabit(habitName);
+    const { habitName, habitCategory } = this.state;
+    this.props.onAddHabit(habitName, habitCategory);
   }
 
   displayHabits() {
     if (this.props.habits) {
       return Object.keys(this.props.habits).map(category => (
         <div>
-          <span className="circle" />
           <h3>{category}</h3>
+          {
+            this.props.habits[category].map(habit => (
+              <p>{habit.name}</p>
+            ))
+          }
         </div>
       ));
     }
@@ -65,7 +74,7 @@ class Habits extends Component {
   displaySelect() {
     if (this.props.habits) {
       return (
-        <select id="inputCategory" className="form-control">
+        <select id="inputCategory" className="form-control" name="habitCategory" onChange={this.handleChange}>
           <option selected disabled>Choose...</option>
           {
             Object.keys(this.props.habits).map(cat => (

@@ -45,23 +45,22 @@ export function addCategory(name, color) {
 /*
 Action to add a habit
 */
-export function addHabit(name, categoryName) {
+export function addHabit(habitName, categoryName) {
   return (dispatch) => {
     dispatch({
       type: ADD_HABIT_REQUEST,
     });
-    if (name && categoryName) {
+    if (habitName && categoryName) {
       axios.post('/api/habit/add', {
-        name,
+        habitName,
         categoryName,
       })
         .then((resp) => {
           if (resp.data.success) {
-            const { newHabit, category } = resp.data;
+            const { newHabit } = resp.data;
             dispatch({
               type: ADD_HABIT_SUCCESS,
               newHabit,
-              category,
             });
           } else {
             dispatch({

@@ -74,110 +74,6 @@ module.exports = () => {
   });
 
   /*
-  Route to handle editing a habit category (i.e. changing color or name)
-  */
-  router.post('/edit', (req, res) => {
-    // Check to make sure user is logged in
-    UserCheck(req, (authRes) => {
-      if (!authRes.success) {
-        res.send({
-          success: false,
-          error: authRes.error,
-        });
-        return;
-      }
-      // Check to make sure params are provided (color, name)
-      const { color, name } = req.body;
-      if (!name || !color) {
-        res.send({
-          success: false,
-          error: 'Provide a name and a color.',
-        });
-        return;
-      }
-      const userId = req.session.passport.user;
-      // Search by userId and category name
-      Category.findOne({ userId, name }, (err, category) => {
-        // If it doesn't exist, throw error
-        if (err || !category) {
-          res.send({
-            success: false,
-            error: 'Error updating category.',
-          });
-          return;
-        }
-        // If it does exist, make changes to category and return
-        category.name = name;
-        category.color = color;
-        category.save()
-          .then(() => {
-            res.send({
-              success: true,
-              error: false,
-            });
-          })
-          .catch(() => {
-            res.send({
-              success: false,
-              error: 'Error updating category.',
-            });
-          });
-      });
-    });
-  });
-
-  /*
-  Route to handle deleting a habit category
-  NOTE: deleting habit category deletes its children habits as well
-  */
-  router.delete('/', (req, res) => {
-    // Check to make sure user is logged in
-    UserCheck(req, (authRes) => {
-      if (!authRes.success) {
-        res.send({
-          success: false,
-          error: authRes.error,
-        });
-        return;
-      }
-      // Check to make sure params are provided (color, name)
-      const { name } = req.body;
-      if (!name) {
-        res.send({
-          success: false,
-          error: 'Provide a name and a color.',
-        });
-        return;
-      }
-      const userId = req.session.passport.user;
-      // Search by userId and category name, delete category
-      Category.findOneAndRemove({ userId, name }, (err, category) => {
-        if (err || !category) {
-          res.send({
-            success: false,
-            error: 'Error deleting category.',
-          });
-          return;
-        }
-        // Search habits by categoryId and delete any belonging to that category
-        Habit.deleteMany({ userId, categoryId: category._id }, (error) => {
-          if (error) {
-            res.send({
-              success: false,
-              error: 'Error deleting category.',
-            });
-            return;
-          }
-          res.send({
-            success: true,
-            error: false,
-          });
-        });
-      });
-    });
-  });
-
-  /*
   Route to pull all of a user's habits
   */
   router.get('/habits', (req, res) => {
@@ -213,6 +109,81 @@ module.exports = () => {
             error: false,
             habits,
           });
+        });
+      });
+    });
+  });
+
+  /*
+  Route to add a new habit
+  */
+  router.post('/habit/add', (req, res) => {
+    // Check to see if user is logged in
+    UserCheck(req, (authRes) => {
+      if (!authRes.success) {
+        res.send({
+          success: false,
+          error: authRes.error,
+        });
+        return;
+      }
+      // Ensure parameters are provided
+      const { habitName, categoryName } = req.body;
+      if (!habitName || !categoryName) {
+        res.send({
+          success: false,
+          error: 'Provide a name and a category.',
+        });
+        return;
+      }
+      const userId = req.session.passport.user;
+      // Search database for existing habits with same name
+      Habit.findOne({ name: habitName, userId }, (err, habit) => {
+        if (err) {
+          res.send({
+            success: false,
+            error: 'Error adding habit.',
+          });
+          return;
+        }
+        if (habit) {
+          res.send({
+            success: false,
+            error: `There is already a habit named ${habitName} .`,
+          });
+          return;
+        }
+        // Pull out category ID
+        Category.findOne({ name: categoryName, userId }, (err2, category) => {
+          if (err2 || !category) {
+            res.send({
+              success: false,
+              error: 'Error creating habit.',
+            });
+            return;
+          }
+          // Create new habit
+          const newHabit = new Habit({
+            name: habitName,
+            userId,
+            categoryId: category._id,
+            startDate: new Date(),
+          });
+          // Save habit in DB
+          newHabit.save()
+            .then(() => {
+              res.send({
+                success: true,
+                error: false,
+                newHabit: { name: habitName, category: categoryName },
+              });
+            })
+            .catch(() => {
+              res.send({
+                success: false,
+                error: 'Error adding habit.',
+              });
+            });
         });
       });
     });
