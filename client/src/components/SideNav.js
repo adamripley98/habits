@@ -19,7 +19,7 @@ class SideNav extends Component {
               </div>
               <div className="nav-section">
                 <Link to="/habits" className="nav-link">
-                  <i className="far fa-check-circle" />
+                  <i className="fas fa-check-circle" />
                   &nbsp;&nbsp;Habits
                 </Link>
               </div>

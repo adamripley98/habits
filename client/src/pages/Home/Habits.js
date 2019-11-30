@@ -3,7 +3,9 @@ import { CirclePicker } from 'react-color';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { addCategory, loadHabits, addHabit } from '../../redux/actions/habits';
+import {
+  addCategory, loadHabits, addHabit, checkHabit, loadHabitDataByDate,
+} from '../../redux/actions/habits';
 import SideNav from '../../components/SideNav';
 
 class Habits extends Component {
@@ -16,6 +18,9 @@ class Habits extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmitAddCategory = this.handleSubmitAddCategory.bind(this);
     this.handleSubmitAddHabit = this.handleSubmitAddHabit.bind(this);
+    this.handleClickLeft = this.handleClickLeft.bind(this);
+    this.handleClickRight = this.handleClickRight.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
     this.state = {
       categoryName: '',
       categoryColor: '',
@@ -27,6 +32,7 @@ class Habits extends Component {
   // Initially load all habits from the backend
   componentDidMount() {
     this.props.onLoadHabits();
+    this.props.onLoadHabitDataByDate(new Date());
   }
 
   handleChange(e) {
@@ -51,6 +57,24 @@ class Habits extends Component {
     this.props.onAddHabit(habitName, habitCategory);
   }
 
+  handleClickLeft() {
+    const tempDate = this.props.selectedDate;
+    this.props.onLoadHabitDataByDate(moment(tempDate).add(1, 'days'));
+  }
+
+  handleClickRight() {
+    const tempDate = this.props.selectedDate;
+    this.props.onLoadHabitDataByDate(moment(tempDate).add(1, 'days'));
+  }
+
+  // Helper method to check or uncheck habit
+  handleCheck(e) {
+    const habitId = e.target.value;
+    const didComplete = e.target.checked;
+    const date = this.props.selectedDate;
+    this.props.onCheckHabit(habitId, didComplete, date);
+  }
+
   displayHabits() {
     if (this.props.habits) {
       return Object.keys(this.props.habits).sort().map(category => (
@@ -61,7 +85,7 @@ class Habits extends Component {
               {
                 this.props.habits[category].map(habit => (
                   <div className="individual-habit">
-                    <input type="checkbox" name="habit-check" value="" />
+                    <input type="checkbox" name="habit-check" value={habit._id} onClick={this.handleCheck} />
                     <ul className="habit-text">{habit.name}</ul>
                   </div>
                 ))
@@ -100,13 +124,13 @@ class Habits extends Component {
         <div className="habit-header-container">
           <h1 className="underline">Habits</h1>
           <div>
-            <i className="il-block fas fa-angle-left" />
+            <i className="il-block fas fa-angle-left" onClick={this.handleClickLeft} />
             <h3 className="il-block">
             &nbsp;&nbsp;
-              {moment(new Date()).format('dddd, MMMM Do')}
+              {moment(this.props.selectedDate).format('dddd, MMMM Do')}
             &nbsp;&nbsp;
             </h3>
-            <i className="il-block fas fa-angle-right" />
+            <i className="il-block fas fa-angle-right" onClick={this.handleClickRight} />
           </div>
           <div className="button-group">
             <button type="button" className="btn btn-primary btn-add" data-toggle="modal" data-target="#categoryModal">
@@ -184,7 +208,10 @@ Habits.propTypes = {
   onAddCategory: PropTypes.func,
   onAddHabit: PropTypes.func,
   onLoadHabits: PropTypes.func,
+  onCheckHabit: PropTypes.func,
+  onLoadHabitDataByDate: PropTypes.func,
   habits: PropTypes.object,
+  selectedDate: PropTypes.instanceOf(Date),
 };
 
 const mapStateToProps = (state) => {
@@ -198,6 +225,8 @@ const mapDispatchToProps = (dispatch) => {
     onAddCategory: (name, color) => dispatch(addCategory(name, color)),
     onAddHabit: (name, categoryName) => dispatch(addHabit(name, categoryName)),
     onLoadHabits: () => dispatch(loadHabits()),
+    onLoadHabitDataByDate: date => dispatch(loadHabitDataByDate(date)),
+    onCheckHabit: (habitId, didComplete, date) => dispatch(checkHabit(habitId, didComplete, date)),
   };
 };
 

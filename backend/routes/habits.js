@@ -1,17 +1,19 @@
 const express = require('express');
 const async = require('async');
+const moment = require('moment');
 
 const router = express.Router();
 
 const Category = require('../models/category');
 const Habit = require('../models/habit');
+const HabitEntry = require('../models/habitEntry');
 const { UserCheck } = require('../utils/authChecking');
 
 module.exports = () => {
   /*
   Route to handle posting a new habit category
   */
-  router.post('/category/add', (req, res) => {
+  router.post('/categories/add', (req, res) => {
     // Check to see if user is logged in
     UserCheck(req, (authRes) => {
       if (!authRes.success) {
@@ -115,9 +117,93 @@ module.exports = () => {
   });
 
   /*
+  Route to pull a user's habit data for a specific date
+  */
+  /*
+  Route to pull all of a user's habits
+  */
+  router.get('/habits/:date', (req, res) => {
+    // Check to ensure user is logged in
+    UserCheck(req, (authRes) => {
+      if (!authRes.success) {
+        res.send({
+          success: false,
+          error: authRes.error,
+        });
+        return;
+      }
+      const userId = req.session.passport.user;
+      const { date } = req.params;
+      const habits = [];
+      // Pull all categories by userId
+      Category.find({ userId }, (err, categories) => {
+        // Loop through each category and pull all habits from each
+        async.each(categories, (category, cb) => {
+          const catObj = {
+            name: category.name,
+            categoryId: category._id,
+            color: category.color,
+            habits: [],
+          };
+          // Loop through each category and pull all habits from each
+          Habit.find({ userId, categoryId: category._id }, (err2, habs) => {
+            async.each(habs, (hab, cb2) => {
+              // Manipulate dates
+              const beginningOfDay = moment(date).startOf('day').format('');
+              const endOfDay = moment(date).endOf('day').format('');
+              // For each habit, pull out habitEntry by date and id
+              HabitEntry.findOne({ habitId: hab._id, date: { $gte: beginningOfDay, $lt: endOfDay } }, (err3, h) => {
+                if (err3) {
+                  res.send({
+                    success: false,
+                    error: 'Error pulling habits.',
+                  });
+                  return;
+                }
+                const habitObj = {
+                  name: hab.name,
+                  habitId: hab._id,
+                  // If entry hasn't been made, default to false
+                  didComplete: h ? h.didComplete : false,
+                };
+                // Add to object
+                catObj.habits.push(habitObj);
+                cb2();
+              });
+            }, (err4) => {
+              if (err4) {
+                res.send({
+                  success: false,
+                  error: 'Error pulling habits.',
+                });
+                return;
+              }
+              habits.push(catObj);
+              cb();
+            });
+          });
+        }, (err5) => {
+          if (err5) {
+            res.send({
+              success: false,
+              error: 'Error pulling habits.',
+            });
+            return;
+          }
+          res.send({
+            success: true,
+            error: false,
+            habits,
+          });
+        });
+      });
+    });
+  });
+
+  /*
   Route to add a new habit
   */
-  router.post('/habit/add', (req, res) => {
+  router.post('/habits/add', (req, res) => {
     // Check to see if user is logged in
     UserCheck(req, (authRes) => {
       if (!authRes.success) {
@@ -185,6 +271,84 @@ module.exports = () => {
               });
             });
         });
+      });
+    });
+  });
+
+  /*
+  Route to check or uncheck a habit
+  */
+  router.post('/habits/check', (req, res) => {
+    // Check to see if user is logged in
+    UserCheck(req, (authRes) => {
+      if (!authRes.success) {
+        res.send({
+          success: false,
+          error: authRes.error,
+        });
+        return;
+      }
+      // Ensure parameters are provided
+      const { habitId, date, didComplete } = req.body;
+      if (!habitId || !date) {
+        res.send({
+          success: false,
+          error: 'Provide a habit and a date.',
+        });
+        return;
+      }
+      const userId = req.session.passport.user;
+      // Manipulate dates
+      const beginningOfDay = moment(date).startOf('day').format('');
+      const endOfDay = moment(date).endOf('day').format('');
+      // Search for habit entry by id and date
+      HabitEntry.findOne({ userId, date: { $gte: beginningOfDay, $lt: endOfDay } }, (err, habitEntry) => {
+        if (err) {
+          res.send({
+            success: false,
+            error: 'Error completing habit.',
+          });
+          return;
+        }
+        // If user hasn't made an entry, create a new one
+        if (!habitEntry) {
+          const newHabitEntry = new HabitEntry({
+            userId,
+            habitId,
+            didComplete,
+            date,
+          });
+          // Save habit entry in DB
+          newHabitEntry.save()
+            .then(() => {
+              res.send({
+                success: true,
+                error: false,
+              });
+            })
+            .catch(() => {
+              res.send({
+                success: false,
+                error: 'Error completing habit.',
+              });
+            });
+        } else {
+          // User already has made the entry, they are updating their answer
+          habitEntry.didComplete = didComplete;
+          habitEntry.save()
+            .then(() => {
+              res.send({
+                success: true,
+                error: false,
+              });
+            })
+            .catch(() => {
+              res.send({
+                success: false,
+                error: 'Error completing habit.',
+              });
+            });
+        }
       });
     });
   });
