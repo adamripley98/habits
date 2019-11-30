@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { CirclePicker } from 'react-color';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { addCategory, loadHabits, addHabit } from '../../redux/actions/habits';
 import SideNav from '../../components/SideNav';
 
@@ -13,7 +14,6 @@ class Habits extends Component {
     this.displaySelect = this.displaySelect.bind(this);
     this.handleChangeColor = this.handleChangeColor.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleChangeSelect = this.handleChangeSelect.bind(this);
     this.handleSubmitAddCategory = this.handleSubmitAddCategory.bind(this);
     this.handleSubmitAddHabit = this.handleSubmitAddHabit.bind(this);
     this.state = {
@@ -41,10 +41,6 @@ class Habits extends Component {
     });
   }
 
-  handleChangeSelect(e) {
-    console.log('e', e.target.name);
-  }
-
   handleSubmitAddCategory() {
     const { categoryName, categoryColor } = this.state;
     this.props.onAddCategory(categoryName, categoryColor);
@@ -57,14 +53,21 @@ class Habits extends Component {
 
   displayHabits() {
     if (this.props.habits) {
-      return Object.keys(this.props.habits).map(category => (
-        <div>
-          <h3>{category}</h3>
-          {
-            this.props.habits[category].map(habit => (
-              <p>{habit.name}</p>
-            ))
-          }
+      return Object.keys(this.props.habits).sort().map(category => (
+        <div className="col-lg-6">
+          <div className="category-card">
+            <h4 className="underline">{category}</h4>
+            <ul>
+              {
+                this.props.habits[category].map(habit => (
+                  <div className="individual-habit">
+                    <input type="checkbox" name="habit-check" value="" />
+                    <ul className="habit-text">{habit.name}</ul>
+                  </div>
+                ))
+              }
+            </ul>
+          </div>
         </div>
       ));
     }
@@ -94,17 +97,29 @@ class Habits extends Component {
   displayComponent() {
     return (
       <div className="container">
-        <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#categoryModal">
-          Add category
-        </button>
-        <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#habitModal">
-          Add habit
-        </button>
-        <button type="button" className="btn btn-secondary" onClick={this.handleEdit}>
-          Edit
-        </button>
-        <h1>Habits</h1>
-        {this.displayHabits()}
+        <div className="habit-header-container">
+          <h1 className="underline">Habits</h1>
+          <div>
+            <i className="il-block fas fa-angle-left" />
+            <h3 className="il-block">
+            &nbsp;&nbsp;
+              {moment(new Date()).format('dddd, MMMM Do')}
+            &nbsp;&nbsp;
+            </h3>
+            <i className="il-block fas fa-angle-right" />
+          </div>
+          <div className="button-group">
+            <button type="button" className="btn btn-primary btn-add" data-toggle="modal" data-target="#categoryModal">
+              Add category
+            </button>
+            <button type="button" className="btn btn-primary btn-add" data-toggle="modal" data-target="#habitModal">
+              Add habit
+            </button>
+          </div>
+        </div>
+        <div className="row">
+          {this.displayHabits()}
+        </div>
         <div className="modal fade" id="categoryModal" tabIndex="-1" role="dialog" aria-labelledby="categoryModalTitle" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">

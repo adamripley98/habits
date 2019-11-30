@@ -3,6 +3,7 @@
 @import './buttons';
 @import './nav';
 @import './home';
+@import './habits';
 
 @font-face {
   font-family: 'Apercu';
@@ -19,6 +20,14 @@ body {
 
 .underline {
   text-decoration: underline;
+}
+
+.fas {
+  font-size: 2rem;
+}
+
+.il-block {
+  display: inline-block;
 }
 
 .lds-ring {

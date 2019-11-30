@@ -1,0 +1,40 @@
+.habit-text {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.habits-container {
+  -webkit-column-count: 3;
+  -moz-column-count:    3;
+  column-count:         3;
+}
+
+.habit-check {
+  display: inline-block;
+}
+
+.habit-header-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.category-card {
+  // width: 100%;
+  box-shadow: 0 8px 25px rgba(199, 199, 199, 0.9);
+  border-radius: 9px;
+  background-color: #ffffff;
+  padding: 1rem;
+  margin: 2rem 1rem;
+  text-align: left;
+}
+
+.category-card:hover {
+  -webkit-transition: All 0.2s ease;
+  -moz-transition: All 0.2s ease;
+  -o-transition: All 0.2s ease;
+  -ms-transition: All 0.2s ease;
+  transition: All 0.2s ease;
+  transform: translateY(-2px);
+  box-shadow: 0 30px 60px -12px rgba(50,50,93,.25), 0 18px 36px -18px rgba(0,0,0,.3), 0 -12px 36px -8px rgba(0,0,0,.025);
+}
