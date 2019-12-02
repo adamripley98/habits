@@ -3,6 +3,7 @@ import {
   ADD_HABIT_REQUEST, ADD_HABIT_SUCCESS, ADD_HABIT_FAILURE,
   LOAD_HABITS_REQUEST, LOAD_HABITS_SUCCESS, LOAD_HABITS_FAILURE,
   LOAD_HABIT_DATA_FAILURE, LOAD_HABIT_DATA_REQUEST, LOAD_HABIT_DATA_SUCCESS,
+  CHECK_HABIT_REQUEST, CHECK_HABIT_SUCCESS, CHECK_HABIT_FAILURE,
 } from '../types';
 /**
  * Reducer which handles all events related to user authentication process
@@ -90,12 +91,33 @@ const categoryReducer = (state = {}, action) => {
       newState.habits = action.habits;
       newState.pending = false;
       newState.success = action.success;
-      // TODO date shouldn't be stored as moment
       newState.selectedDate = action.date;
       newState.error = null;
       return newState;
     }
     case LOAD_HABIT_DATA_FAILURE: {
+      const newState = Object.assign({}, state);
+      newState.pending = false;
+      newState.success = null;
+      newState.error = action.error;
+      return newState;
+    }
+    case CHECK_HABIT_REQUEST: {
+      const newState = Object.assign({}, state);
+      newState.pending = true;
+      newState.success = null;
+      newState.error = null;
+      return newState;
+    }
+    case CHECK_HABIT_SUCCESS: {
+      const newState = Object.assign({}, state);
+      newState.habits = action.habits;
+      newState.pending = false;
+      newState.success = action.success;
+      newState.error = null;
+      return newState;
+    }
+    case CHECK_HABIT_FAILURE: {
       const newState = Object.assign({}, state);
       newState.pending = false;
       newState.success = null;

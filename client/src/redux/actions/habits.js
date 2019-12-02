@@ -164,6 +164,7 @@ export function checkHabit(habitId, didComplete, date) {
           if (resp.data.success) {
             dispatch({
               type: CHECK_HABIT_SUCCESS,
+              habits: resp.data.habits,
             });
           } else {
             dispatch({

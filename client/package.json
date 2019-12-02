@@ -8,6 +8,7 @@
     "connected-react-router": "^6.5.2",
     "fusioncharts": "^3.14.0-sr.1",
     "history": "^4.9.0",
+    "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",

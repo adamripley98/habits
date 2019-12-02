@@ -8,6 +8,7 @@ const Category = require('../models/category');
 const Habit = require('../models/habit');
 const HabitEntry = require('../models/habitEntry');
 const { UserCheck } = require('../utils/authChecking');
+const { getHabits } = require('../utils/getHabits');
 
 module.exports = () => {
   /*
@@ -134,67 +135,19 @@ module.exports = () => {
       }
       const userId = req.session.passport.user;
       const { date } = req.params;
-      const habits = [];
-      // Pull all categories by userId
-      Category.find({ userId }, (err, categories) => {
-        // Loop through each category and pull all habits from each
-        async.each(categories, (category, cb) => {
-          const catObj = {
-            name: category.name,
-            categoryId: category._id,
-            color: category.color,
-            habits: [],
-          };
-          // Loop through each category and pull all habits from each
-          Habit.find({ userId, categoryId: category._id }, (err2, habs) => {
-            async.each(habs, (hab, cb2) => {
-              // Manipulate dates
-              const beginningOfDay = moment(date).startOf('day').format('');
-              const endOfDay = moment(date).endOf('day').format('');
-              // For each habit, pull out habitEntry by date and id
-              HabitEntry.findOne({ habitId: hab._id, date: { $gte: beginningOfDay, $lt: endOfDay } }, (err3, h) => {
-                if (err3) {
-                  res.send({
-                    success: false,
-                    error: 'Error pulling habits.',
-                  });
-                  return;
-                }
-                const habitObj = {
-                  name: hab.name,
-                  habitId: hab._id,
-                  // If entry hasn't been made, default to false
-                  didComplete: h ? h.didComplete : false,
-                };
-                // Add to object
-                catObj.habits.push(habitObj);
-                cb2();
-              });
-            }, (err4) => {
-              if (err4) {
-                res.send({
-                  success: false,
-                  error: 'Error pulling habits.',
-                });
-                return;
-              }
-              habits.push(catObj);
-              cb();
-            });
-          });
-        }, (err5) => {
-          if (err5) {
-            res.send({
-              success: false,
-              error: 'Error pulling habits.',
-            });
-            return;
-          }
+      // Helper method that returns habits in proper form for a given user on a date
+      getHabits(userId, date, (resp) => {
+        if (!resp.success) {
           res.send({
-            success: true,
-            error: false,
-            habits,
+            success: false,
+            error: authRes.error,
           });
+          return;
+        }
+        res.send({
+          success: true,
+          error: false,
+          habits: resp.habits,
         });
       });
     });
@@ -302,7 +255,7 @@ module.exports = () => {
       const beginningOfDay = moment(date).startOf('day').format('');
       const endOfDay = moment(date).endOf('day').format('');
       // Search for habit entry by id and date
-      HabitEntry.findOne({ userId, date: { $gte: beginningOfDay, $lt: endOfDay } }, (err, habitEntry) => {
+      HabitEntry.findOne({ userId, habitId, date: { $gte: beginningOfDay, $lt: endOfDay } }, (err, habitEntry) => {
         if (err) {
           res.send({
             success: false,
@@ -310,6 +263,7 @@ module.exports = () => {
           });
           return;
         }
+        console.log('what is habitEntry', habitEntry);
         // If user hasn't made an entry, create a new one
         if (!habitEntry) {
           const newHabitEntry = new HabitEntry({
@@ -318,12 +272,25 @@ module.exports = () => {
             didComplete,
             date,
           });
+          console.log(newHabitEntry, 'newHabitEntry');
           // Save habit entry in DB
           newHabitEntry.save()
             .then(() => {
-              res.send({
-                success: true,
-                error: false,
+              console.log('should be saving', habitEntry);
+              // Helper method that returns habits in proper form for a given user on a date
+              getHabits(userId, date, (resp) => {
+                if (!resp.success) {
+                  res.send({
+                    success: false,
+                    error: authRes.error,
+                  });
+                  return;
+                }
+                res.send({
+                  success: true,
+                  error: false,
+                  habits: resp.habits,
+                });
               });
             })
             .catch(() => {
@@ -337,9 +304,21 @@ module.exports = () => {
           habitEntry.didComplete = didComplete;
           habitEntry.save()
             .then(() => {
-              res.send({
-                success: true,
-                error: false,
+              console.log('should be saving', habitEntry);
+              // Helper method that returns habits in proper form for a given user on a date
+              getHabits(userId, date, (resp) => {
+                if (!resp.success) {
+                  res.send({
+                    success: false,
+                    error: authRes.error,
+                  });
+                  return;
+                }
+                res.send({
+                  success: true,
+                  error: false,
+                  habits: resp.habits,
+                });
               });
             })
             .catch(() => {

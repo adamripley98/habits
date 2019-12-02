@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const habitEntrySchema = new Schema({
   habitId: String,
   userId: String,
-  date: Date,
+  date: String,
   didComplete: Boolean,
 });
 

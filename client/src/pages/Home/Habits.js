@@ -31,7 +31,12 @@ class Habits extends Component {
 
   // Initially load all habits from the backend
   componentDidMount() {
-    this.props.onLoadHabitDataByDate(new Date());
+    this.props.onLoadHabitDataByDate(moment(new Date()).format());
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log('prev', prevProps.selectedDate, prevProps.habits);
+    console.log('now', this.props.selectedDate, this.props.habits);
   }
 
   handleChange(e) {
@@ -58,12 +63,12 @@ class Habits extends Component {
 
   handleClickLeft() {
     const tempDate = this.props.selectedDate;
-    this.props.onLoadHabitDataByDate(moment(tempDate).subtract(1, 'days').format(''));
+    this.props.onLoadHabitDataByDate(moment(tempDate).subtract(1, 'days').format());
   }
 
   handleClickRight() {
     const tempDate = this.props.selectedDate;
-    this.props.onLoadHabitDataByDate(moment(tempDate).add(1, 'days').format(''));
+    this.props.onLoadHabitDataByDate(moment(tempDate).add(1, 'days').format());
   }
 
   // Helper method to check or uncheck habit
@@ -93,7 +98,7 @@ class Habits extends Component {
       // TODO sort habit names alphabetically
 
       return sortedCategories.map(category => (
-        <div className="col-lg-6">
+        <div className="col-lg-6" key={category.categoryId}>
           <div className="category-card">
             <h4 className="underline">{category.name}</h4>
             <ul>
@@ -110,8 +115,8 @@ class Habits extends Component {
                   // names must be equal
                   return 0;
                 }).map(habit => (
-                  <div className="individual-habit">
-                    <input type="checkbox" name="habit-check" value={habit.habitId} onClick={this.handleCheck} checked={habit.didComplete} />
+                  <div className="individual-habit" key={habit.habitId}>
+                    <input type="checkbox" name="habit-check" value={habit.habitId} onClick={this.handleCheck} defaultChecked={habit.didComplete} />
                     <ul className="habit-text">{habit.name}</ul>
                   </div>
                 ))
@@ -121,19 +126,20 @@ class Habits extends Component {
         </div>
       ));
     }
+    console.log('null boy', this.props);
     return null;
   }
 
   displaySelect() {
     if (this.props.habits) {
       return (
-        <select id="inputCategory" className="form-control" name="habitCategory" onChange={this.handleChange}>
-          <option selected disabled>Choose...</option>
+        <select id="inputCategory" className="form-control" name="habitCategory" defaultValue="choose" onChange={this.handleChange}>
+          <option value="choose" disabled>Choose...</option>
           {
-            Object.keys(this.props.habits).map(cat => (
-              <option value={cat} key={cat}>{cat}</option>
+            this.props.habits.map(cat => (
+              <option value={cat.name} key={cat.categoryId}>{cat.name}</option>
             ))
-        }
+          }
         </select>
       );
     }
@@ -145,6 +151,7 @@ class Habits extends Component {
   }
 
   displayComponent() {
+    console.log('render is called');
     return (
       <div className="container">
         <div className="habit-header-container">
@@ -235,8 +242,8 @@ Habits.propTypes = {
   onAddHabit: PropTypes.func,
   onCheckHabit: PropTypes.func,
   onLoadHabitDataByDate: PropTypes.func,
-  habits: PropTypes.object,
-  selectedDate: PropTypes.instanceOf(Date),
+  habits: PropTypes.array,
+  selectedDate: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {
