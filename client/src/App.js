@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import './App.css';
 import Home from './pages/Home/Home';
 import Habits from './pages/Home/Habits';
+import AddFriends from './pages/Home/AddFriends';
 import SignUp from './pages/auth/SignUp';
 import Login from './pages/auth/Login';
 import Nav from './components/Nav';
@@ -30,6 +31,7 @@ class App extends Component {
           <Route exact path="/" component={LandingPage} />
           <Route path="/home" component={requireLogin(Home)} />
           <Route path="/habits" component={requireLogin(Habits)} />
+          <Route path="/addfriends" component={requireLogin(AddFriends)} />
           <Route path="/register" component={SignUp} />
           <Route path="/login" component={Login} />
           <Route path="/forgot" component={Forgot} />
