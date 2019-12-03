@@ -18,11 +18,9 @@ class AddFriends extends Component {
     };
   }
 
-  // TODO clear error on unmount
-
   // On initial load, load all relationships
   componentDidMount() {
-    // this.props.onLoadRelationships();
+    this.props.onLoadRelationships();
   }
 
   handleChange(e) {

@@ -17,6 +17,7 @@ export function loadRelationships() {
         if (resp.data.success) {
           dispatch({
             type: LOAD_RELATIONSHIPS_SUCCESS,
+            relationships: resp.data.relationships,
           });
         } else {
           dispatch({

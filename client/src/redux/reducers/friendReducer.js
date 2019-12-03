@@ -40,6 +40,7 @@ const friendReducer = (state = {}, action) => {
       newState.pending = false;
       newState.success = action.success;
       newState.error = null;
+      // TODO add to relationships
       return newState;
     }
     case ADD_FRIEND_FAILURE: {
