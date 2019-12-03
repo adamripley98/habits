@@ -19,6 +19,7 @@ const friendReducer = (state = {}, action) => {
       newState.pending = false;
       newState.success = action.success;
       newState.error = null;
+      newState.relationships = action.relationships;
       return newState;
     }
     case LOAD_RELATIONSHIPS_FAILURE: {

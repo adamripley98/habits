@@ -2,6 +2,8 @@ import axios from 'axios';
 import {
   LOAD_RELATIONSHIPS_REQUEST, LOAD_RELATIONSHIPS_SUCCESS, LOAD_RELATIONSHIPS_FAILURE,
   ADD_FRIEND_FAILURE, ADD_FRIEND_SUCCESS, ADD_FRIEND_REQUEST,
+  ACCEPT_FRIEND_FAILURE, ACCEPT_FRIEND_SUCCESS, ACCEPT_FRIEND_REQUEST,
+  REJECT_FRIEND_FAILURE, REJECT_FRIEND_SUCCESS, REJECT_FRIEND_REQUEST,
 } from '../types';
 
 /*
@@ -70,6 +72,84 @@ export function addFriend(friendEmail) {
       dispatch({
         type: ADD_FRIEND_FAILURE,
         error: 'Error adding friend',
+      });
+    }
+  };
+}
+
+/*
+Action to accept a request
+*/
+export function acceptFriend(userId) {
+  return (dispatch) => {
+    dispatch({
+      type: ACCEPT_FRIEND_REQUEST,
+    });
+    if (userId) {
+      axios.post('/api/relationships/accept', {
+        userId,
+      })
+        .then((resp) => {
+          if (resp.data.success) {
+            dispatch({
+              type: ACCEPT_FRIEND_SUCCESS,
+            });
+          } else {
+            dispatch({
+              type: ACCEPT_FRIEND_FAILURE,
+              error: resp.data.error,
+            });
+          }
+        })
+        .catch(() => {
+          dispatch({
+            type: ACCEPT_FRIEND_FAILURE,
+            error: 'Error accepting friend.',
+          });
+        });
+    } else {
+      dispatch({
+        type: ACCEPT_FRIEND_FAILURE,
+        error: 'Error accepting friend',
+      });
+    }
+  };
+}
+
+/*
+Action to reject a request
+*/
+export function rejectFriend(userId) {
+  return (dispatch) => {
+    dispatch({
+      type: REJECT_FRIEND_REQUEST,
+    });
+    if (userId) {
+      axios.post('/api/relationships/reject', {
+        userId,
+      })
+        .then((resp) => {
+          if (resp.data.success) {
+            dispatch({
+              type: REJECT_FRIEND_SUCCESS,
+            });
+          } else {
+            dispatch({
+              type: REJECT_FRIEND_FAILURE,
+              error: resp.data.error,
+            });
+          }
+        })
+        .catch(() => {
+          dispatch({
+            type: REJECT_FRIEND_FAILURE,
+            error: 'Error rejecting friend.',
+          });
+        });
+    } else {
+      dispatch({
+        type: REJECT_FRIEND_FAILURE,
+        error: 'Error rejecting friend',
       });
     }
   };

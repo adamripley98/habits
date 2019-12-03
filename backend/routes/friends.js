@@ -1,6 +1,5 @@
 const express = require('express');
 const async = require('async');
-const moment = require('moment');
 
 const router = express.Router();
 
@@ -59,7 +58,7 @@ module.exports = () => {
           return;
         }
         // Search for an existing relationship
-        Relationship.find({ $or: [{ user1Id: new RegExp(user._id, 'i') }, { user2Id: new RegExp(user._id, 'i') }] }, (err2, relationship) => {
+        Relationship.find({ $or: [{ user1Id: new RegExp(user._id, 'i') }, { user2Id: new RegExp(user._id, 'i') }], $or: [{ user1Id: new RegExp(userId, 'i') }, { user2Id: new RegExp(userId, 'i') }] }, (err2, relationship) => {
           if (err2) {
             res.send({
               success: false,
@@ -128,7 +127,18 @@ module.exports = () => {
         // Relationship already exists
         if (relationships.length) {
           async.each(relationships, (relationship, cb) => {
-            const otherUserId = userId === relationship.user1Id ? relationship.user2Id : relationship.user1Id;
+            let otherUserId = '';
+            let status = '';
+            if (relationship.status === 'friends') {
+              status = 'friends';
+              otherUserId = relationship.user1Id;
+            } else if (userId === relationship.user1Id) {
+              otherUserId = relationship.user2Id;
+              status = 'pending';
+            } else {
+              otherUserId = relationship.user1Id;
+              status = 'requested';
+            }
             User.findById(otherUserId, (err2, user) => {
               if (err2) {
                 res.send({
@@ -141,7 +151,7 @@ module.exports = () => {
                 name: user.name,
                 profilePicture: user.profilePicture,
                 userId: otherUserId,
-                status: relationship.status,
+                status,
               });
               cb();
             });
@@ -165,6 +175,94 @@ module.exports = () => {
             relationships: [],
           });
         }
+      });
+    });
+  });
+
+  /*
+  Route to handle rejecting a friend
+  */
+  router.post('/relationships/reject', (req, res) => {
+    // Check to see if user is logged in
+    UserCheck(req, (authRes) => {
+      if (!authRes.success) {
+        res.send({
+          success: false,
+          error: authRes.error,
+        });
+        return;
+      }
+      // Isolate parameters
+      const userId = req.session.passport.user;
+      const otherUserId = req.body.userId;
+      if (!otherUserId) {
+        res.send({
+          success: false,
+          error: 'Could not reject friend.',
+        });
+        return;
+      }
+      Relationship.findOneAndRemove({ $or: [{ user1Id: new RegExp(userId, 'i') }, { user2Id: new RegExp(userId, 'i') }], $or: [{ user1Id: new RegExp(otherUserId, 'i') }, { user2Id: new RegExp(otherUserId, 'i') }] }, (err, relationship) => {
+        if (err) {
+          res.send({
+            success: false,
+            error: 'Could not reject friend',
+          });
+          return;
+        }
+        res.send({
+          success: true,
+          error: '',
+        });
+      });
+    });
+  });
+
+  /*
+  Route to handle accepting a friend
+  */
+  router.post('/relationships/accept', (req, res) => {
+    // Check to see if user is logged in
+    UserCheck(req, (authRes) => {
+      if (!authRes.success) {
+        res.send({
+          success: false,
+          error: authRes.error,
+        });
+        return;
+      }
+      // Isolate parameters
+      const userId = req.session.passport.user;
+      const otherUserId = req.body.userId;
+      if (!otherUserId) {
+        res.send({
+          success: false,
+          error: 'Could not accept friend.',
+        });
+        return;
+      }
+      Relationship.findOne({ $or: [{ user1Id: new RegExp(userId, 'i') }, { user2Id: new RegExp(userId, 'i') }], $or: [{ user1Id: new RegExp(otherUserId, 'i') }, { user2Id: new RegExp(otherUserId, 'i') }] }, (err, relationship) => {
+        if (err) {
+          res.send({
+            success: false,
+            error: 'Could not accept friend',
+          });
+          return;
+        }
+        relationship.status = 'friends';
+        relationship.save()
+          .then(() => {
+            res.send({
+              success: true,
+              error: '',
+            });
+          })
+          .catch(() => {
+            res.send({
+              success: false,
+              error: 'Could not accept friend',
+            });
+          });
       });
     });
   });
