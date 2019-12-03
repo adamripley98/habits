@@ -67,9 +67,18 @@ module.exports = () => {
                 habitId: habit._id,
                 score: 0,
               };
+              // Manipulate dates
+              const today = new Date();
+              let days = 0;
+              if (period === 'week') {
+                days = 7;
+              } else if (period === 'month') {
+                days = 30;
+              }
+              const startDate = moment(today).subtract(days, 'days').startOf('day').format('');
+              const endDate = moment(today).endOf('day').format('');
               // For each habit, pull out habitEntry by date and id
-              // TODO only relevant dates
-              HabitEntry.find({ habitId: habit._id }, (err3, entries) => {
+              HabitEntry.find({ habitId: habit._id, date: { $gte: startDate, $lt: endDate } }, (err3, entries) => {
                 if (err3) {
                   res.send({
                     success: false,

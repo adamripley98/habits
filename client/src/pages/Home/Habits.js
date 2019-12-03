@@ -94,7 +94,7 @@ class Habits extends Component {
       return sortedCategories.map(category => (
         <div className="col-lg-6" key={category.categoryId}>
           <div className="category-card">
-            <h4 className="underline">{category.name}</h4>
+            <h4 className="underline" style={{ color: category.color }}>{category.name}</h4>
             <ul>
               {
                 category.habits.sort((a, b) => {

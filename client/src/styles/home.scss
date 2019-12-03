@@ -16,6 +16,21 @@
   margin: 0 2rem;
 }
 
+.duration-option:hover {
+  text-decoration: underline;
+}
+
 .clicked {
   text-decoration: underline;
+}
+
+.bar {
+  border: 1px solid lightgray;
+  height: 1.5rem;
+  z-index: -1;
+}
+
+.colored-bar {
+  height: 1.5rem;
+  margin-top: -1.5rem;
 }

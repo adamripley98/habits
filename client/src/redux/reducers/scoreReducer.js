@@ -15,7 +15,7 @@ const scoreReducer = (state = {}, action) => {
     }
     case LOAD_SCORES_SUCCESS: {
       const newState = Object.assign({}, state);
-      newState.habits = action.habits;
+      newState.scores = action.scores;
       newState.pending = false;
       newState.success = action.success;
       newState.error = null;
