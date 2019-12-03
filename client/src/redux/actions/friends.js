@@ -42,7 +42,6 @@ export function addFriend(friendEmail) {
     dispatch({
       type: ADD_FRIEND_REQUEST,
     });
-    console.log('enters addFerien action');
     if (friendEmail) {
       axios.post('/api/relationships/add', {
         friendEmail,
@@ -60,13 +59,13 @@ export function addFriend(friendEmail) {
           }
         })
         .catch((error) => {
+          console.log('error', error);
           dispatch({
             type: ADD_FRIEND_FAILURE,
-            error,
+            error: 'Error adding friend.',
           });
         });
     } else {
-      console.log('no email');
       dispatch({
         type: ADD_FRIEND_FAILURE,
         error: 'Error adding friend',

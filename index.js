@@ -18,6 +18,7 @@ const reset = require('./backend/routes/auth/reset')();
 const verify = require('./backend/routes/auth/verify')();
 const habits = require('./backend/routes/habits')();
 const score = require('./backend/routes/score')();
+const friends = require('./backend/routes/friends')();
 
 // Serve the static files from the React app
 app.use(bodyParser.json({ limit: '150mb' }));
@@ -57,6 +58,7 @@ app.use('/api/', reset);
 app.use('/api/', verify);
 app.use('/api/', habits);
 app.use('/api', score);
+app.use('/api', friends);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
