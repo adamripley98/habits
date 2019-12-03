@@ -6,9 +6,9 @@ import {
   CHECK_HABIT_REQUEST, CHECK_HABIT_SUCCESS, CHECK_HABIT_FAILURE,
 } from '../types';
 /**
- * Reducer which handles all events related to user authentication process
+ * Reducer which handles all events related to habit adding and checking process
  */
-const categoryReducer = (state = {}, action) => {
+const habitReducer = (state = {}, action) => {
   switch (action.type) {
     case ADD_CAT_REQUEST: {
       const newState = Object.assign({}, state);
@@ -104,7 +104,6 @@ const categoryReducer = (state = {}, action) => {
     }
     case CHECK_HABIT_REQUEST: {
       const newState = Object.assign({}, state);
-      newState.pending = true;
       newState.success = null;
       newState.error = null;
       return newState;
@@ -129,4 +128,4 @@ const categoryReducer = (state = {}, action) => {
   }
 };
 
-export default categoryReducer;
+export default habitReducer;

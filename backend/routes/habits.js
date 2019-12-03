@@ -263,7 +263,6 @@ module.exports = () => {
           });
           return;
         }
-        console.log('what is habitEntry', habitEntry);
         // If user hasn't made an entry, create a new one
         if (!habitEntry) {
           const newHabitEntry = new HabitEntry({
@@ -272,11 +271,9 @@ module.exports = () => {
             didComplete,
             date,
           });
-          console.log(newHabitEntry, 'newHabitEntry');
           // Save habit entry in DB
           newHabitEntry.save()
             .then(() => {
-              console.log('should be saving', habitEntry);
               // Helper method that returns habits in proper form for a given user on a date
               getHabits(userId, date, (resp) => {
                 if (!resp.success) {
@@ -304,7 +301,6 @@ module.exports = () => {
           habitEntry.didComplete = didComplete;
           habitEntry.save()
             .then(() => {
-              console.log('should be saving', habitEntry);
               // Helper method that returns habits in proper form for a given user on a date
               getHabits(userId, date, (resp) => {
                 if (!resp.success) {

@@ -41,7 +41,6 @@ module.exports = () => {
   router.post('/reset', (req, res) => {
     // Isolate variables
     const { password, token } = req.body;
-    console.log(req.body);
     // Find given user with refresh token in Mongo, makes sure it isn't expired
     User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
       if (err) {

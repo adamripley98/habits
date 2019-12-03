@@ -7,6 +7,7 @@ import {
   addCategory, addHabit, checkHabit, loadHabitDataByDate,
 } from '../../redux/actions/habits';
 import SideNav from '../../components/SideNav';
+import Loading from '../../components/shared/Loading';
 
 class Habits extends Component {
   constructor(props) {
@@ -32,11 +33,6 @@ class Habits extends Component {
   // Initially load all habits from the backend
   componentDidMount() {
     this.props.onLoadHabitDataByDate(moment(new Date()).format());
-  }
-
-  componentDidUpdate(prevProps) {
-    console.log('prev', prevProps.selectedDate, prevProps.habits);
-    console.log('now', this.props.selectedDate, this.props.habits);
   }
 
   handleChange(e) {
@@ -95,8 +91,6 @@ class Habits extends Component {
         return 0;
       });
 
-      // TODO sort habit names alphabetically
-
       return sortedCategories.map(category => (
         <div className="col-lg-6" key={category.categoryId}>
           <div className="category-card">
@@ -126,7 +120,6 @@ class Habits extends Component {
         </div>
       ));
     }
-    console.log('null boy', this.props);
     return null;
   }
 
@@ -151,7 +144,6 @@ class Habits extends Component {
   }
 
   displayComponent() {
-    console.log('render is called');
     return (
       <div className="container">
         <div className="habit-header-container">
@@ -175,7 +167,7 @@ class Habits extends Component {
           </div>
         </div>
         <div className="row">
-          {this.displayHabits()}
+          {this.props.pending ? <Loading /> : this.displayHabits()}
         </div>
         <div className="modal fade" id="categoryModal" tabIndex="-1" role="dialog" aria-labelledby="categoryModalTitle" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered" role="document">
@@ -244,12 +236,14 @@ Habits.propTypes = {
   onLoadHabitDataByDate: PropTypes.func,
   habits: PropTypes.array,
   selectedDate: PropTypes.string,
+  pending: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => {
   return {
     habits: state.habitState.habits,
     selectedDate: state.habitState.selectedDate,
+    pending: state.habitState.pending,
   };
 };
 

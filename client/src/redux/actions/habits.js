@@ -153,7 +153,6 @@ export function checkHabit(habitId, didComplete, date) {
     dispatch({
       type: CHECK_HABIT_REQUEST,
     });
-    console.log('hab id', habitId, date);
     if (habitId && date) {
       axios.post('/api/habits/check', {
         habitId,
