@@ -6,6 +6,7 @@ const router = express.Router();
 const Relationship = require('../models/relationship');
 const User = require('../models/user');
 const { UserCheck } = require('../utils/authChecking');
+const { getScore } = require('../utils/getScore');
 
 
 module.exports = () => {
@@ -58,7 +59,7 @@ module.exports = () => {
           return;
         }
         // Search for an existing relationship
-        Relationship.find({ $or: [{ user1Id: new RegExp(user._id, 'i') }, { user2Id: new RegExp(user._id, 'i') }], $or: [{ user1Id: new RegExp(userId, 'i') }, { user2Id: new RegExp(userId, 'i') }] }, (err2, relationship) => {
+        Relationship.find({ $and: [{ $or: [{ user1Id: new RegExp(user._id, 'i') }, { user2Id: new RegExp(user._id, 'i') }] }, { $or: [{ user1Id: new RegExp(userId, 'i') }, { user2Id: new RegExp(userId, 'i') }] }] }, (err2, relationship) => {
           if (err2) {
             res.send({
               success: false,
@@ -68,6 +69,7 @@ module.exports = () => {
           }
           // Relationship already exists
           if (relationship.length) {
+            console.log('yee', relationship);
             res.send({
               success: false,
               error: 'Relationship already exists.',
@@ -131,7 +133,7 @@ module.exports = () => {
             let status = '';
             if (relationship.status === 'friends') {
               status = 'friends';
-              otherUserId = relationship.user1Id;
+              otherUserId = userId === relationship.user1Id ? relationship.user2Id : relationship.user1Id;
             } else if (userId === relationship.user1Id) {
               otherUserId = relationship.user2Id;
               status = 'pending';
@@ -180,6 +182,94 @@ module.exports = () => {
   });
 
   /*
+  Route to handle getting all friend's content
+  */
+  router.get('/relationships/content', (req, res) => {
+    // Check to see if user is logged in
+    UserCheck(req, (authRes) => {
+      if (!authRes.success) {
+        res.send({
+          success: false,
+          error: authRes.error,
+        });
+        return;
+      }
+      const userId = req.session.passport.user;
+      // Search through relationships
+      Relationship.find({ $or: [{ user1Id: new RegExp(userId, 'i') }, { user2Id: new RegExp(userId, 'i') }] }, (err, relationships) => {
+        if (err) {
+          res.send({
+            success: false,
+            error: 'Error getting content.',
+          });
+          return;
+        }
+        console.log('1');
+        const content = [];
+        // Relationship already exists
+        if (relationships.length) {
+          async.each(relationships, (relationship, cb) => {
+            console.log('2');
+            let otherUserId = '';
+            // Only show content if they're friends, not pending
+            if (relationship.status === 'friends') {
+              otherUserId = userId === relationship.user1Id ? relationship.user2Id : relationship.user1Id;
+              getScore(otherUserId, 'week', (resp) => {
+                console.log('3');
+                if (!resp.success) {
+                  res.send({
+                    success: false,
+                    error: 'Error pulling content.',
+                  });
+                  return;
+                }
+                User.findById(otherUserId, (err2, user) => {
+                  if (err2) {
+                    res.send({
+                      success: false,
+                      error: 'Error pulling content.',
+                    });
+                    return;
+                  }
+                  console.log('4');
+                  content.push({
+                    name: user.name,
+                    profilePicture: user.profilePicture,
+                    userId: otherUserId,
+                    scores: resp.scores,
+                  });
+                  cb();
+                });
+              });
+            } else {
+              cb();
+            }
+          }, (err3) => {
+            if (err3) {
+              res.send({
+                success: false,
+                error: 'Error getting friends.',
+              });
+              return;
+            }
+            console.log('5');
+            res.send({
+              success: true,
+              error: '',
+              content,
+            });
+          });
+        } else {
+          res.send({
+            success: true,
+            content: [],
+          });
+        }
+      });
+    });
+  });
+
+  /*
   Route to handle rejecting a friend
   */
   router.post('/relationships/reject', (req, res) => {
@@ -202,7 +292,7 @@ module.exports = () => {
         });
         return;
       }
-      Relationship.findOneAndRemove({ $or: [{ user1Id: new RegExp(userId, 'i') }, { user2Id: new RegExp(userId, 'i') }], $or: [{ user1Id: new RegExp(otherUserId, 'i') }, { user2Id: new RegExp(otherUserId, 'i') }] }, (err, relationship) => {
+      Relationship.findOneAndRemove({ $and: [{ $or: [{ user1Id: new RegExp(userId, 'i') }, { user2Id: new RegExp(userId, 'i') }] }, { $or: [{ user1Id: new RegExp(otherUserId, 'i') }, { user2Id: new RegExp(otherUserId, 'i') }] }] }, (err, relationship) => {
         if (err) {
           res.send({
             success: false,
@@ -241,7 +331,7 @@ module.exports = () => {
         });
         return;
       }
-      Relationship.findOne({ $or: [{ user1Id: new RegExp(userId, 'i') }, { user2Id: new RegExp(userId, 'i') }], $or: [{ user1Id: new RegExp(otherUserId, 'i') }, { user2Id: new RegExp(otherUserId, 'i') }] }, (err, relationship) => {
+      Relationship.findOne({ $and: [{ $or: [{ user1Id: new RegExp(userId, 'i') }, { user2Id: new RegExp(userId, 'i') }] }, { $or: [{ user1Id: new RegExp(otherUserId, 'i') }, { user2Id: new RegExp(otherUserId, 'i') }] }] }, (err, relationship) => {
         if (err) {
           res.send({
             success: false,

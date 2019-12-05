@@ -4,6 +4,7 @@ import {
   ADD_FRIEND_FAILURE, ADD_FRIEND_SUCCESS, ADD_FRIEND_REQUEST,
   ACCEPT_FRIEND_FAILURE, ACCEPT_FRIEND_SUCCESS, ACCEPT_FRIEND_REQUEST,
   REJECT_FRIEND_FAILURE, REJECT_FRIEND_SUCCESS, REJECT_FRIEND_REQUEST,
+  LOAD_FRIEND_CONTENT_SUCCESS, LOAD_FRIEND_CONTENT_FAILURE, LOAD_FRIEND_CONTENT_REQUEST,
 } from '../types';
 
 /*
@@ -152,5 +153,63 @@ export function rejectFriend(userId) {
         error: 'Error rejecting friend',
       });
     }
+  };
+}
+
+/*
+Action to load friend's content
+*/
+export function loadFriendContent() {
+  return (dispatch) => {
+    dispatch({
+      type: LOAD_FRIEND_CONTENT_REQUEST,
+    });
+    axios.get('/api/relationships/content')
+      .then((resp) => {
+        if (resp.data.success) {
+          const scores = [];
+          resp.data.content.forEach((user) => {
+            // Manipulating scores object
+            const userObj = {
+              name: user.name,
+              userId: user.userId,
+              profilePicture: user.profilePicture,
+              scores: [],
+            };
+            user.scores.forEach((cat) => {
+              let totalScore = 0;
+              let totalPossible = 0;
+              const possiblePerHabit = 7;
+              cat.habits.forEach((hab) => {
+                totalScore += hab.score;
+                totalPossible += possiblePerHabit;
+              });
+              userObj.scores.push({
+                score: totalScore / totalPossible,
+                name: cat.name,
+                categoryId: cat.categoryId,
+                color: cat.color,
+              });
+            });
+            scores.push(userObj);
+          });
+          console.log('scores', scores);
+          dispatch({
+            type: LOAD_FRIEND_CONTENT_SUCCESS,
+            content: scores,
+          });
+        } else {
+          dispatch({
+            type: LOAD_FRIEND_CONTENT_FAILURE,
+            error: resp.data.error,
+          });
+        }
+      })
+      .catch(() => {
+        dispatch({
+          type: LOAD_FRIEND_CONTENT_FAILURE,
+          error: 'Error loading content.',
+        });
+      });
   };
 }
