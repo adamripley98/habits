@@ -24,18 +24,6 @@ class SideNav extends Component {
                 </Link>
               </div>
               <div className="nav-section">
-                <Link to="/todolist" className="nav-link">
-                  <i className="fas fa-list-ul" />
-                  &nbsp;&nbsp;To Do List
-                </Link>
-              </div>
-              <div className="nav-section">
-                <Link to="/goals" className="nav-link">
-                  <i className="fas fa-check-double" />
-                  &nbsp;&nbsp;Goals
-                </Link>
-              </div>
-              <div className="nav-section">
                 <Link to="/journal" className="nav-link">
                   <i className="fas fa-book-open" />
                   &nbsp;&nbsp;Journal
@@ -44,31 +32,19 @@ class SideNav extends Component {
               <br />
               <h5 className="gold-text bold">Social</h5>
               <div className="nav-section">
+                <Link to="/addfriends" className="nav-link">
+                  <i className="fas fa-user-plus" />
+                  &nbsp;&nbsp;Manage friends
+                </Link>
+              </div>
+              <div className="nav-section">
                 <Link to="/feed" className="nav-link">
                   <i className="fas fa-hashtag" />
                   &nbsp;&nbsp;Feed
                 </Link>
               </div>
-              <div className="nav-section">
-                <Link to="/addfriends" className="nav-link">
-                  <i className="fas fa-user-plus" />
-                  &nbsp;&nbsp;Add friends
-                </Link>
-              </div>
-              <div className="nav-section">
-                <Link to="/thoughts" className="nav-link">
-                  <i className="fas fa-comments" />
-                  &nbsp;&nbsp;Thoughts
-                </Link>
-              </div>
               <br />
               <h5 className="gold-text bold">Account</h5>
-              <div className="nav-section">
-                <Link to="/customize" className="nav-link">
-                  <i className="fas fa-user-circle" />
-                  &nbsp;&nbsp;Customize Dash
-                </Link>
-              </div>
               <div className="nav-section">
                 <Link to="/settings" className="nav-link">
                   <i className="fas fa-user-cog" />

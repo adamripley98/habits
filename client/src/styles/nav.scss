@@ -32,3 +32,15 @@
 .nav-section:hover {
   background-color: $gold;
 }
+
+.footer {
+  bottom: 0 !important;
+  background: $navy;
+  width: 100%;
+  color: white;
+  height: 20vh;
+}
+
+.bottom-links {
+  bottom: 0;
+}

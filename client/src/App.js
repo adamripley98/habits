@@ -10,6 +10,7 @@ import Feed from './pages/Home/Feed';
 import SignUp from './pages/auth/SignUp';
 import Login from './pages/auth/Login';
 import Nav from './components/Nav';
+import Footer from './components/Footer';
 import Forgot from './pages/auth/Forgot';
 import Reset from './pages/auth/Reset';
 import Verify from './pages/auth/Verify';
@@ -42,6 +43,7 @@ class App extends Component {
         </Switch>
       </div>
     );
+    // <Footer />
     return (
       <Switch>
         <App />

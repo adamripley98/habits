@@ -54,6 +54,7 @@ export function addFriend(friendEmail) {
           if (resp.data.success) {
             dispatch({
               type: ADD_FRIEND_SUCCESS,
+              newRelationship: resp.data.newRelationship,
             });
           } else {
             dispatch({
@@ -62,8 +63,7 @@ export function addFriend(friendEmail) {
             });
           }
         })
-        .catch((error) => {
-          console.log('error', error);
+        .catch(() => {
           dispatch({
             type: ADD_FRIEND_FAILURE,
             error: 'Error adding friend.',
@@ -193,7 +193,6 @@ export function loadFriendContent() {
             });
             scores.push(userObj);
           });
-          console.log('scores', scores);
           dispatch({
             type: LOAD_FRIEND_CONTENT_SUCCESS,
             content: scores,

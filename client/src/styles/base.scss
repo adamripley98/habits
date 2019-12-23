@@ -26,8 +26,42 @@ body {
   font-size: 2rem;
 }
 
+.p-bigger {
+  font-size: 1.6rem;
+  line-height: 2.5rem;
+}
+
+.mb-10 {
+  margin-bottom: 10rem;
+}
+
+.p-tb-10 {
+  padding: 10rem 0;
+}
+
+.p-tb-7 {
+  padding: 7rem 0;
+}
+
+.navy-text {
+  color: $navy;
+}
+
+.gold-link {
+  color: $gold;
+  font-size: 1.2rem;
+}
+
+.line {
+  border-bottom: 1px solid black;
+}
+
 .il-block {
   display: inline-block;
+}
+
+.icon {
+  height: 3.5rem;
 }
 
 .lds-ring {

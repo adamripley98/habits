@@ -69,7 +69,6 @@ module.exports = () => {
           }
           // Relationship already exists
           if (relationship.length) {
-            console.log('yee', relationship);
             res.send({
               success: false,
               error: 'Relationship already exists.',
@@ -87,6 +86,11 @@ module.exports = () => {
             .then(() => {
               res.send({
                 success: true,
+                newRelationship: {
+                  name: user.name,
+                  userId: user._id,
+                  status: 'pending',
+                },
                 error: '',
               });
             })
@@ -204,18 +208,15 @@ module.exports = () => {
           });
           return;
         }
-        console.log('1');
         const content = [];
         // Relationship already exists
         if (relationships.length) {
           async.each(relationships, (relationship, cb) => {
-            console.log('2');
             let otherUserId = '';
             // Only show content if they're friends, not pending
             if (relationship.status === 'friends') {
               otherUserId = userId === relationship.user1Id ? relationship.user2Id : relationship.user1Id;
               getScore(otherUserId, 'week', (resp) => {
-                console.log('3');
                 if (!resp.success) {
                   res.send({
                     success: false,
@@ -231,7 +232,6 @@ module.exports = () => {
                     });
                     return;
                   }
-                  console.log('4');
                   content.push({
                     name: user.name,
                     profilePicture: user.profilePicture,
@@ -252,7 +252,6 @@ module.exports = () => {
               });
               return;
             }
-            console.log('5');
             res.send({
               success: true,
               error: '',
