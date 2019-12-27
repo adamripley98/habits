@@ -2,13 +2,42 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { logout } from '../redux/actions/authentication';
+
+const CUT_OFF_POINT = 990;
 
 class SideNav extends Component {
+  constructor(props) {
+    super(props);
+    this.updateWidth = this.updateWidth.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+    this.state = {
+      width: window.innerWidth,
+    };
+  }
+
+  componentDidMount() {
+    this.updateWidth();
+    window.addEventListener('resize', this.updateWidth);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWidth);
+  }
+
+  updateWidth() {
+    this.setState({ width: window.innerWidth });
+  }
+
+  handleLogout() {
+    this.props.onLogout();
+  }
+
   render() {
     return (
       <div>
-        <div className="row">
-          <div className="col-lg-3 col-sm-4">
+        <div className={this.state.width > CUT_OFF_POINT ? 'row' : ''}>
+          <div className={this.state.width > CUT_OFF_POINT ? 'col-lg-3 col-sm-4' : 'hidden'}>
             <div className="side-nav">
               <nav className="pt-2">
                 <h5 className="gold-text bold mb-3 pl-3">Personal</h5>
@@ -44,7 +73,7 @@ class SideNav extends Component {
                   </NavLink>
                 </div>
                 <div className="nav-section">
-                  <NavLink to="/addfriends" className="nav-link">
+                  <NavLink to="/manage-friends" className="nav-link">
                     <i className="fas fa-user-plus" />
                     &nbsp;&nbsp;&nbsp;&nbsp;Manage friends
                   </NavLink>
@@ -57,15 +86,15 @@ class SideNav extends Component {
                   </NavLink>
                 </div>
                 <div className="nav-section">
-                  <NavLink to="/settings" className="nav-link">
+                  <div className="nav-link" onClick={this.handleLogout}>
                     <i className="fas fa-sign-out-alt" />
                     &nbsp;&nbsp;&nbsp;&nbsp;Sign out
-                  </NavLink>
+                  </div>
                 </div>
               </nav>
             </div>
           </div>
-          <div className="col-lg-9 col-sm-8">
+          <div className={this.state.width > CUT_OFF_POINT ? 'col-lg-9 col-sm-8' : ''}>
             {this.props.component}
           </div>
         </div>
@@ -75,24 +104,22 @@ class SideNav extends Component {
 }
 
 SideNav.propTypes = {
-  userId: PropTypes.string,
+  onLogout: PropTypes.func,
   component: PropTypes.object,
 };
 
-// Allows us to access redux state as this.props.userId inside component
 const mapStateToProps = (state) => {
   return {
     userId: state.authState.userId,
   };
 };
 
-// Allows us to dispatch a login event by calling this.props.onLogin
 const mapDispatchToProps = (dispatch) => {
   return {
+    onLogout: () => dispatch(logout()),
   };
 };
 
-// Redux config
 SideNav = connect(
   mapStateToProps,
   mapDispatchToProps

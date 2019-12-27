@@ -3,6 +3,7 @@ import { CirclePicker } from 'react-color';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import $ from 'jquery';
 import {
   addCategory, addHabit, checkHabit, loadHabitDataByDate,
 } from '../../redux/actions/habits';
@@ -16,6 +17,7 @@ class Habits extends Component {
     this.displayComponent = this.displayComponent.bind(this);
     this.displayHabits = this.displayHabits.bind(this);
     this.displaySelect = this.displaySelect.bind(this);
+    this.displayDate = this.displayDate.bind(this);
     this.handleChangeColor = this.handleChangeColor.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmitAddCategory = this.handleSubmitAddCategory.bind(this);
@@ -28,6 +30,7 @@ class Habits extends Component {
       categoryColor: '',
       habitName: '',
       habitCategory: '',
+      arrowClicked: '',
     };
   }
 
@@ -59,11 +62,13 @@ class Habits extends Component {
   }
 
   handleClickLeft() {
+    this.setState({ arrowClicked: 'left' });
     const tempDate = this.props.selectedDate;
     this.props.onLoadHabitDataByDate(moment(tempDate).subtract(1, 'days').format());
   }
 
   handleClickRight() {
+    this.setState({ arrowClicked: 'right' });
     const tempDate = this.props.selectedDate;
     this.props.onLoadHabitDataByDate(moment(tempDate).add(1, 'days').format());
   }
@@ -73,6 +78,9 @@ class Habits extends Component {
     const habitId = e.target.value;
     const didComplete = e.target.checked;
     const date = this.props.selectedDate;
+    // Check/uncheck habit on frontend initially while backend loads
+    didComplete ? $(`#${habitId}`).addClass('cross-through') : $(`#${habitId}`).removeClass('cross-through');
+    // Check habit in redux and backend
     this.props.onCheckHabit(habitId, didComplete, date);
   }
 
@@ -96,36 +104,34 @@ class Habits extends Component {
         <div className="col-xl-4 col-md-6" key={category.categoryId}>
           <div className="category-card">
             <div className="category-card-header" style={{ backgroundColor: category.color }}>
-              <i className="fas fa-book-open p-3 float-left" />
-              <h4 className="p-3">{category.name}</h4>
+              <i className="fas fa-book-open pl-4 float-left" />
+              <h4 className="p-3 mb-0">{category.name}</h4>
             </div>
             <div className="category-card-body">
-              <ul>
-                {
-                  category.habits.sort((a, b) => {
-                    const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-                    const nameB = b.name.toUpperCase(); // ignore upper and lowercase
-                    if (nameA < nameB) {
-                      return -1;
-                    }
-                    if (nameA > nameB) {
-                      return 1;
-                    }
-                    // names must be equal
-                    return 0;
-                  }).map(habit => (
-                    <div className="individual-habit mb-2" key={habit.habitId}>
-                      <div className="pretty p-icon p-round p-bigger p-smooth">
-                        <input type="checkbox" defaultChecked={habit.didComplete} value={habit.habitId} onClick={this.handleCheck} />
-                        <div className="state p-success">
-                          <i className="icon gold-text fa fa-check" />
-                          <label className={habit.didComplete ? 'ml-2 cross-through' : 'ml-2'}>{habit.name}</label>
-                        </div>
+              {
+                category.habits.sort((a, b) => {
+                  const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+                  const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+                  if (nameA < nameB) {
+                    return -1;
+                  }
+                  if (nameA > nameB) {
+                    return 1;
+                  }
+                  // names must be equal
+                  return 0;
+                }).map(habit => (
+                  <div className="individual-habit mb-2" key={habit.habitId}>
+                    <div className="pretty p-icon p-round p-bigger p-smooth">
+                      <input type="checkbox" defaultChecked={habit.didComplete} value={habit.habitId} onClick={this.handleCheck} />
+                      <div className="state p-success">
+                        <i className="icon gold-text fa fa-check" />
+                        <label id={habit.habitId} className={habit.didComplete ? 'test ml-2 cross-through' : 'ml-2'}>{habit.name}</label>
                       </div>
                     </div>
-                  ))
-                }
-              </ul>
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -154,24 +160,39 @@ class Habits extends Component {
     );
   }
 
+  // Helper method to display dates, even before backend has been loaded
+  displayDate() {
+    if (this.props.pending && this.state.arrowClicked === 'right') {
+      return moment(this.props.selectedDate).add(1, 'days').format('dddd, MMMM Do');
+    }
+    if (this.props.pending && this.state.arrowClicked === 'left') {
+      return moment(this.props.selectedDate).subtract(1, 'days').format('dddd, MMMM Do');
+    }
+    return moment(this.props.selectedDate).format('dddd, MMMM Do');
+  }
+
   displayComponent() {
     return (
       <div className="container mt-6">
         <div className="habit-header-container mb-3">
-          <h1 className="navy-text bold">Habits</h1>
-          <div>
-            <i className="il-block fas fa-angle-left" onClick={this.handleClickLeft} />
-            <h3 className="il-block navy-text bold">
-            &nbsp;&nbsp;
-              {moment(this.props.selectedDate).format('dddd, MMMM Do')}
-            &nbsp;&nbsp;
-            </h3>
-            <i className="il-block fas fa-angle-right navy-block" onClick={this.handleClickRight} />
-          </div>
+          <h1 className="habit-header-title">Habits</h1>
           <div className="button-group">
-            <button type="button" className="btn btn-primary btn-add">
+            <button type="button" className="btn btn-primary">
               Edit habits
             </button>
+          </div>
+          <div className="arrow-section">
+            <div className="left-arrow">
+              <i className="il-block fas fa-angle-left arrow-icon" onClick={this.handleClickLeft} />
+            </div>
+            <h3 className="il-block date-text navy-text bold">
+            &nbsp;&nbsp;
+              {this.displayDate()}
+            &nbsp;&nbsp;
+            </h3>
+            <div className="right-arrow">
+              <i className="il-block arrow fas fa-angle-right navy-block arrow-icon" onClick={this.handleClickRight} />
+            </div>
           </div>
         </div>
         <div className="row justify-content-center">

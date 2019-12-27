@@ -3,12 +3,17 @@
   width: 6rem;
 }
 
+.logo-link {
+  background: url('../images/60-lines.png'), $navy !important;
+}
+
 .navbar-dark {
   background: url('../images/60-lines.png'), $navy !important;
 }
 
 .side-nav {
   background: $navy;
+  background: url('../images/60-lines.png'), $navy !important;
   margin: 6rem 0rem 0 1rem;
   padding: 1rem 0;
   border-radius: 0.3rem;
@@ -38,4 +43,8 @@
 
 .nav-section:hover {
   background-color: $gold;
+}
+
+.hidden {
+  display: none;
 }

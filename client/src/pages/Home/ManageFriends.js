@@ -8,7 +8,7 @@ import SideNav from '../../components/SideNav';
 import Loading from '../../components/shared/Loading';
 import ErrorMessage from '../../components/shared/ErrorMessage';
 
-class AddFriends extends Component {
+class ManageFriends extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -100,12 +100,14 @@ class AddFriends extends Component {
 
   render() {
     return (
-      <SideNav component={this.displayComponent()} />
+      <div className="container-fluid">
+        <SideNav component={this.displayComponent()} />
+      </div>
     );
   }
 }
 
-AddFriends.propTypes = {
+ManageFriends.propTypes = {
   onLoadRelationships: PropTypes.func,
   onAddFriend: PropTypes.func,
   onAcceptFriend: PropTypes.func,
@@ -132,9 +134,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-AddFriends = connect(
+ManageFriends = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AddFriends);
+)(ManageFriends);
 
-export default AddFriends;
+export default ManageFriends;

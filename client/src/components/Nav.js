@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { logout } from '../redux/actions/authentication';
 import Logo from '../images/logo.png';
 import Default from '../images/default-profile.jpg';
@@ -37,7 +38,9 @@ class Nav extends Component {
     return (
       <div>
         <nav className="navbar fixed-top navbar-dark bg-dark">
-          <img src={Logo} alt="logo" className="logo" />
+          <NavLink to="/" className="logo-link">
+            <img src={Logo} alt="logo" className="logo" />
+          </NavLink>
           {this.props.userId ? this.loggedInLinks() : this.loggedOutLinks()}
         </nav>
       </div>

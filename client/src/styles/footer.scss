@@ -1,11 +1,15 @@
 .footer {
   background: $navy;
   width: 100%;
+  bottom: 0 !important;
+  background: url('../images/60-lines.png'), $navy !important;
+  clear: both;
 }
 
 .bottom-links {
   margin: 0  2rem !important;
   padding-bottom: 0.5rem;
+  bottom: 0 !important;
 }
 
 .bottom-links-right {

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import './App.css';
 import Home from './pages/Home/Home';
 import Habits from './pages/Home/Habits2';
-import AddFriends from './pages/Home/AddFriends';
+import ManageFriends from './pages/Home/ManageFriends';
 import Feed from './pages/Home/Feed';
 import SignUp from './pages/auth/SignUp';
 import Login from './pages/auth/Login';
@@ -30,16 +30,18 @@ class App extends Component {
       <div>
         <Nav />
         <Switch>
-          <Route exact path="/" component={LandingPage} />
-          <Route path="/home" component={requireLogin(Home)} />
-          <Route path="/habits" component={requireLogin(Habits)} />
-          <Route path="/addfriends" component={requireLogin(AddFriends)} />
-          <Route path="/feed" component={requireLogin(Feed)} />
-          <Route path="/register" component={SignUp} />
-          <Route path="/login" component={Login} />
-          <Route path="/forgot" component={Forgot} />
-          <Route path="/reset/:token" component={Reset} />
-          <Route path="/verify/:token" component={requireLogin(Verify)} />
+          <div className="body-wrapper">
+            <Route exact path="/" component={LandingPage} />
+            <Route path="/home" component={requireLogin(Home)} />
+            <Route path="/habits" component={requireLogin(Habits)} />
+            <Route path="/manage-friends" component={requireLogin(ManageFriends)} />
+            <Route path="/feed" component={requireLogin(Feed)} />
+            <Route path="/register" component={SignUp} />
+            <Route path="/login" component={Login} />
+            <Route path="/forgot" component={Forgot} />
+            <Route path="/reset/:token" component={Reset} />
+            <Route path="/verify/:token" component={requireLogin(Verify)} />
+          </div>
         </Switch>
         <Footer />
 

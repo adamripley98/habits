@@ -114,7 +114,7 @@ class Home extends Component {
             <h3 className={this.state.active === 'month' ? 'duration-option clicked' : 'duration-option'} onClick={this.clickMonth}>Month</h3>
           </div>
           <div className="button-group">
-            <button type="button" className="btn btn-primary btn-add">
+            <button type="button" className="btn btn-primary">
               Enter Today&apos;s Habits
             </button>
           </div>
@@ -128,7 +128,9 @@ class Home extends Component {
 
   render() {
     return (
-      <SideNav component={this.displayComponent()} />
+      <div className="container-fluid">
+        <SideNav component={this.displayComponent()} />
+      </div>
     );
   }
 }

@@ -30,11 +30,14 @@ $pretty--color-success:$navy !important;
 html, body {
     max-width: 100%;
     overflow-x: hidden;
-    height: 100%;
 }
 
 body {
   font-family: 'Apercu' !important;
+}
+
+.body-wrapper {
+  min-height: 80vh;
 }
 
 .bold {

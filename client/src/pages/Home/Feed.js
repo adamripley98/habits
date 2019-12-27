@@ -70,7 +70,9 @@ class Feed extends Component {
 
   render() {
     return (
-      <SideNav component={this.displayComponent()} />
+      <div className="container-fluid">
+        <SideNav component={this.displayComponent()} />
+      </div>
     );
   }
 }
