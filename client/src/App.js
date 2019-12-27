@@ -41,9 +41,10 @@ class App extends Component {
           <Route path="/reset/:token" component={Reset} />
           <Route path="/verify/:token" component={requireLogin(Verify)} />
         </Switch>
+        <Footer />
+
       </div>
     );
-    // <Footer />
     return (
       <Switch>
         <App />

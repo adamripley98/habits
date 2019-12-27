@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import DummyImage from '../images/ai.svg';
-import SocialIcon from '../images/social-icon.png';
 import CheckIcon from '../images/icons/check.png';
 import ComputerIcon from '../images/computer-background.png';
 import LaptopIcon from '../images/laptop-background.png';

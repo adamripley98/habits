@@ -5,6 +5,8 @@
 @import './home';
 @import './habits';
 @import './loader';
+@import './footer';
+@import './formatting';
 
 @import '~pretty-checkbox/src/scss/variables';
 
@@ -28,6 +30,7 @@ $pretty--color-success:$navy !important;
 html, body {
     max-width: 100%;
     overflow-x: hidden;
+    height: 100%;
 }
 
 body {
@@ -51,41 +54,8 @@ body {
   line-height: 2.5rem;
 }
 
-.mb-10 {
-  margin-bottom: 10rem;
-}
-
-.mt-6 {
-  margin-top: 6rem;
-}
-
-.p-tb-10 {
-  padding: 10rem 0;
-}
-
-.p-tb-7 {
-  padding: 7rem 0;
-}
-
-.pt-8 {
-  padding-top: 8rem;
-}
-
-.navy-text {
-  color: $navy;
-}
-
-.gold-link {
-  color: $gold;
-  font-size: 1.2rem;
-}
-
 .line {
   border-bottom: 1px solid black;
-}
-
-.il-block {
-  display: inline-block;
 }
 
 .icon-pic {
@@ -94,40 +64,4 @@ body {
 
 .cross-through {
   text-decoration: line-through;
-}
-
-.float-left {
-  float: left;
-}
-
-.lds-ring {
-  width: 64px;
-  height: 64px;
-}
-.lds-ring div {
-  position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 0px auto;
-  border: 6px solid $light-gray;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: $light-gray transparent transparent transparent;
-}
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
-}
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
-}
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
-}
-@keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }

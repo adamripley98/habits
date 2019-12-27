@@ -11,6 +11,8 @@
   background: $navy;
   margin: 6rem 0rem 0 1rem;
   padding: 1rem 0;
+  border-radius: 0.3rem;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05)
 }
 
 .profile-pic {
@@ -36,16 +38,4 @@
 
 .nav-section:hover {
   background-color: $gold;
-}
-
-.footer {
-  bottom: 0 !important;
-  background: $navy;
-  width: 100%;
-  color: white;
-  height: 20vh;
-}
-
-.bottom-links {
-  bottom: 0;
 }

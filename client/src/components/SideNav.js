@@ -26,27 +26,27 @@ class SideNav extends Component {
                 </div>
                 <div className="nav-section">
                   <NavLink to="/journal" className="nav-link">
-                    <i className="fas fa-book-open" />
-                    &nbsp;&nbsp;&nbsp;&nbsp;Journal
-                  </NavLink>
-                </div>
-                <div className="nav-section">
-                  <NavLink to="/journal" className="nav-link">
                     <i className="fas fa-smile" />
                     &nbsp;&nbsp;&nbsp;&nbsp;Track Mood
                   </NavLink>
                 </div>
-                <h5 className="gold-text bold mb-3 pl-3">Social</h5>
                 <div className="nav-section">
-                  <NavLink to="/addfriends" className="nav-link">
-                    <i className="fas fa-user-plus" />
-                    &nbsp;&nbsp;&nbsp;&nbsp;Manage friends
+                  <NavLink to="/journal" className="nav-link">
+                    <i className="fas fa-book-open" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;Journal
                   </NavLink>
                 </div>
+                <h5 className="gold-text bold mb-3 pl-3">Social</h5>
                 <div className="nav-section">
                   <NavLink to="/feed" className="nav-link">
                     <i className="fas fa-hashtag" />
                     &nbsp;&nbsp;&nbsp;&nbsp;Feed
+                  </NavLink>
+                </div>
+                <div className="nav-section">
+                  <NavLink to="/addfriends" className="nav-link">
+                    <i className="fas fa-user-plus" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;Manage friends
                   </NavLink>
                 </div>
                 <h5 className="gold-text bold mb-3 pl-3">Account</h5>
