@@ -36,7 +36,7 @@ class Nav extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-dark bg-dark">
+        <nav className="navbar fixed-top navbar-dark bg-dark">
           <img src={Logo} alt="logo" className="logo" />
           {this.props.userId ? this.loggedInLinks() : this.loggedOutLinks()}
         </nav>

@@ -105,7 +105,7 @@ class Home extends Component {
 
   displayComponent() {
     return (
-      <div className="container">
+      <div className="container mt-6">
         <div className="habit-header-container">
           <h1 className="underline">Home</h1>
           <div>

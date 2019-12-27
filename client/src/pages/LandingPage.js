@@ -11,7 +11,7 @@ class LandingPage extends Component {
       <div>
 
         <div className="header-section">
-          <div className="container">
+          <div className="container pt-8">
             <div className="row">
               <div className="col-lg-6">
                 <h1 className="header-text">
@@ -70,11 +70,11 @@ class LandingPage extends Component {
               <div className="col-lg-5">
                 <div>
                   <div>
-                    <img className="icon m-2" src={CheckIcon} alt="icon" />
+                    <img className="icon-pic m-2" src={CheckIcon} alt="icon" />
                     <div>
                       <h1 className="bold m-2 mr-4">Habit tracking</h1>
                     </div>
-                    <p className="p-bigger p-2 mr-4">
+                    <p className="p-big p-2 mr-4">
                       Turn your vague daily routine into concrete, quantifiable personal metrics. Record your habits daily, analyze progress over time, and start functioning at 100%.
                     </p>
                   </div>
@@ -92,9 +92,9 @@ class LandingPage extends Component {
                   <img className="computer-image" src={LaptopIcon} alt="dummy" />
                 </div>
                 <div className="col-lg-5">
-                  <img className="icon m-2 ml-4" src={CheckIcon} alt="icon" />
+                  <img className="icon-pic m-2 ml-4" src={CheckIcon} alt="icon" />
                   <h1 className="bold m-2 ml-4">Social Accountability</h1>
-                  <p className="p-bigger p-2 ml-4">
+                  <p className="p-big p-2 ml-4">
                     Set up a support network and hold each other accountable. Share thoughts, view habit progress, and make sure the people you care about most are taking care of themselves.
                   </p>
                 </div>
@@ -104,16 +104,16 @@ class LandingPage extends Component {
           <div className="container p-tb-7">
             <div className="row mt-5">
               <div className="col-lg-6">
-                <img className="icon m-2" src={CheckIcon} alt="icon" />
+                <img className="icon-pic m-2" src={CheckIcon} alt="icon" />
                 <h1 className="bold m-2">Journaling</h1>
-                <p className="p-bigger p-2">
+                <p className="p-big p-2">
                   Reflect and put your thoughts down on paper. Write what’s on your mind or select an existing prompt; share entries with your network or keep them for yourself.
                 </p>
               </div>
               <div className="col-lg-6">
-                <img className="icon m-2" src={CheckIcon} alt="icon" />
+                <img className="icon-pic m-2" src={CheckIcon} alt="icon" />
                 <h1 className="bold m-2">Mood tracking</h1>
-                <p className="p-bigger p-2">
+                <p className="p-big p-2">
                   Record and analyze changes in your mood over time, answer customizable questions about your mental health, and keep track of your medications.
                 </p>
               </div>

@@ -5,7 +5,7 @@ import React from 'react';
  * Component to render a spinning loading circle
  */
 const Loading = () => (
-  <div className="lds-ring">
+  <div className="lds-ellipsis">
     <div />
     <div />
     <div />

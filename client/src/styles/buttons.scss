@@ -1,7 +1,14 @@
 .btn-primary {
-  background: $blue;
+  background: $navy;
   color: $gold;
-  border-color: $blue;
+  border: none;
+  border-radius: 0.3rem;
+  font-weight: bold;
+  transition: .3s;
+}
+
+.btn-primary:hover {
+  background: $blue;
 }
 
 .btn-add {

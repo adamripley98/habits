@@ -9,6 +9,7 @@ import {
 import SideNav from '../../components/SideNav';
 import Loading from '../../components/shared/Loading';
 
+
 class Habits extends Component {
   constructor(props) {
     super(props);
@@ -92,30 +93,40 @@ class Habits extends Component {
       });
 
       return sortedCategories.map(category => (
-        <div className="col-lg-6" key={category.categoryId}>
+        <div className="col-xl-4 col-md-6" key={category.categoryId}>
           <div className="category-card">
-            <h4 className="underline" style={{ color: category.color }}>{category.name}</h4>
-            <ul>
-              {
-                category.habits.sort((a, b) => {
-                  const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-                  const nameB = b.name.toUpperCase(); // ignore upper and lowercase
-                  if (nameA < nameB) {
-                    return -1;
-                  }
-                  if (nameA > nameB) {
-                    return 1;
-                  }
-                  // names must be equal
-                  return 0;
-                }).map(habit => (
-                  <div className="individual-habit" key={habit.habitId}>
-                    <input type="checkbox" name="habit-check" value={habit.habitId} onClick={this.handleCheck} defaultChecked={habit.didComplete} />
-                    <ul className="habit-text">{habit.name}</ul>
-                  </div>
-                ))
-              }
-            </ul>
+            <div className="category-card-header" style={{ backgroundColor: category.color }}>
+              <i className="fas fa-book-open p-3 float-left" />
+              <h4 className="p-3">{category.name}</h4>
+            </div>
+            <div className="category-card-body">
+              <ul>
+                {
+                  category.habits.sort((a, b) => {
+                    const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+                    const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+                    if (nameA < nameB) {
+                      return -1;
+                    }
+                    if (nameA > nameB) {
+                      return 1;
+                    }
+                    // names must be equal
+                    return 0;
+                  }).map(habit => (
+                    <div className="individual-habit mb-2" key={habit.habitId}>
+                      <div className="pretty p-icon p-round p-bigger p-smooth">
+                        <input type="checkbox" defaultChecked={habit.didComplete} value={habit.habitId} onClick={this.handleCheck} />
+                        <div className="state p-success">
+                          <i className="icon gold-text fa fa-check" />
+                          <label className={habit.didComplete ? 'ml-2 cross-through' : 'ml-2'}>{habit.name}</label>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                }
+              </ul>
+            </div>
           </div>
         </div>
       ));
@@ -145,24 +156,21 @@ class Habits extends Component {
 
   displayComponent() {
     return (
-      <div className="container mt-6 push-right">
-        <div className="habit-header-container">
-          <h1 className="underline">Habits</h1>
+      <div className="container mt-6">
+        <div className="habit-header-container mb-3">
+          <h1 className="navy-text bold">Habits</h1>
           <div>
             <i className="il-block fas fa-angle-left" onClick={this.handleClickLeft} />
-            <h3 className="il-block">
+            <h3 className="il-block navy-text bold">
             &nbsp;&nbsp;
               {moment(this.props.selectedDate).format('dddd, MMMM Do')}
             &nbsp;&nbsp;
             </h3>
-            <i className="il-block fas fa-angle-right" onClick={this.handleClickRight} />
+            <i className="il-block fas fa-angle-right navy-block" onClick={this.handleClickRight} />
           </div>
           <div className="button-group">
-            <button type="button" className="btn btn-primary btn-add" data-toggle="modal" data-target="#categoryModal">
-              Add category
-            </button>
-            <button type="button" className="btn btn-primary btn-add" data-toggle="modal" data-target="#habitModal">
-              Add habit
+            <button type="button" className="btn btn-primary btn-add">
+              Edit habits
             </button>
           </div>
         </div>
@@ -224,7 +232,9 @@ class Habits extends Component {
 
   render() {
     return (
-      <SideNav component={this.displayComponent()} />
+      <div className="container-fluid">
+        <SideNav component={this.displayComponent()} />
+      </div>
     );
   }
 }

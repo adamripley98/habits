@@ -14,8 +14,7 @@
 .header-section {
   height: 80vh;
   background: $navy;
-  background: linear-gradient(180deg, $navy 17%, $blue 100%);
-  z-index: -1;
+  background: url('../images/60-lines.png'), linear-gradient(180deg, $navy 17%, $blue 100%);
 }
 
 .features-section {

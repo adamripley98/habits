@@ -1,65 +1,71 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class SideNav extends Component {
   render() {
     return (
-      <div className="container-fluid">
+      <div>
         <div className="row">
-          <div className="col-lg-2 col-md-3 col-sm-4 side-nav">
-            <nav>
-              <h5 className="gold-text bold">Personal</h5>
-              <div className="nav-section">
-                <Link to="/home" className="nav-link">
-                  <i className="fas fa-home" />
-                  &nbsp;&nbsp;Home
-                </Link>
-              </div>
-              <div className="nav-section">
-                <Link to="/habits" className="nav-link">
-                  <i className="fas fa-check-circle" />
-                  &nbsp;&nbsp;Habits
-                </Link>
-              </div>
-              <div className="nav-section">
-                <Link to="/journal" className="nav-link">
-                  <i className="fas fa-book-open" />
-                  &nbsp;&nbsp;Journal
-                </Link>
-              </div>
-              <br />
-              <h5 className="gold-text bold">Social</h5>
-              <div className="nav-section">
-                <Link to="/addfriends" className="nav-link">
-                  <i className="fas fa-user-plus" />
-                  &nbsp;&nbsp;Manage friends
-                </Link>
-              </div>
-              <div className="nav-section">
-                <Link to="/feed" className="nav-link">
-                  <i className="fas fa-hashtag" />
-                  &nbsp;&nbsp;Feed
-                </Link>
-              </div>
-              <br />
-              <h5 className="gold-text bold">Account</h5>
-              <div className="nav-section">
-                <Link to="/settings" className="nav-link">
-                  <i className="fas fa-user-cog" />
-                  &nbsp;&nbsp;Account Settings
-                </Link>
-              </div>
-              <div className="nav-section">
-                <Link to="/settings" className="nav-link">
-                  <i className="fas fa-sign-out-alt" />
-                  &nbsp;&nbsp;Sign out
-                </Link>
-              </div>
-            </nav>
+          <div className="col-lg-3 col-sm-4">
+            <div className="side-nav">
+              <nav className="pt-2">
+                <h5 className="gold-text bold mb-3 pl-3">Personal</h5>
+                <div className="nav-section">
+                  <NavLink to="/home" className="nav-link">
+                    <i className="fas fa-home" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;Home
+                  </NavLink>
+                </div>
+                <div className="nav-section">
+                  <NavLink to="/habits" className="nav-link">
+                    <i className="fas fa-check-circle" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;Habits
+                  </NavLink>
+                </div>
+                <div className="nav-section">
+                  <NavLink to="/journal" className="nav-link">
+                    <i className="fas fa-book-open" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;Journal
+                  </NavLink>
+                </div>
+                <div className="nav-section">
+                  <NavLink to="/journal" className="nav-link">
+                    <i className="fas fa-smile" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;Track Mood
+                  </NavLink>
+                </div>
+                <h5 className="gold-text bold mb-3 pl-3">Social</h5>
+                <div className="nav-section">
+                  <NavLink to="/addfriends" className="nav-link">
+                    <i className="fas fa-user-plus" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;Manage friends
+                  </NavLink>
+                </div>
+                <div className="nav-section">
+                  <NavLink to="/feed" className="nav-link">
+                    <i className="fas fa-hashtag" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;Feed
+                  </NavLink>
+                </div>
+                <h5 className="gold-text bold mb-3 pl-3">Account</h5>
+                <div className="nav-section">
+                  <NavLink to="/settings" className="nav-link">
+                    <i className="fas fa-user-cog" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;Account Settings
+                  </NavLink>
+                </div>
+                <div className="nav-section">
+                  <NavLink to="/settings" className="nav-link">
+                    <i className="fas fa-sign-out-alt" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;Sign out
+                  </NavLink>
+                </div>
+              </nav>
+            </div>
           </div>
-          <div className="col-lg-10 col-md-9 col-sm-8">
+          <div className="col-lg-9 col-sm-8">
             {this.props.component}
           </div>
         </div>

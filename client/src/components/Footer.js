@@ -4,7 +4,7 @@ import Logo from '../images/logo.png';
 function Footer() {
   return (
     <div className="footer">
-      <img className="icon" src={Logo} alt="icon" />
+      <img className="icon-pic" src={Logo} alt="icon" />
       <div className="social-links">
         <h1>social</h1>
       </div>

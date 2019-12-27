@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './App.css';
 import Home from './pages/Home/Home';
-import Habits from './pages/Home/Habits';
+import Habits from './pages/Home/Habits2';
 import AddFriends from './pages/Home/AddFriends';
 import Feed from './pages/Home/Feed';
 import SignUp from './pages/auth/SignUp';

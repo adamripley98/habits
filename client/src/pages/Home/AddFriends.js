@@ -89,7 +89,7 @@ class AddFriends extends Component {
 
   displayComponent() {
     return (
-      <div className="container">
+      <div className="container mt-6">
         <div>
           <h1 className="underline">Add friends</h1>
         </div>

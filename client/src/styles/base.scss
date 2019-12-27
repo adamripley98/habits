@@ -4,10 +4,30 @@
 @import './nav';
 @import './home';
 @import './habits';
+@import './loader';
+
+@import '~pretty-checkbox/src/scss/variables';
+
+$pretty--colors:(
+  primary:#3f51b5,
+  info:#00bcd4,
+  success:$navy,
+  warning:$pretty--color-warning, // default
+  danger:$pretty--color-danger //default
+);
+
+@import '~pretty-checkbox/src/pretty-checkbox.scss';
+
+$pretty--color-success:$navy !important;
 
 @font-face {
   font-family: 'Apercu';
   src: url('../assets/fonts/Apercu_Regular.otf') format('woff'), /* Pretty Modern Browsers */
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -23,10 +43,10 @@ body {
 }
 
 .fas {
-  font-size: 2rem;
+  font-size: 1.4rem;
 }
 
-.p-bigger {
+.p-big {
   font-size: 1.6rem;
   line-height: 2.5rem;
 }
@@ -35,12 +55,20 @@ body {
   margin-bottom: 10rem;
 }
 
+.mt-6 {
+  margin-top: 6rem;
+}
+
 .p-tb-10 {
   padding: 10rem 0;
 }
 
 .p-tb-7 {
   padding: 7rem 0;
+}
+
+.pt-8 {
+  padding-top: 8rem;
 }
 
 .navy-text {
@@ -60,8 +88,16 @@ body {
   display: inline-block;
 }
 
-.icon {
+.icon-pic {
   height: 3.5rem;
+}
+
+.cross-through {
+  text-decoration: line-through;
+}
+
+.float-left {
+  float: left;
 }
 
 .lds-ring {
