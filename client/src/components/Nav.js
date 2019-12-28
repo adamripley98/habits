@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 import $ from 'jquery';
 import { logout } from '../redux/actions/authentication';
 import Logo from '../images/logo.png';
-import Default from '../images/default-profile.jpg';
 import Adam from '../images/adampic.jpg';
 
 const CUT_OFF_POINT = 990;
@@ -42,7 +41,7 @@ class Nav extends Component {
   // Hamburger menu should only be shown on small screens
   showOnSmall() {
     return (
-      <div className="m-0 p-0 d-flex justify-content-center">
+      <span className="m-0 p-0 d-flex justify-content-center">
         <button
           className="navbar-toggler first-button il-block pr-025"
           type="button"
@@ -71,7 +70,7 @@ class Nav extends Component {
             </li>
           </ul>
         </div>
-      </div>
+      </span>
     );
   }
 
@@ -87,7 +86,6 @@ class Nav extends Component {
             <a className="dropdown-item" href="#">Sign Out</a>
           </div>
         </div>
-        {this.state.width > CUT_OFF_POINT ? null : this.showOnSmall()}
       </div>
     );
   }
@@ -101,14 +99,89 @@ class Nav extends Component {
 
   render() {
     return (
-      <div>
-        <nav className="navbar fixed-top navbar-dark bg-dark">
-          <NavLink to="/" className="logo-link">
-            <img src={Logo} alt="logo" className="logo" />
-          </NavLink>
-          {this.props.userId ? this.loggedInLinks() : this.loggedOutLinks()}
-        </nav>
-      </div>
+      <nav className="navbar fixed-top navbar-dark bg-dark">
+        <NavLink to="/" className="logo-link">
+          <img src={Logo} alt="logo" className="logo" />
+        </NavLink>
+        <div className="dropdown il-block m-0 p-0 show-on-large">
+          <a className="p-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <img src={Adam} alt="default" className="profile-pic" />
+          </a>
+          <div className="dropdown-menu dropdown-menu-right" onClick={this.handleLogout}>
+            <a className="dropdown-item" href="#">Sign Out</a>
+          </div>
+        </div>
+        <button
+          className="navbar-toggler first-button il-block pr-025 show-on-small"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent20"
+          aria-controls="navbarSupportedContent20"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <div className="animated-icon1">
+            <span />
+            <span />
+            <span />
+          </div>
+        </button>
+        <div className="collapse navbar-collapse show-on-small" id="navbarSupportedContent20">
+          <ul className="navbar-nav mt-4 mb-4">
+            <h5 className="gold-text bold mb-2">Personal</h5>
+            <li className="nav-section" data-toggle="collapse" data-target=".navbar-collapse">
+              <NavLink to="/home" className="nav-link">
+                <i className="fas fa-home mr-3" />
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-section" data-toggle="collapse" data-target=".navbar-collapse">
+              <NavLink to="/habits" className="nav-link">
+                <i className="fas fa-check-circle mr-3" />
+                Habits
+              </NavLink>
+            </li>
+            <li className="nav-section" data-toggle="collapse" data-target=".navbar-collapse">
+              <NavLink to="/mood" className="nav-link">
+                <i className="fas fa-smile mr-3" />
+                Track Mood
+              </NavLink>
+            </li>
+            <li className="nav-section" data-toggle="collapse" data-target=".navbar-collapse">
+              <NavLink to="/journal" className="nav-link">
+                <i className="fas fa-book-open mr-3" />
+                Journal
+              </NavLink>
+            </li>
+            <h5 className="gold-text bold mb-2">Social</h5>
+            <li className="nav-section" data-toggle="collapse" data-target=".navbar-collapse">
+              <NavLink to="/feed" className="nav-link">
+                <i className="fas fa-hashtag mr-3" />
+                Feed
+              </NavLink>
+            </li>
+            <li className="nav-section" data-toggle="collapse" data-target=".navbar-collapse">
+              <NavLink to="/manage-friends" className="nav-link">
+                <i className="fas fa-user-plus mr-3" />
+                Manage Friends
+              </NavLink>
+            </li>
+            <h5 className="gold-text bold mb-2">Account</h5>
+            <li className="nav-section" data-toggle="collapse" data-target=".navbar-collapse">
+              <NavLink to="/settings" className="nav-link nav-link">
+                <i className="fas fa-user-cog mr-3" />
+                Account Settings
+              </NavLink>
+            </li>
+            <li className="nav-section" data-toggle="collapse" data-target=".navbar-collapse">
+              <div className="nav-link" onClick={this.handleLogout}>
+                <i className="fas fa-sign-out-alt mr-3" />
+                Sign Out
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
     );
   }
 }
@@ -141,6 +214,9 @@ Nav = connect(
 // Javascript for hamburger animation
 $(document).ready(function () {
   $('.first-button').on('click', function () {
+    $('.animated-icon1').toggleClass('open');
+  });
+  $('.nav-section').on('click', function () {
     $('.animated-icon1').toggleClass('open');
   });
 });

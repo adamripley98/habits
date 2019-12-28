@@ -41,52 +41,52 @@ class SideNav extends Component {
             <div className="side-nav">
               <nav className="pt-2">
                 <h5 className="gold-text bold mb-3 pl-3">Personal</h5>
-                <div className="nav-section">
-                  <NavLink to="/home" className="nav-link">
+                <div className="side-nav-section">
+                  <NavLink to="/home" className="side-nav-link">
                     <i className="fas fa-home" />
                     &nbsp;&nbsp;&nbsp;&nbsp;Home
                   </NavLink>
                 </div>
-                <div className="nav-section">
-                  <NavLink to="/habits" className="nav-link">
+                <div className="side-nav-section">
+                  <NavLink to="/habits" className="side-nav-link">
                     <i className="fas fa-check-circle" />
                     &nbsp;&nbsp;&nbsp;&nbsp;Habits
                   </NavLink>
                 </div>
-                <div className="nav-section">
-                  <NavLink to="/journal" className="nav-link">
+                <div className="side-nav-section">
+                  <NavLink to="/mood" className="side-nav-link">
                     <i className="fas fa-smile" />
                     &nbsp;&nbsp;&nbsp;&nbsp;Track Mood
                   </NavLink>
                 </div>
-                <div className="nav-section">
-                  <NavLink to="/journal" className="nav-link">
+                <div className="side-nav-section">
+                  <NavLink to="/journal" className="side-nav-link">
                     <i className="fas fa-book-open" />
                     &nbsp;&nbsp;&nbsp;&nbsp;Journal
                   </NavLink>
                 </div>
                 <h5 className="gold-text bold mb-3 pl-3">Social</h5>
-                <div className="nav-section">
-                  <NavLink to="/feed" className="nav-link">
+                <div className="side-nav-section">
+                  <NavLink to="/feed" className="side-nav-link">
                     <i className="fas fa-hashtag" />
                     &nbsp;&nbsp;&nbsp;&nbsp;Feed
                   </NavLink>
                 </div>
-                <div className="nav-section">
-                  <NavLink to="/manage-friends" className="nav-link">
+                <div className="side-nav-section">
+                  <NavLink to="/manage-friends" className="side-nav-link">
                     <i className="fas fa-user-plus" />
                     &nbsp;&nbsp;&nbsp;&nbsp;Manage Friends
                   </NavLink>
                 </div>
                 <h5 className="gold-text bold mb-3 pl-3">Account</h5>
-                <div className="nav-section">
-                  <NavLink to="/settings" className="nav-link">
+                <div className="side-nav-section">
+                  <NavLink to="/settings" className="side-nav-link">
                     <i className="fas fa-user-cog" />
                     &nbsp;&nbsp;&nbsp;&nbsp;Account Settings
                   </NavLink>
                 </div>
-                <div className="nav-section">
-                  <div className="nav-link" onClick={this.handleLogout}>
+                <div className="side-nav-section">
+                  <div className="side-nav-link" onClick={this.handleLogout}>
                     <i className="fas fa-sign-out-alt" />
                     &nbsp;&nbsp;&nbsp;&nbsp;Sign Out
                   </div>

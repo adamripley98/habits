@@ -17,7 +17,7 @@
   margin: 6rem 0rem 0 1rem;
   padding: 1rem 0;
   border-radius: 0.3rem;
-  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05)
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05) !important;
 }
 
 .profile-pic {
@@ -27,24 +27,45 @@
   border-radius: 50%;
 }
 
+.side-nav-link {
+  color: white;
+  display: block;
+  padding: 0.5rem 1rem;
+  cursor:pointer;
+}
+
+.side-nav-link:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.side-nav-link.active {
+  background-color: $gold;
+}
+
 .nav-link {
   color: white;
+  cursor:pointer;
 }
 
 .nav-link:hover {
   color: white;
 }
 
-.active {
+.nav-link.active {
+  text-decoration: underline;
+}
+
+.side-nav-section {
+  margin-bottom: 1rem;
+}
+
+.side-nav-section:hover {
   background-color: $gold;
 }
 
 .nav-section {
-  margin-bottom: 1rem;
-}
-
-.nav-section:hover {
-  background-color: $gold;
+  margin-bottom: 0.2rem;
 }
 
 .hidden {
@@ -54,6 +75,18 @@
 .navbar-toggler {
   outline: none !important;
   border: none;
+}
+
+@media (min-width: 990px) {
+  .show-on-small {
+    display: none !important;
+  }
+}
+
+@media (max-width: 990px) {
+  .show-on-large {
+    display: none !important;
+  }
 }
 
 .animated-icon1 {
