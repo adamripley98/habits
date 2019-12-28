@@ -178,7 +178,7 @@ class Habits extends Component {
           <h1 className="habit-header-title">Habits</h1>
           <div className="button-group">
             <button type="button" className="btn btn-primary">
-              Edit habits
+              Edit Habits
             </button>
           </div>
           <div className="arrow-section">

@@ -75,7 +75,7 @@ class SideNav extends Component {
                 <div className="nav-section">
                   <NavLink to="/manage-friends" className="nav-link">
                     <i className="fas fa-user-plus" />
-                    &nbsp;&nbsp;&nbsp;&nbsp;Manage friends
+                    &nbsp;&nbsp;&nbsp;&nbsp;Manage Friends
                   </NavLink>
                 </div>
                 <h5 className="gold-text bold mb-3 pl-3">Account</h5>
@@ -88,7 +88,7 @@ class SideNav extends Component {
                 <div className="nav-section">
                   <div className="nav-link" onClick={this.handleLogout}>
                     <i className="fas fa-sign-out-alt" />
-                    &nbsp;&nbsp;&nbsp;&nbsp;Sign out
+                    &nbsp;&nbsp;&nbsp;&nbsp;Sign Out
                   </div>
                 </div>
               </nav>
