@@ -2,6 +2,14 @@
   margin-bottom: 10rem;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-25 {
+  margin-right: 2.5rem;
+}
+
 .mt-6 {
   margin-top: 6rem;
 }
@@ -27,11 +35,11 @@
 }
 
 .float-left {
-  float: left;
+  float: left !important;
 }
 
 .float-right {
-  float: right;
+  float: right !important;
 }
 
 .clear-float {

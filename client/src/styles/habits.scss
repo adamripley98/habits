@@ -9,7 +9,9 @@
 }
 
 .category-card {
-  margin-bottom: 1rem;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1.5rem;
   text-align: left;
   border-radius: 0.3rem !important;
   background: #fff;
@@ -49,6 +51,44 @@
 
 .button-group {
   order: 3;
+}
+
+.habit-icon {
+  opacity: 0.5;
+}
+
+.add-cat-icon {
+  color: $gold;
+  float: left;
+  font-size: 2rem !important;
+}
+
+.habit-icon:hover {
+  opacity: 1.0;
+}
+
+@media (min-width: 576px) {
+    .card-columns {
+        column-count: 1;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 992px) {
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 1200px) {
+    .card-columns {
+        column-count: 3;
+    }
 }
 
 @media (max-width: 768px) {

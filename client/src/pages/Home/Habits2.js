@@ -31,6 +31,7 @@ class Habits extends Component {
       habitName: '',
       habitCategory: '',
       arrowClicked: '',
+      editting: false,
     };
   }
 
@@ -101,38 +102,54 @@ class Habits extends Component {
       });
 
       return sortedCategories.map(category => (
-        <div className="col-xl-4 col-md-6" key={category.categoryId}>
-          <div className="category-card">
-            <div className="category-card-header" style={{ backgroundColor: category.color }}>
-              <i className="fas fa-book-open pl-4 float-left" />
-              <h4 className="p-3 mb-0">{category.name}</h4>
-            </div>
-            <div className="category-card-body">
-              {
-                category.habits.sort((a, b) => {
-                  const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-                  const nameB = b.name.toUpperCase(); // ignore upper and lowercase
-                  if (nameA < nameB) {
-                    return -1;
-                  }
-                  if (nameA > nameB) {
-                    return 1;
-                  }
-                  // names must be equal
-                  return 0;
-                }).map(habit => (
-                  <div className="individual-habit mb-2" key={habit.habitId}>
-                    <div className="pretty p-icon p-round p-bigger p-smooth">
-                      <input type="checkbox" defaultChecked={habit.didComplete} value={habit.habitId} onClick={this.handleCheck} />
-                      <div className="state p-success">
-                        <i className="icon gold-text fa fa-check" />
-                        <label id={habit.habitId} className={habit.didComplete ? 'test ml-2 cross-through' : 'ml-2'}>{habit.name}</label>
+        <div className="category-card">
+          <div className="category-card-header" style={{ backgroundColor: category.color }}>
+            <i className="fas fa-book-open pl-4 float-left" />
+            <h4 className="p-3 mb-0">{category.name}</h4>
+            {this.state.editting ? <i className="fas fa-trash-alt ml-auto pr-4 habit-icon" /> : null}
+          </div>
+          <div className="category-card-body">
+            {
+              category.habits.sort((a, b) => {
+                const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+                const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+                if (nameA < nameB) {
+                  return -1;
+                }
+                if (nameA > nameB) {
+                  return 1;
+                }
+                // names must be equal
+                return 0;
+              }).map(habit => (
+                <div className="individual-habit mb-2" key={habit.habitId}>
+                  {
+                    this.state.editting ? (
+                      <div>
+                        <i className="far fa-trash-alt mr-2 habit-icon" />
+                        <i className="far fa-edit habit-icon" />
+                        <label id={habit.habitId} className="ml-2">{habit.name}</label>
                       </div>
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
+                    ) : (
+                      <div className="pretty p-icon p-round p-bigger p-smooth">
+                        <input type="checkbox" defaultChecked={habit.didComplete} value={habit.habitId} onClick={this.handleCheck} />
+                        <div className="state p-success">
+                          <i className="icon gold-text fa fa-check" />
+                          <label id={habit.habitId} className={habit.didComplete ? 'test ml-2 cross-through' : 'ml-2'}>{habit.name}</label>
+                        </div>
+                      </div>
+                    )
+                  }
+                </div>
+              ))
+            }
+            {
+              this.state.editting ? (
+                <button type="button" className="btn-primary">
+                  Add Habit
+                </button>
+              ) : null
+            }
           </div>
         </div>
       ));
@@ -177,8 +194,8 @@ class Habits extends Component {
         <div className="habit-header-container mb-3">
           <h1 className="habit-header-title">Habits</h1>
           <div className="button-group">
-            <button type="button" className="btn btn-primary">
-              Edit Habits
+            <button type="button" className="btn btn-primary" onClick={() => this.setState({ editting: !this.state.editting })}>
+              {this.state.editting ? 'Save Changes' : 'Edit Habits'}
             </button>
           </div>
           <div className="arrow-section">
@@ -195,9 +212,24 @@ class Habits extends Component {
             </div>
           </div>
         </div>
-        <div className="row justify-content-center">
-          {this.props.pending ? <Loading /> : this.displayHabits()}
-        </div>
+        {this.props.pending ? (
+          <div className="d-flex justify-content-center">
+            <Loading />
+          </div>
+        ) : (
+          <div className="card-columns">
+            {
+              this.state.editting ? (
+                <div className="category-card navy-background p-2 d-flex align-items-center">
+                  <i className="fas fa-plus-circle add-cat-icon mr-2"></i>
+                  <h3 className="gold-text mb-0">Add Category</h3>
+                </div>
+              ) : null
+            }
+            {this.displayHabits()}
+          </div>
+        )
+        }
         <div className="modal fade" id="categoryModal" tabIndex="-1" role="dialog" aria-labelledby="categoryModalTitle" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
