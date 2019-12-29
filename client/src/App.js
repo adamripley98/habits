@@ -7,6 +7,7 @@ import Home from './pages/Home/Home';
 import Habits from './pages/Home/Habits2';
 import ManageFriends from './pages/Home/ManageFriends2';
 import Feed from './pages/Home/Feed';
+import AccountSettings from './pages/Home/AccountSettings';
 import SignUp from './pages/auth/SignUp';
 import Login from './pages/auth/Login';
 import Nav from './components/Nav';
@@ -35,6 +36,7 @@ class App extends Component {
             <Route path="/home" component={requireLogin(Home)} />
             <Route path="/habits" component={requireLogin(Habits)} />
             <Route path="/manage-friends" component={requireLogin(ManageFriends)} />
+            <Route path="/settings" component={requireLogin(AccountSettings)} />
             <Route path="/feed" component={requireLogin(Feed)} />
             <Route path="/register" component={SignUp} />
             <Route path="/login" component={Login} />

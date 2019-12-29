@@ -140,6 +140,8 @@ class ManageFriends extends Component {
       <div className="category-card p-3">
         <h3 className="navy-text bold m-3">Add Friends</h3>
         <p className="grey-italics">Search friends by name or email.</p>
+        <input type="text" name="search-input" value="" className="search-input" />
+        <button type="button" className="btn-primary">Search</button>
         <div className="line" />
       </div>
     );
@@ -153,6 +155,13 @@ class ManageFriends extends Component {
           <i className="fas fa-ellipsis-h ml-auto mr-4" />
         </div>
         <div className="line" />
+        <div className="user-block">
+          <img src={Adam} alt="profile" className="friends-pic" />
+          <a href="" className="user-link">
+            Adam Ripley
+          </a>
+          <i className="fas fa-ellipsis-h ml-auto mr-4" />
+        </div>
       </div>
     );
   }
