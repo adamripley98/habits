@@ -145,7 +145,7 @@ class Habits extends Component {
             }
             {
               this.state.editting ? (
-                <button type="button" className="btn-primary">
+                <button type="button" className="btn-primary" data-toggle="modal" data-target="#habitModal">
                   Add Habit
                 </button>
               ) : null
@@ -191,8 +191,8 @@ class Habits extends Component {
   displayComponent() {
     return (
       <div className="container mt-6">
-        <div className="habit-header-container mb-3">
-          <h1 className="habit-header-title">Habits</h1>
+        <div className="header-container mb-3">
+          <h1 className="header-title">Habits</h1>
           <div className="button-group">
             <button type="button" className="btn btn-primary" onClick={() => this.setState({ editting: !this.state.editting })}>
               {this.state.editting ? 'Save Changes' : 'Edit Habits'}
@@ -220,10 +220,10 @@ class Habits extends Component {
           <div className="card-columns">
             {
               this.state.editting ? (
-                <div className="category-card navy-background p-2 d-flex align-items-center">
-                  <i className="fas fa-plus-circle add-cat-icon mr-2"></i>
+                <button type="button" className="btn-primary category-card navy-background p-2 d-flex align-items-center">
+                  <i className="fas fa-plus-circle add-cat-icon mr-2" />
                   <h3 className="gold-text mb-0">Add Category</h3>
-                </div>
+                </button>
               ) : null
             }
             {this.displayHabits()}

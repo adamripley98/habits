@@ -106,7 +106,7 @@ class Home extends Component {
   displayComponent() {
     return (
       <div className="container mt-6">
-        <div className="habit-header-container">
+        <div className="header-container">
           <h1 className="underline">Home</h1>
           <div>
             <h3 className={this.state.active === 'day' ? 'duration-option clicked' : 'duration-option'} onClick={this.clickDay}>Day</h3>

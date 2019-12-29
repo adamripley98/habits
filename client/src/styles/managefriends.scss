@@ -1,0 +1,27 @@
+.manage-friends-pic {
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  border-radius: 50%;
+  // display: inline-block;
+}
+
+.user-link {
+  color: $navy;
+  font-size: 1.5rem;
+  font-weight:bold;
+}
+
+.user-link:hover {
+  color: $gold;
+}
+
+.user-block {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.friend-btn-group {
+  margin-left: auto;
+}

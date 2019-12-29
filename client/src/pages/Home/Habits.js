@@ -146,7 +146,7 @@ class Habits extends Component {
   displayComponent() {
     return (
       <div className="container mt-6 push-right">
-        <div className="habit-header-container">
+        <div className="header-container">
           <h1 className="underline">Habits</h1>
           <div>
             <i className="il-block fas fa-angle-left" onClick={this.handleClickLeft} />

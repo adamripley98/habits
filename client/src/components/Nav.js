@@ -7,71 +7,15 @@ import { logout } from '../redux/actions/authentication';
 import Logo from '../images/logo.png';
 import Adam from '../images/adampic.jpg';
 
-const CUT_OFF_POINT = 990;
-
 class Nav extends Component {
   constructor(props) {
     super(props);
-    this.updateWidth = this.updateWidth.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.loggedInLinks = this.loggedInLinks.bind(this);
-    this.showOnSmall = this.showOnSmall.bind(this);
-    this.state = {
-      width: window.innerWidth,
-    };
-  }
-
-  componentDidMount() {
-    this.updateWidth();
-    window.addEventListener('resize', this.updateWidth);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWidth);
-  }
-
-  updateWidth() {
-    this.setState({ width: window.innerWidth });
   }
 
   handleLogout() {
     this.props.onLogout();
-  }
-
-  // Hamburger menu should only be shown on small screens
-  showOnSmall() {
-    return (
-      <span className="m-0 p-0 d-flex justify-content-center">
-        <button
-          className="navbar-toggler first-button il-block pr-025"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent20"
-          aria-controls="navbarSupportedContent20"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <div className="animated-icon1">
-            <span />
-            <span />
-            <span />
-          </div>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent20">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Features</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Pricing</a>
-            </li>
-          </ul>
-        </div>
-      </span>
-    );
   }
 
   // Links to be shown only if a user is logged in
@@ -126,7 +70,7 @@ class Nav extends Component {
             <span />
           </div>
         </button>
-        <div className="collapse navbar-collapse show-on-small" id="navbarSupportedContent20">
+        <div className="collapse navbar-collapse show-on-small ml-3" id="navbarSupportedContent20">
           <ul className="navbar-nav mt-4 mb-4">
             <h5 className="gold-text bold mb-2">Personal</h5>
             <li className="nav-section" data-toggle="collapse" data-target=".navbar-collapse">
