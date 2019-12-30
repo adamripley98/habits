@@ -9,6 +9,7 @@
 @import './formatting';
 @import './managefriends';
 @import './settings';
+@import './journal';
 
 @import '~pretty-checkbox/src/scss/variables';
 
@@ -64,7 +65,7 @@ body {
 }
 
 .line {
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid $light-gray;
   margin: 0 1.5rem;
 }
 

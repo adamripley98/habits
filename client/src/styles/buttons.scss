@@ -52,7 +52,6 @@ button, button:focus,  {
 }
 
 .btn-delete-account {
-  // border: none;
   background: #FF6347;
   color: white;
   border-radius: 0.3rem;
@@ -63,5 +62,4 @@ button, button:focus,  {
 
 .btn-delete-account:hover {
   background: #8B0000;
-  box-shadow: 0 6px 10px rgba(0,0,0,.14), 0 0 6px rgba(0,0,0,.09);
 }

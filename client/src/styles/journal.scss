@@ -1,0 +1,25 @@
+.RichTextEditor__root___2QXK- {
+  // background: green !important;
+  margin: 0 1rem !important;
+  font-family: 'Apercu' !important;
+  border: none !important;
+}
+
+.EditorToolbar__root___3_Aqz {
+  font-family: 'Apercu' !important;
+  font-size: 1rem !important;
+  border: none !important;
+}
+
+.DraftEditor-root {
+  border: 1px solid $light-gray !important;
+  border-radius: 3px;
+  margin: 0 0.5rem 1rem;
+  height: 20vh !important;
+}
+
+.DraftEditor-root:focus {
+  border: 1px solid $navy !important;
+  border-radius: 3px;
+  margin: 0 0.5rem 1rem;
+}

@@ -84,7 +84,7 @@ class AccountSettings extends Component {
   showNotificationSettings() {
     return (
       <div className="category-card p-3">
-        <h3 className="navy-text bold pb-2 pl-3 pt-1">Notifications & Privacy</h3>
+        <h3 className="card-title">Notifications & Privacy</h3>
         <div className="line" />
         <div className="setting-section">
           <div>
