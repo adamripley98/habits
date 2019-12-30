@@ -70,7 +70,7 @@ class AccountSettings extends Component {
         <div className="setting-section">
           <div>
             <p className="bold mb-0">Bio</p>
-            <p className="mb-2">Hello I'm a lifting bro from AK and i finna meet gurlz</p>
+            <p className="mb-2">Hello I'm a lifting bro from AK and i finna meet gurlz because gurlz are sick and im a lifting bro</p>
           </div>
           <div className="edit-link">
             <i className="far fa-edit" />
@@ -84,17 +84,44 @@ class AccountSettings extends Component {
   showNotificationSettings() {
     return (
       <div className="category-card p-3">
-        <h3 className="navy-text bold pb-2 pl-3 pt-1">Notification Preferences</h3>
+        <h3 className="navy-text bold pb-2 pl-3 pt-1">Notifications & Privacy</h3>
         <div className="line" />
-      </div>
-    );
-  }
-
-  showPrivacySettings() {
-    return (
-      <div className="category-card p-3">
-        <h3 className="navy-text bold pb-2 pl-3 pt-1">Privacy Settings</h3>
+        <div className="setting-section">
+          <div>
+            <p className="bold mb-0">App Notifications</p>
+            <p className="mb-2">New posts, likes/comments, friend requests</p>
+          </div>
+          <div className="edit-link">
+            <i className="far fa-edit" />
+            <p>Edit</p>
+          </div>
+        </div>
         <div className="line" />
+        <div className="setting-section">
+          <div>
+            <p className="bold mb-0">Email Notifications</p>
+            <p className="mb-2">Dayli news, reminders, friend requests</p>
+          </div>
+          <div className="edit-link">
+            <i className="far fa-edit" />
+            <p>Edit</p>
+          </div>
+        </div>
+        <div className="line" />
+        <div className="setting-section">
+          <div>
+            <p className="bold mb-0">Score Privacy</p>
+            <p className="mb-2">Currently only friends can see your scores</p>
+          </div>
+          <div className="edit-link">
+            <i className="far fa-edit" />
+            <p>Edit</p>
+          </div>
+        </div>
+        <div className="line" />
+        <div className="setting-section">
+          <button type="button" className="btn-delete-account">Delete Account</button>
+        </div>
       </div>
     );
   }
@@ -109,9 +136,6 @@ class AccountSettings extends Component {
           </div>
           <div className="col-lg-6">
             {this.showNotificationSettings()}
-          </div>
-          <div className="col-lg-6">
-            {this.showPrivacySettings()}
           </div>
         </div>
       </div>
