@@ -1,0 +1,35 @@
+.setting-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1.5rem 0rem 1.5rem;
+}
+
+.edit-link {
+  display: flex;
+  color: $navy;
+  i {
+    padding-top: 0.15rem;
+    margin-right: 0.15rem;
+  }
+  padding-top:0.8rem;
+}
+
+.edit-link:hover {
+  text-decoration: underline;
+  color: $gold;
+  cursor: pointer;
+}
+
+.card-title {
+  color: $navy;
+  font-weight: bold;
+  padding-left: 1rem;
+}
+
+.change-pic {
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0.25rem 0 0.5rem 0;
+}
