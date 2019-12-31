@@ -9,6 +9,7 @@ import ManageFriends from './pages/Home/ManageFriends2';
 import Feed from './pages/Home/Feed';
 import AccountSettings from './pages/Home/AccountSettings';
 import Journal from './pages/Home/Journal';
+import Mood from './pages/Home/Mood';
 import SignUp from './pages/auth/SignUp';
 import Login from './pages/auth/Login';
 import Nav from './components/Nav';
@@ -40,6 +41,7 @@ class App extends Component {
             <Route path="/settings" component={requireLogin(AccountSettings)} />
             <Route path="/feed" component={requireLogin(Feed)} />
             <Route path="/journal" component={requireLogin(Journal)} />
+            <Route path="/mood" component={requireLogin(Mood)} />
             <Route path="/register" component={SignUp} />
             <Route path="/login" component={Login} />
             <Route path="/forgot" component={Forgot} />
