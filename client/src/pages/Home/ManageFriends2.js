@@ -50,7 +50,7 @@ class ManageFriends extends Component {
         <div className="category-card-header">
           <h3 className="card-title">Friend Requests</h3>
         </div>
-        <div className="category-card-body">
+        <div className="category-card-body scroll-friends">
           <div className="user-block">
             <img src={Adam} alt="profile" className="manage-friends-pic" />
             <div className="ml-3">
@@ -104,10 +104,14 @@ class ManageFriends extends Component {
           <h3 className="card-title">Add Friends</h3>
         </div>
         <div className="category-card-body">
-          <p className="grey-italics">Search friends by name or email.</p>
-          <input type="text" name="search-input" value="" className="search-input" />
-          <button type="button" className="btn-primary">Search</button>
-          <div className="line" />
+          <div className="input-group">
+            <input type="text" className="form-control search-input" placeholder="Search friends by name or email" />
+            <div className="input-group-append">
+              <button className="btn-primary" type="button">
+                <i className="fas fa-search" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -173,7 +177,7 @@ class ManageFriends extends Component {
             <a href="" className="user-link">
               Adam Ripley
             </a>
-            <i className="fas fa-ellipsis-h ml-auto mr-4" />
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
           </div>
           <div className="line" />
           <div className="user-block pt-2 pb-2">

@@ -43,18 +43,21 @@ class Journal extends Component {
 
   showCreateNew() {
     return (
-      <div className="category-card p-3">
-        <h3 className="card-title">Create New Entry</h3>
-        <div className="line" />
-        <RichTextEditor
-          value={this.state.value}
-          onChange={this.handleChange}
-          toolbarConfig={toolbarConfig}
-          placeholder="What's on your mind?"
-          autoFocus
-        />
-        <div className="d-flex justify-content-end">
-          <button type="button" className="btn-primary mr-4">Post</button>
+      <div className="category-card">
+        <div className="category-card-header">
+          <h3 className="card-title">Create New Entry</h3>
+        </div>
+        <div className="category-card-body">
+          <RichTextEditor
+            value={this.state.value}
+            onChange={this.handleChange}
+            toolbarConfig={toolbarConfig}
+            placeholder="What's on your mind?"
+            autoFocus
+          />
+          <div className="d-flex justify-content-end">
+            <button type="button" className="btn-primary mr-4">Post</button>
+          </div>
         </div>
       </div>
     );
@@ -62,10 +65,11 @@ class Journal extends Component {
 
   showPastEntries() {
     return (
-      <div className="category-card p-3 past-entries">
-        <h3 className="card-title">Past Entries</h3>
-        <div className="line" />
-        <div className="scroll">
+      <div className="category-card past-entries">
+        <div className="category-card-header">
+          <h3 className="card-title">Past Entries</h3>
+        </div>
+        <div className="category-card-body scroll">
           <div className="journal-entry-section">
             <a href="" className="navy-link">
               This is a test entry.
