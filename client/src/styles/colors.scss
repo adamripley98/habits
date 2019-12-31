@@ -17,6 +17,14 @@ $turquoise: #00818a;
   font-size: 1.2rem;
 }
 
+.navy-link {
+  color: $navy;
+}
+
+.navy-link:hover {
+  color: $gold;
+}
+
 .grey-italics {
   color: #565656;
   font-style: italic;

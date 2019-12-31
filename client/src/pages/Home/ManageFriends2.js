@@ -46,90 +46,52 @@ class ManageFriends extends Component {
 
   showRequested() {
     return (
-      <div className="category-card p-3">
-        <h3 className="navy-text bold m-3">Friend Requests</h3>
-        <div className="line" />
-        <div className="user-block">
-          <img src={Adam} alt="profile" className="manage-friends-pic" />
-          <div className="ml-3">
-            <a href="" className="user-link">
-              Adam Ripley
-            </a>
-            <p className="grey-italics mb-0 mt--05">1 mutual friend</p>
-          </div>
-          <div className="friend-btn-group mr-3">
-            <button type="button" className="btn-primary btn-friend-accept mr-1">Confirm</button>
-            <button type="button" className="btn-secondary btn-friend-reject">Delete</button>
-          </div>
+      <div className="category-card">
+        <div className="category-card-header">
+          <h3 className="card-title">Friend Requests</h3>
         </div>
-        <div className="line" />
-        <div className="user-block">
-          <img src={Adam} alt="profile" className="manage-friends-pic" />
-          <div className="ml-3">
-            <a href="" className="user-link">
-              Adam Ripley
-            </a>
-            <p className="grey-italics mb-0 mt--05">6 mutual friends</p>
+        <div className="category-card-body">
+          <div className="user-block">
+            <img src={Adam} alt="profile" className="manage-friends-pic" />
+            <div className="ml-3">
+              <a href="" className="user-link">
+                Adam Ripley
+              </a>
+              <p className="grey-italics mb-0 mt--05">1 mutual friend</p>
+            </div>
+            <div className="friend-btn-group mr-3">
+              <button type="button" className="btn-primary btn-friend-accept mr-1">Confirm</button>
+              <button type="button" className="btn-secondary btn-friend-reject">Delete</button>
+            </div>
           </div>
-          <div className="friend-btn-group mr-3">
-            <button type="button" className="btn-primary btn-friend-accept mr-1">Confirm</button>
-            <button type="button" className="btn-secondary btn-friend-reject">Delete</button>
+          <div className="line" />
+          <div className="user-block">
+            <img src={Adam} alt="profile" className="manage-friends-pic" />
+            <div className="ml-3">
+              <a href="" className="user-link">
+                Adam Ripley
+              </a>
+              <p className="grey-italics mb-0 mt--05">6 mutual friends</p>
+            </div>
+            <div className="friend-btn-group mr-3">
+              <button type="button" className="btn-primary btn-friend-accept mr-1">Confirm</button>
+              <button type="button" className="btn-secondary btn-friend-reject">Delete</button>
+            </div>
           </div>
-        </div>
-        <div className="line" />
-        <div className="user-block">
-          <img src={Adam} alt="profile" className="manage-friends-pic" />
-          <div className="ml-3">
-            <a href="" className="user-link">
-              Adam Ripley
-            </a>
-            <p className="grey-italics mb-0 mt--05">0 mutual friends</p>
+          <div className="line" />
+          <div className="user-block">
+            <img src={Adam} alt="profile" className="manage-friends-pic" />
+            <div className="ml-3">
+              <a href="" className="user-link">
+                Adam Ripley
+              </a>
+              <p className="grey-italics mb-0 mt--05">0 mutual friends</p>
+            </div>
+            <div className="friend-btn-group mr-3">
+              <button type="button" className="btn-primary btn-friend-accept mr-1">Confirm</button>
+              <button type="button" className="btn-secondary btn-friend-reject">Delete</button>
+            </div>
           </div>
-          <div className="friend-btn-group mr-3">
-            <button type="button" className="btn-primary btn-friend-accept mr-1">Confirm</button>
-            <button type="button" className="btn-secondary btn-friend-reject">Delete</button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  showPending() {
-    return (
-      <div className="category-card p-3">
-        <h3 className="navy-text bold m-3">Pending Approval</h3>
-        <div className="line" />
-        <div className="user-block">
-          <img src={Adam} alt="profile" className="manage-friends-pic" />
-          <div className="ml-3">
-            <a href="" className="user-link">
-              Adam Ripley
-            </a>
-            <p className="grey-italics mb-0 mt--05">Sent 3 hours ago</p>
-          </div>
-          <button type="button" className="btn-primary ml-4">Cancel Request</button>
-        </div>
-        <div className="line" />
-        <div className="user-block">
-          <img src={Adam} alt="profile" className="manage-friends-pic" />
-          <div className="ml-3">
-            <a href="" className="user-link">
-              Adam Ripley
-            </a>
-            <p className="grey-italics mb-0 mt--05">Sent 2 days ago</p>
-          </div>
-          <button type="button" className="btn-primary ml-4">Cancel Request</button>
-        </div>
-        <div className="line" />
-        <div className="user-block">
-          <img src={Adam} alt="profile" className="manage-friends-pic" />
-          <div className="ml-3">
-            <a href="" className="user-link">
-              Adam Ripley
-            </a>
-            <p className="grey-italics mb-0 mt--05">Sent 1 week ago</p>
-          </div>
-          <button type="button" className="btn-primary ml-4">Cancel Request</button>
         </div>
       </div>
     );
@@ -137,30 +99,146 @@ class ManageFriends extends Component {
 
   showAddFriends() {
     return (
-      <div className="category-card p-3">
-        <h3 className="navy-text bold m-3">Add Friends</h3>
-        <p className="grey-italics">Search friends by name or email.</p>
-        <input type="text" name="search-input" value="" className="search-input" />
-        <button type="button" className="btn-primary">Search</button>
-        <div className="line" />
+      <div className="category-card">
+        <div className="category-card-header">
+          <h3 className="card-title">Add Friends</h3>
+        </div>
+        <div className="category-card-body">
+          <p className="grey-italics">Search friends by name or email.</p>
+          <input type="text" name="search-input" value="" className="search-input" />
+          <button type="button" className="btn-primary">Search</button>
+          <div className="line" />
+        </div>
       </div>
     );
   }
 
   showFriendsList() {
     return (
-      <div className="category-card p-3">
+      <div className="category-card">
         <div className="category-card-header">
-          <h3 className="navy-text bold m-3">Friends List</h3>
-          <i className="fas fa-ellipsis-h ml-auto mr-4" />
+          <h3 className="card-title">Friends List</h3>
         </div>
-        <div className="line" />
-        <div className="user-block">
-          <img src={Adam} alt="profile" className="friends-pic" />
-          <a href="" className="user-link">
-            Adam Ripley
-          </a>
-          <i className="fas fa-ellipsis-h ml-auto mr-4" />
+        <div className="category-card-body scroll-friends">
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-4" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
+          <div className="line" />
+          <div className="user-block pt-2 pb-2">
+            <img src={Adam} alt="profile" className="friends-pic" />
+            <a href="" className="user-link">
+              Adam Ripley
+            </a>
+            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+          </div>
         </div>
       </div>
     );
@@ -171,16 +249,11 @@ class ManageFriends extends Component {
       <div>
         <ErrorMessage error={this.props.error} />
         <div className="row">
-          <div className="col-lg-6">
+          <div className="col-lg-8">
             {this.showRequested()}
-          </div>
-          <div className="col-lg-6">
-            {this.showPending()}
-          </div>
-          <div className="col-lg-6">
             {this.showAddFriends()}
           </div>
-          <div className="col-lg-6">
+          <div className="col-lg-4">
             {this.showFriendsList()}
           </div>
         </div>

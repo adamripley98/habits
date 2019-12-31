@@ -23,3 +23,33 @@
   border-radius: 3px;
   margin: 0 0.5rem 1rem;
 }
+
+.journal-entry-section {
+  margin: 0 1.5rem;
+  padding: 0.5rem 0.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &:hover {
+    background: #f9f9f9;
+    cursor: pointer;
+    p {
+      color: $gold;
+    }
+    a {
+      color: $gold;
+      text-decoration: underline;
+    }
+  }
+}
+
+.past-entries {
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.scroll {
+  max-height: 30vh;
+  overflow-y: auto;
+}

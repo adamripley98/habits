@@ -41,24 +41,129 @@ class Journal extends Component {
     this.setState({ value });
   }
 
+  showCreateNew() {
+    return (
+      <div className="category-card p-3">
+        <h3 className="card-title">Create New Entry</h3>
+        <div className="line" />
+        <RichTextEditor
+          value={this.state.value}
+          onChange={this.handleChange}
+          toolbarConfig={toolbarConfig}
+          placeholder="What's on your mind?"
+          autoFocus
+        />
+        <div className="d-flex justify-content-end">
+          <button type="button" className="btn-primary mr-4">Post</button>
+        </div>
+      </div>
+    );
+  }
+
+  showPastEntries() {
+    return (
+      <div className="category-card p-3 past-entries">
+        <h3 className="card-title">Past Entries</h3>
+        <div className="line" />
+        <div className="scroll">
+          <div className="journal-entry-section">
+            <a href="" className="navy-link">
+              This is a test entry.
+            </a>
+            <p>1/5/20</p>
+            <p>Public</p>
+          </div>
+          <div className="line" />
+          <div className="journal-entry-section">
+            <a href="" className="navy-link">
+              This is a test entry.
+            </a>
+            <p>1/5/20</p>
+            <p>Public</p>
+          </div>
+          <div className="line" />
+          <div className="journal-entry-section">
+            <a href="" className="navy-link">
+              This is a test entry.
+            </a>
+            <p>1/5/20</p>
+            <p>Public</p>
+          </div>
+          <div className="line" />
+          <div className="journal-entry-section">
+            <a href="" className="navy-link">
+              This is a test entry.
+            </a>
+            <p>1/5/20</p>
+            <p>Public</p>
+          </div>
+          <div className="line" />
+          <div className="journal-entry-section">
+            <a href="" className="navy-link">
+              This is a test entry.
+            </a>
+            <p>1/5/20</p>
+            <p>Public</p>
+          </div>
+          <div className="line" />
+          <div className="journal-entry-section">
+            <a href="" className="navy-link">
+              This is a test entry.
+            </a>
+            <p>1/5/20</p>
+            <p>Public</p>
+          </div>
+          <div className="line" />
+          <div className="journal-entry-section">
+            <a href="" className="navy-link">
+              This is a test entry.
+            </a>
+            <p>1/5/20</p>
+            <p>Public</p>
+          </div>
+          <div className="line" />
+          <div className="journal-entry-section">
+            <a href="" className="navy-link">
+              This is a test entry.
+            </a>
+            <p>1/5/20</p>
+            <p>Public</p>
+          </div>
+          <div className="line" />
+          <div className="journal-entry-section">
+            <a href="" className="navy-link">
+              This is a test entry.
+            </a>
+            <p>1/5/20</p>
+            <p>Public</p>
+          </div>
+          <div className="line" />
+          <div className="journal-entry-section">
+            <a href="" className="navy-link">
+              This is a test entry.
+            </a>
+            <p>1/5/20</p>
+            <p>Public</p>
+          </div>
+          <div className="line" />
+          <div className="journal-entry-section">
+            <a href="" className="navy-link">
+              This is a test entry.
+            </a>
+            <p>1/5/20</p>
+            <p>Public</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   showContent() {
     return (
       <div>
         <ErrorMessage error={this.props.error} />
-        <div className="category-card p-3">
-          <h3 className="card-title">Create New Entry</h3>
-          <div className="line" />
-          <RichTextEditor
-            value={this.state.value}
-            onChange={this.handleChange}
-            toolbarConfig={toolbarConfig}
-            placeholder="What's on your mind?"
-            autoFocus
-          />
-          <div className="d-flex justify-content-end">
-            <button type="button" className="btn-primary mr-4">Post</button>
-          </div>
-        </div>
+        { this.showCreateNew()}
+        { this.showPastEntries() }
       </div>
     );
   }
