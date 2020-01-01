@@ -6,7 +6,7 @@ import './App.css';
 import Home from './pages/Home/Home';
 import Habits from './pages/Home/Habits2';
 import ManageFriends from './pages/Home/ManageFriends2';
-import Feed from './pages/Home/Feed';
+import Feed from './pages/Home/Feed2';
 import AccountSettings from './pages/Home/AccountSettings';
 import Journal from './pages/Home/Journal';
 import Mood from './pages/Home/Mood';

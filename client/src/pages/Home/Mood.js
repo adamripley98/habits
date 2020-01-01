@@ -20,6 +20,7 @@ class Mood extends Component {
       <div className="category-card">
         <div className="category-card-header">
           <h3 className="card-title">Create New Entry</h3>
+          <i className="far fa-edit" />
         </div>
         <div className="category-card-body">
           <h1>hello world</h1>
