@@ -1,3 +1,57 @@
 .status-input {
-  margin: auto;
+  // margin: 1rem;
+  // box-sizing: border-box;
+}
+
+.circle-container {
+  width: 200px;
+  height: 200px;
+}
+
+.circle-pic {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.CircularProgressbarWithChildren .CircularProgressbarWithChildren-path {
+  transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+.post-body {
+  padding: 1.2rem;
+}
+
+.comment-icon {
+  display: inline;
+}
+
+.like-icon {
+  display: inline;
+}
+
+.post-header {
+
+}
+
+.post-footer {
+  margin: 1rem 0 0 1.2rem;
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.comment-box {
+  padding: 0.375rem 0.75rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+}
+
+.comment-box-container {
+  // width: 70%;
+}
+
+
+.icons-box {
+  margin-right: 1.5rem;
 }
