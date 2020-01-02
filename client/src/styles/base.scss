@@ -67,6 +67,20 @@ body {
   line-height: 2.5rem;
 }
 
+.link-bigger {
+  font-size: 1.1rem;
+  font-weight:bold;
+}
+
+.link-large {
+  font-size: 1.5rem !important;
+  font-weight: bold;
+}
+
+.p-bigger {
+  font-size: 1.1rem;
+}
+
 .line {
   border-bottom: 1px solid $light-gray;
   margin: 0 1.5rem;

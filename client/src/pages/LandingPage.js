@@ -20,7 +20,12 @@ class LandingPage extends Component {
                   </span>
                     &nbsp;look like for you?
                 </h1>
-                <button type="button" className="btn-nav">FIND OUT NOW →</button>
+                <button type="button" className="btn-expanding mt-2">
+                  <span className="btn-circle">
+                    <span className="btn-icon btn-arrow" />
+                  </span>
+                  <span className="btn-expanding-text">&nbsp;&nbsp;&nbsp;&nbsp;FIND OUT NOW&nbsp;</span>
+                </button>
               </div>
               <div className="col-lg-6">
                 <img className="header-image" src={DummyImage} alt="dummy" />

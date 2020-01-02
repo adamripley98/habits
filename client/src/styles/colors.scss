@@ -21,12 +21,21 @@ $turquoise: #00818a;
   color: $navy;
 }
 
-.navy-link:hover {
+.white-link {
+  color: white;
+}
+
+.navy-link:hover, .white-link:hover {
   color: $gold;
 }
 
 .grey-italics {
   color: #565656;
+  font-style: italic;
+}
+
+.light-grey-italics {
+  color: $light-gray;
   font-style: italic;
 }
 

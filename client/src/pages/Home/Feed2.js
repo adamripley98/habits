@@ -42,47 +42,140 @@ class Feed extends Component {
 
   showPosts() {
     return (
-      <div className="category-card">
-        <div className="category-card-header">
-          <h3 className="card-title">Posts</h3>
-        </div>
-        <div className="category-card-body">
-          <div className="post-container">
-            <div className="post-header">
-              <img src={Adam} alt="profile" className="friends-pic" />
-              <a href="" className="user-link">
-                Adam Ripley
-              </a>
-              <p className="grey-italics">1/2/20 at 4:32 PM</p>
-            </div>
-            <div className="line" />
-            <div className="post-body">
-              is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-            </div>
-            <div className="line" />
-            <div className="post-footer">
-              <div className="comment-box-container">
-                <input type="text" className="comment-box" placeholder="Add a comment" />
-              </div>
-              <div className="icons-box">
-                <div className="pretty p-icon p-toggle p-jelly p-plain like-icon">
-                  <input type="checkbox" />
-                  <div className="state p-off">
-                    <i className="icon fa fa-heart-o " />
-                    <label>3 likes</label>
-                  </div>
-                  <div className="state p-on p-danger-o">
-                    <i className="icon fa fa-heart" />
-                    <label>4 likes</label>
-                  </div>
+      <div>
+        <div className="category-card">
+          <div className="category-card-body">
+            <div className="post-container">
+              <div className="post-header">
+                <img src={Adam} alt="profile" className="friends-pic mt-1" />
+                <div className="">
+                  <a href="" className="user-link">
+                    Adam Ripley
+                  </a>
+                  <p className="grey-italics">1/2/20 at 4:32 PM</p>
                 </div>
-                <div className="comment-icon">
-                  <i class="far fa-comment light-grey" />
-                  <label>&nbsp;0 comments</label>
+                <i className="fas fa-ellipsis-h ml-auto mr-4 mt-3" />
+              </div>
+              <div className="line" />
+              <div className="post-body">
+                tronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+              </div>
+              <div className="line" />
+              <div className="post-footer">
+                <div className="comment-box-container">
+                  <input type="text" className="comment-box" placeholder="Add a comment" />
+                </div>
+                <div className="icons-box">
+                  <div className="pretty p-icon p-toggle p-jelly p-plain like-icon">
+                    <input type="checkbox" />
+                    <div className="state p-off">
+                      <i className="icon fa fa-heart-o " />
+                      <label>3 likes</label>
+                    </div>
+                    <div className="state p-on p-danger-o">
+                      <i className="icon fa fa-heart" />
+                      <label>4 likes</label>
+                    </div>
+                  </div>
+                  <div className="comment-icon">
+                    <i class="far fa-comment light-grey" />
+                    <label>&nbsp;0 comments</label>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="category-card">
+          <div className="category-card-body">
+            <div className="post-container">
+              <div className="post-header">
+                <img src={Adam} alt="profile" className="friends-pic mt-1" />
+                <div className="">
+                  <a href="" className="user-link">
+                    Adam Ripley
+                  </a>
+                  <p className="grey-italics">1/2/20 at 4:32 PM</p>
+                </div>
+                <i className="fas fa-ellipsis-h ml-auto mr-4 mt-3" />
+              </div>
+              <div className="line" />
+              <div className="post-body">
+                he release of Letraset sheets containing Lorem Ipsum passages, and more recently with?
+              </div>
+              <div className="line" />
+              <div className="post-footer">
+                <div className="comment-box-container">
+                  <input type="text" className="comment-box" placeholder="Add a comment" />
+                </div>
+                <div className="icons-box">
+                  <div className="pretty p-icon p-toggle p-jelly p-plain like-icon">
+                    <input type="checkbox" />
+                    <div className="state p-off">
+                      <i className="icon fa fa-heart-o " />
+                      <label>3 likes</label>
+                    </div>
+                    <div className="state p-on p-danger-o">
+                      <i className="icon fa fa-heart" />
+                      <label>4 likes</label>
+                    </div>
+                  </div>
+                  <div className="comment-icon">
+                    <i class="far fa-comment light-grey" />
+                    <label>&nbsp;0 comments</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="category-card">
+          <div className="category-card-body">
+            <div className="post-container">
+              <div className="post-header">
+                <img src={Adam} alt="profile" className="friends-pic mt-1" />
+                <div className="">
+                  <a href="" className="user-link">
+                    Adam Ripley
+                  </a>
+                  <p className="grey-italics">1/2/20 at 4:32 PM</p>
+                </div>
+                <i className="fas fa-ellipsis-h ml-auto mr-4 mt-3" />
+              </div>
+              <div className="line" />
+              <div className="post-body">
+                is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+              </div>
+              <div className="line" />
+              <div className="post-footer">
+                <div className="comment-box-container">
+                  <input type="text" className="comment-box" placeholder="Add a comment" />
+                </div>
+                <div className="icons-box">
+                  <div className="pretty p-icon p-toggle p-jelly p-plain like-icon">
+                    <input type="checkbox" />
+                    <div className="state p-off">
+                      <i className="icon fa fa-heart-o " />
+                      <label>3 likes</label>
+                    </div>
+                    <div className="state p-on p-danger-o">
+                      <i className="icon fa fa-heart" />
+                      <label>4 likes</label>
+                    </div>
+                  </div>
+                  <div className="comment-icon">
+                    <i class="far fa-comment light-grey" />
+                    <label>&nbsp;0 comments</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="d-flex justify-content-center">
+          <button type="button" className="btn-primary">Show More</button>
         </div>
       </div>
     );
@@ -96,14 +189,28 @@ class Feed extends Component {
         </div>
         <div className="category-card-body">
           <div className="user-block pt-2 pb-2">
-            <img src={Adam} alt="profile" className="friends-pic" />
-            <a href="" className="user-link">
-              Adam Ripley
-            </a>
-            <i className="fas fa-ellipsis-h ml-auto mr-2" />
             <CircularProgressbarWithChildren value={66} initialAnimation>
-              <img className="circle-pic" style={{ width: 150, height: 150 }} src={Adam} alt="Adam" />
+              <img className="circle-pic" src={Adam} alt="Adam" />
             </CircularProgressbarWithChildren>
+            <div className="ml-3">
+              <a href="" className="link-large navy-link">
+                Adam Ripley
+              </a>
+              <p className="grey-italics p-bigger">66% optimized</p>
+            </div>
+            <div className="ml-auto">
+              <div className="pretty p-icon p-toggle p-jelly p-plain like-icon">
+                <input type="checkbox" />
+                <div className="state p-off">
+                  <label>Show More</label>
+                  <i className="icon fa fa-chevron-right" />
+                </div>
+                <div className="state p-on">
+                  <label>Show Less</label>
+                  <i className="icon fa fa-chevron-down" />
+                </div>
+              </div>
+            </div>
           </div>
           <div className="line" />
           <div className="user-block pt-2 pb-2">
