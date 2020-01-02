@@ -1,0 +1,57 @@
+@import '~pretty-checkbox/src/scss/variables';
+
+$pretty--colors:(
+  primary:#3f51b5,
+  info:#00bcd4,
+  success:$navy,
+  warning:$pretty--color-warning, // default
+  danger:$pretty--color-danger //default
+);
+
+@import '~pretty-checkbox/src/pretty-checkbox.scss';
+
+$pretty--color-success:$navy !important;
+
+@font-face {
+  font-family: 'Apercu';
+  src: url('../assets/fonts/Apercu_Regular.otf') format('woff'), /* Pretty Modern Browsers */
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.fas {
+  font-size: 1.4rem;
+}
+
+.p-big {
+  font-size: 1.6rem;
+  line-height: 2.5rem;
+}
+
+.link-bigger {
+  font-size: 1.1rem;
+  font-weight:bold;
+}
+
+.link-large {
+  font-size: 1.5rem !important;
+  font-weight: bold;
+}
+
+.link-small {
+  font-size: 0.9rem !important;
+}
+
+.p-bigger {
+  font-size: 1.1rem;
+}
+
+.cross-through {
+  text-decoration: line-through;
+}

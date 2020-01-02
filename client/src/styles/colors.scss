@@ -18,7 +18,11 @@ $turquoise: #00818a;
 }
 
 .navy-link {
-  color: $navy;
+  color: $navy !important;
+  cursor: pointer;
+  a {
+    color: $navy !important;
+  }
 }
 
 .white-link {
@@ -26,7 +30,10 @@ $turquoise: #00818a;
 }
 
 .navy-link:hover, .white-link:hover {
-  color: $gold;
+  color: $gold !important;
+  a {
+    color: $gold !important;
+  }
 }
 
 .grey-italics {

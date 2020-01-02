@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { CircularProgressbar, buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
+import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import SideNav from '../../components/SideNav';
+import ProgressProvider from '../../components/ProgressProvider';
 import Loading from '../../components/shared/Loading';
 import ErrorMessage from '../../components/shared/ErrorMessage';
 import Adam from '../../images/adampic.jpg';
@@ -11,9 +12,6 @@ import Adam from '../../images/adampic.jpg';
 class Feed extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: 80,
-    };
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -31,7 +29,7 @@ class Feed extends Component {
           <h3 className="card-title">New Post</h3>
         </div>
         <div className="category-card-body">
-          <textarea className="form-control status-input" rows="3" placeholder="What's on your mind?" />
+          <textarea className="form-control" rows="3" placeholder="What's on your mind?" />
           <div className="d-flex justify-content-end">
             <button type="button" className="btn-primary mt-2">Post</button>
           </div>
@@ -78,7 +76,7 @@ class Feed extends Component {
                     </div>
                   </div>
                   <div className="comment-icon">
-                    <i class="far fa-comment light-grey" />
+                    <i className="far fa-comment light-grey" />
                     <label>&nbsp;0 comments</label>
                   </div>
                 </div>
@@ -122,7 +120,7 @@ class Feed extends Component {
                     </div>
                   </div>
                   <div className="comment-icon">
-                    <i class="far fa-comment light-grey" />
+                    <i className="far fa-comment light-grey" />
                     <label>&nbsp;0 comments</label>
                   </div>
                 </div>
@@ -166,7 +164,7 @@ class Feed extends Component {
                     </div>
                   </div>
                   <div className="comment-icon">
-                    <i class="far fa-comment light-grey" />
+                    <i className="far fa-comment light-grey" />
                     <label>&nbsp;0 comments</label>
                   </div>
                 </div>
@@ -189,66 +187,131 @@ class Feed extends Component {
         </div>
         <div className="category-card-body">
           <div className="user-block pt-2 pb-2">
-            <CircularProgressbarWithChildren value={66} initialAnimation>
-              <img className="circle-pic" src={Adam} alt="Adam" />
-            </CircularProgressbarWithChildren>
+            <ProgressProvider valueStart={0} valueEnd={86}>
+              {(value, color) => (
+                <CircularProgressbarWithChildren
+                  value={value}
+                  initialAnimation
+                  styles={buildStyles({
+                    strokeLinecap: 'butt',
+                    pathTransitionDuration: 1,
+                    pathColor: `${color}`,
+                    trailColor: '#ededed',
+                  })}
+                >
+                  <img className="circle-pic" src={Adam} alt="Adam" />
+                </CircularProgressbarWithChildren>
+              )
+             }
+            </ProgressProvider>
             <div className="ml-3">
               <a href="" className="link-large navy-link">
                 Adam Ripley
               </a>
-              <p className="grey-italics p-bigger">66% optimized</p>
+              <p className="grey-italics p-bigger">86% optimized</p>
             </div>
-            <div className="ml-auto">
-              <div className="pretty p-icon p-toggle p-jelly p-plain like-icon">
-                <input type="checkbox" />
-                <div className="state p-off">
-                  <label>Show More</label>
-                  <i className="icon fa fa-chevron-right" />
-                </div>
-                <div className="state p-on">
-                  <label>Show Less</label>
-                  <i className="icon fa fa-chevron-down" />
-                </div>
+            <div className="show-more-div">
+              <div className="link-small bold">
+                Show More
+                <i className="icon fa fa-chevron-right ml-1 arrow-move-right" />
               </div>
             </div>
           </div>
           <div className="line" />
           <div className="user-block pt-2 pb-2">
-            <img src={Adam} alt="profile" className="friends-pic" />
-            <a href="" className="user-link">
-              Adam Ripley
-            </a>
-            <i className="fas fa-ellipsis-h ml-auto mr-2" />
-            <CircularProgressbar
-              value={this.state.value}
-              text={`${this.state.value}%`}
-              strokeWidth={10}
-              styles={buildStyles({
-                rotation: 0.25,
-                strokeLinecap: 'round',
-                textSize: '24px',
-                pathTransitionDuration: 0.5,
-                pathColor: `rgba(62, 152, 199, ${this.state.value / 100})`,
-                textColor: '#293462',
-                trailColor: '#d6d6d6',
-              })}
-            />
+            <ProgressProvider valueStart={0} valueEnd={71}>
+              {(value, color) => (
+                <CircularProgressbarWithChildren
+                  value={value}
+                  initialAnimation
+                  styles={buildStyles({
+                    strokeLinecap: 'butt',
+                    pathTransitionDuration: 1,
+                    pathColor: `${color}`,
+                    trailColor: '#ededed',
+                  })}
+                >
+                  <img className="circle-pic" src={Adam} alt="Adam" />
+                </CircularProgressbarWithChildren>
+              )
+             }
+            </ProgressProvider>
+            <div className="ml-3">
+              <a href="" className="link-large navy-link">
+                Adam Ripley
+              </a>
+              <p className="grey-italics p-bigger">71% optimized</p>
+            </div>
+            <div className="show-more-div">
+              <div className="link-small bold">
+                Show More
+                <i className="icon fa fa-chevron-right ml-1 arrow-move-right" />
+              </div>
+            </div>
           </div>
           <div className="line" />
           <div className="user-block pt-2 pb-2">
-            <img src={Adam} alt="profile" className="friends-pic" />
-            <a href="" className="user-link">
-              Adam Ripley
-            </a>
-            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+            <ProgressProvider valueStart={0} valueEnd={45}>
+              {(value, color) => (
+                <CircularProgressbarWithChildren
+                  value={value}
+                  initialAnimation
+                  styles={buildStyles({
+                    strokeLinecap: 'butt',
+                    pathTransitionDuration: 1,
+                    pathColor: `${color}`,
+                    trailColor: '#ededed',
+                  })}
+                >
+                  <img className="circle-pic" src={Adam} alt="Adam" />
+                </CircularProgressbarWithChildren>
+              )
+             }
+            </ProgressProvider>
+            <div className="ml-3">
+              <a href="" className="link-large navy-link">
+                Adam Ripley
+              </a>
+              <p className="grey-italics p-bigger">45% optimized</p>
+            </div>
+            <div className="show-more-div">
+              <div className="link-small bold">
+                Show More
+                <i className="icon fa fa-chevron-right ml-1 arrow-move-right" />
+              </div>
+            </div>
           </div>
           <div className="line" />
           <div className="user-block pt-2 pb-2">
-            <img src={Adam} alt="profile" className="friends-pic" />
-            <a href="" className="user-link">
-              Adam Ripley
-            </a>
-            <i className="fas fa-ellipsis-h ml-auto mr-2" />
+            <ProgressProvider valueStart={0} valueEnd={18}>
+              {(value, color) => (
+                <CircularProgressbarWithChildren
+                  value={value}
+                  initialAnimation
+                  styles={buildStyles({
+                    strokeLinecap: 'butt',
+                    pathTransitionDuration: 1,
+                    pathColor: `${color}`,
+                    trailColor: '#ededed',
+                  })}
+                >
+                  <img className="circle-pic" src={Adam} alt="Adam" />
+                </CircularProgressbarWithChildren>
+              )
+             }
+            </ProgressProvider>
+            <div className="ml-3">
+              <a href="" className="link-large navy-link">
+                Adam Ripley
+              </a>
+              <p className="grey-italics p-bigger">18% optimized</p>
+            </div>
+            <div className="show-more-div">
+              <div className="link-small bold">
+                Show More
+                <i className="icon fa fa-chevron-right ml-1 arrow-move-right" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
