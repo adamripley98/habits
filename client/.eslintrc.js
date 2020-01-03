@@ -29,5 +29,7 @@ module.exports = {
     "arrow-body-style": "off",
     "max-len": "off",
     "class-methods-use-this": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/label-has-for": "off",
   },
 };

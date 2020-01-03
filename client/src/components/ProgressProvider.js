@@ -33,7 +33,6 @@ class ProgressProvider extends React.Component {
 
   // Helper method to change color of progress bar dependent on value
   pickColor(value) {
-    console.log('enter pick', value);
     // eslint-disable-next-line no-restricted-globals
     if (!value || isNaN(value) || value > 100 || value < 0) {
       return '#ededed';

@@ -24,6 +24,10 @@ body {
   font-family: 'Apercu' !important;
 }
 
+textarea {
+  resize: none;
+}
+
 .body-wrapper {
   min-height: 80vh;
 }
