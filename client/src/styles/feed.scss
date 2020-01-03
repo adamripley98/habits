@@ -16,7 +16,7 @@
 }
 
 .post-body {
-  padding: 0.8rem 1.4rem 0.3rem 1.4rem;
+  padding: 0.8rem 1.4rem 0.8rem 1.4rem;
 }
 
 .sort-section {
@@ -97,14 +97,6 @@
   line-height: 1.5;
   border-radius: 0.25rem;
   border: 1px solid #ced4da;
-  width: 150%;
-}
-
-.post-container {
-}
-
-.comment-box-container {
-  // width: 70%;
 }
 
 .show-more-div {
@@ -129,5 +121,7 @@
 }
 
 .icons-box {
+  margin-left: 1rem;
   margin-right: 1.5rem;
+  white-space: nowrap;
 }

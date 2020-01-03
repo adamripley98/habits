@@ -33,6 +33,7 @@ class Journal extends Component {
     super(props);
     this.state = {
       value: RichTextEditor.createEmptyValue(),
+      privacyState: 'Private',
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -55,7 +56,16 @@ class Journal extends Component {
             placeholder="What's on your mind?"
             autoFocus
           />
-          <div className="d-flex justify-content-end">
+          <div className="d-flex justify-content-end align-items-center">
+            <div className="dropdown mr-2">
+              <button className="dropdown-btn padded-btn dropdown-toggle" type="button" id="privacy-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {this.state.privacyState}
+              </button>
+              <div className="dropdown-menu dropdown-menu-right" aria-labelledby="privacy-dropdown">
+                <span className="dropdown-item" href="#">Private</span>
+                <span className="dropdown-item" href="#">Public</span>
+              </div>
+            </div>
             <button type="button" className="btn-primary mr-4">Post</button>
           </div>
         </div>

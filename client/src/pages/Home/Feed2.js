@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 import SideNav from '../../components/SideNav';
 import ProgressProvider from '../../components/ProgressProvider';
 import Loading from '../../components/shared/Loading';
@@ -61,7 +60,7 @@ class Feed extends Component {
               {`${txt.substring(0, 700)}...`}
             </p>
           )}
-          <div className="show-more-div pt-0 mr-0 mb-1 float-right" onClick={() => this.setState({ showReadMore: !this.state.showReadMore })}>
+          <div className="show-more-div pt-0 mr-0 float-right" onClick={() => this.setState({ showReadMore: !this.state.showReadMore })}>
             <div className="link-small bold">
               { this.state.showReadMore ? (
                 <div>
@@ -90,7 +89,8 @@ class Feed extends Component {
 
   showComments() {
     return (
-      <div className="comment-section mt-2">
+      <div className="comment-section">
+        <div className="line" />
         <div className="comment-block">
           <div className="comment-header">
             <img src={Adam} alt="profile" />
@@ -172,14 +172,13 @@ class Feed extends Component {
                 <i className="fas fa-ellipsis-h ml-auto mr-4 mt-3" />
               </div>
               <div className="line" />
-              <div className="post-body">
+              <div className="post-body mb-0">
                 tronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
               </div>
+              {this.state.showComments ? this.showComments() : null}
               <div className="line" />
               <div className="post-footer">
-                <div className="comment-box-container">
-                  <input type="text" className="comment-box" placeholder="Add a comment" />
-                </div>
+                <input type="text" className="comment-box" style={{ width: '100%' }} placeholder="Add a comment" />
                 <div className="icons-box">
                   <div className="pretty p-icon p-toggle p-jelly p-plain like-icon">
                     <input type="checkbox" />
@@ -194,11 +193,10 @@ class Feed extends Component {
                   </div>
                   <div className="comment-icon" onClick={() => this.setState({ showComments: !this.state.showComments })}>
                     <i className={this.state.showComments ? 'far fa-comment navy-text' : 'far fa-comment light-grey'} />
-                    &nbsp;4 comments
+                    <label className="mb-0">&nbsp;4 comments</label>
                   </div>
                 </div>
               </div>
-              {this.state.showComments ? this.showComments() : null}
             </div>
           </div>
         </div>
@@ -308,20 +306,20 @@ class Feed extends Component {
             <p className="bold navy-text m-0">Sorting by:</p>
           </div>
           <div className="dropdown">
-            <button className="sort-btn dropdown-toggle" type="button" id="sort-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button className="dropdown-btn dropdown-toggle" type="button" id="sort-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {this.state.sortedBy}
             </button>
-            <div className="dropdown-menu" aria-labelledby="sort-dropdown">
+            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="sort-dropdown">
               <a className="dropdown-item" href="#">Score (High to Low)</a>
               <a className="dropdown-item" href="#">Score (Low to High)</a>
               <a className="dropdown-item" href="#">Alphabetical</a>
             </div>
           </div>
           <div className="dropdown">
-            <button className="sort-btn dropdown-toggle" type="button" id="duration-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button className="dropdown-btn dropdown-toggle" type="button" id="duration-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {this.state.duration}
             </button>
-            <div className="dropdown-menu" aria-labelledby="duration-dropdown">
+            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="duration-dropdown">
               <a className="dropdown-item" href="#">Day</a>
               <a className="dropdown-item" href="#">Week</a>
               <a className="dropdown-item" href="#">Month</a>

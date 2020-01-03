@@ -34,6 +34,23 @@
   opacity: 1.0;
 }
 
+.individual-habit {
+  .pretty {
+    white-space: inherit !important;
+  }
+
+  .pretty .state label{
+    text-indent: 0 !important;
+    padding-left: 2rem !important;
+  }
+
+  .pretty .state label:after,
+  .pretty .state label:before,
+  .pretty.p-icon .state .icon {
+      top: calc(50% - ((1em + 2px)/2)) !important;
+  }
+}
+
 @media (max-width: 768px) {
   .arrow-section {
     display: block;

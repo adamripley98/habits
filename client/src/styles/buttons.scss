@@ -29,6 +29,10 @@ button, button:focus,  {
   display: inline-block;
 }
 
+.btn-save {
+  padding: 0.5rem 1rem;
+}
+
 .btn-nav {
   margin: 0.7rem 2rem 0.7rem 0rem;
   color: $gold;
@@ -53,20 +57,30 @@ button, button:focus,  {
 .btn-delete-account {
   background: #FF6347;
   color: white;
+  border: none;
   border-radius: 0.3rem;
   font-weight: bold;
   transition: .3s;
   padding: 0.5rem 1rem;
-  &.hover {
-    background: #8B0000;
+  &:hover {
+    background: #8B0000 !important;
   }
 }
 
-.sort-btn {
+.padded-btn {
+  padding: 0.41rem 1.15rem;
+  font-weight: bold;
+}
+
+.dropdown-btn {
   background: none;
   border: 1px solid $navy;
   border-radius: 0.3rem;
   color: $navy;
+  transition: .3s;
+  &:hover {
+    background: $very-light-gray;
+  }
 }
 
 .btn-expanding {

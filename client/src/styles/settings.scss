@@ -1,7 +1,11 @@
 .setting-section {
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem 1.5rem 0rem 1.5rem;
+  align-items: center;
+  padding: 0.5rem 1.5rem;
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .edit-link {
@@ -11,7 +15,6 @@
     padding-top: 0.15rem;
     margin-right: 0.15rem;
   }
-  padding-top:0.8rem;
 }
 
 .edit-link:hover {

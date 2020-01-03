@@ -9,12 +9,21 @@ import Adam from '../../images/adampic.jpg';
 class AccountSettings extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      editting: null,
+    };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
+    });
+  }
+
+  handleEdit(name) {
+    this.setState({
+      editting: name,
     });
   }
 
@@ -25,10 +34,35 @@ class AccountSettings extends Component {
           <h3 className="card-title">Basic Information</h3>
         </div>
         <div className="category-card-body">
+          {
+            this.state.editting === 'name' ? (
+              <div className="setting-section">
+                <div>
+                  <p className="bold">Full Name</p>
+                  <input type="text" className="form-control" name="full-name" value="Adam Ripley" />
+                </div>
+                <button type="button" className="btn btn-primary btn-save" onClick={() => this.setState({ editting: null })}>
+                  Save Changes
+                </button>
+              </div>
+            ) : (
+              <div className="setting-section">
+                <div>
+                  <p className="bold">Full Name</p>
+                  <p>Adam Ripley</p>
+                </div>
+                <div className="edit-link" onClick={() => this.handleEdit('name')}>
+                  <i className="far fa-edit" />
+                  <p>Edit</p>
+                </div>
+              </div>
+            )
+          }
+          <div className="line" />
           <div className="setting-section">
             <div>
-              <p className="bold mb-0">Full Name</p>
-              <p className="mb-2">Adam Ripley</p>
+              <p className="bold">Password</p>
+              <p>&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;</p>
             </div>
             <div className="edit-link">
               <i className="far fa-edit" />
@@ -38,18 +72,7 @@ class AccountSettings extends Component {
           <div className="line" />
           <div className="setting-section">
             <div>
-              <p className="bold mb-0">Password</p>
-              <p className="mb-2">&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;</p>
-            </div>
-            <div className="edit-link">
-              <i className="far fa-edit" />
-              <p>Edit</p>
-            </div>
-          </div>
-          <div className="line" />
-          <div className="setting-section">
-            <div>
-              <p className="bold mb-0">Profile Picture</p>
+              <p className="bold">Profile Picture</p>
               <img src={Adam} alt="change-pic" className="change-pic" />
             </div>
             <div className="edit-link mt-4">
@@ -60,8 +83,8 @@ class AccountSettings extends Component {
           <div className="line" />
           <div className="setting-section">
             <div>
-              <p className="bold mb-0">Location</p>
-              <p className="mb-2">Anchorage, AK</p>
+              <p className="bold">Location</p>
+              <p>Anchorage, AK</p>
             </div>
             <div className="edit-link">
               <i className="far fa-edit" />
@@ -71,8 +94,8 @@ class AccountSettings extends Component {
           <div className="line" />
           <div className="setting-section">
             <div>
-              <p className="bold mb-0">Bio</p>
-              <p className="mb-2">Hello I'm a lifting bro from AK and i finna meet gurlz because gurlz are sick and im a lifting bro</p>
+              <p className="bold">Bio</p>
+              <p>Hello I'm a lifting bro from AK and i finna meet gurlz because gurlz are sick and im a lifting bro</p>
             </div>
             <div className="edit-link">
               <i className="far fa-edit" />
@@ -93,8 +116,8 @@ class AccountSettings extends Component {
         <div className="category-card-body">
           <div className="setting-section">
             <div>
-              <p className="bold mb-0">App Notifications</p>
-              <p className="mb-2">New posts, likes/comments, friend requests</p>
+              <p className="bold">App Notifications</p>
+              <p>New posts, likes/comments, friend requests</p>
             </div>
             <div className="edit-link">
               <i className="far fa-edit" />
@@ -104,8 +127,8 @@ class AccountSettings extends Component {
           <div className="line" />
           <div className="setting-section">
             <div>
-              <p className="bold mb-0">Email Notifications</p>
-              <p className="mb-2">Dayli news, reminders, friend requests</p>
+              <p className="bold">Email Notifications</p>
+              <p>Dayli news, reminders, friend requests</p>
             </div>
             <div className="edit-link">
               <i className="far fa-edit" />
@@ -115,8 +138,8 @@ class AccountSettings extends Component {
           <div className="line" />
           <div className="setting-section">
             <div>
-              <p className="bold mb-0">Score Privacy</p>
-              <p className="mb-2">Currently only friends can see your scores</p>
+              <p className="bold">Score Privacy</p>
+              <p>Currently only friends can see your scores</p>
             </div>
             <div className="edit-link">
               <i className="far fa-edit" />
