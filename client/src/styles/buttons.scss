@@ -12,18 +12,16 @@ button, button:focus,  {
   font-weight: bold;
   transition: .3s;
   padding: 0.5rem 1.25rem;
-}
-
-.btn-primary:hover {
-  background: $blue;
-  box-shadow: 0 6px 10px rgba(0,0,0,.14), 0 0 6px rgba(0,0,0,.09);
-}
-
-.btn-primary:focus {
-  background: $navy !important;
-  color: $gold !important;
-  outline: none;
-  box-shadow: none;
+  &:hover {
+    background: $blue;
+    box-shadow: 0 6px 10px rgba(0,0,0,.07), 0 0 6px rgba(0,0,0,.045) !important;
+  }
+  &:focus {
+    background: $navy !important;
+    color: $gold !important;
+    outline: none;
+    box-shadow: none;
+  }
 }
 
 .btn-smaller {
@@ -59,10 +57,16 @@ button, button:focus,  {
   font-weight: bold;
   transition: .3s;
   padding: 0.5rem 1rem;
+  &.hover {
+    background: #8B0000;
+  }
 }
 
-.btn-delete-account:hover {
-  background: #8B0000;
+.sort-btn {
+  background: none;
+  border: 1px solid $navy;
+  border-radius: 0.3rem;
+  color: $navy;
 }
 
 .btn-expanding {

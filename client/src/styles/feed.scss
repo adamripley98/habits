@@ -19,6 +19,17 @@
   padding: 0.8rem 1.4rem 0.3rem 1.4rem;
 }
 
+.sort-section {
+  background: $very-light-gray;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  div {
+    margin:0 1rem;
+  }
+}
+
 .comment-icon {
   display: inline;
   cursor: pointer;

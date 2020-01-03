@@ -15,6 +15,8 @@ class Feed extends Component {
     this.state = {
       showComments: false,
       showReadMore: false,
+      sortedBy: 'Score (High to Low)',
+      duration: 'Week',
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -300,6 +302,31 @@ class Feed extends Component {
       <div className="category-card">
         <div className="category-card-header">
           <h3 className="card-title">Friend Scores</h3>
+        </div>
+        <div className="sort-section">
+          <div>
+            <p className="bold navy-text m-0">Sorting by:</p>
+          </div>
+          <div className="dropdown">
+            <button className="sort-btn dropdown-toggle" type="button" id="sort-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {this.state.sortedBy}
+            </button>
+            <div className="dropdown-menu" aria-labelledby="sort-dropdown">
+              <a className="dropdown-item" href="#">Score (High to Low)</a>
+              <a className="dropdown-item" href="#">Score (Low to High)</a>
+              <a className="dropdown-item" href="#">Alphabetical</a>
+            </div>
+          </div>
+          <div className="dropdown">
+            <button className="sort-btn dropdown-toggle" type="button" id="duration-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {this.state.duration}
+            </button>
+            <div className="dropdown-menu" aria-labelledby="duration-dropdown">
+              <a className="dropdown-item" href="#">Day</a>
+              <a className="dropdown-item" href="#">Week</a>
+              <a className="dropdown-item" href="#">Month</a>
+            </div>
+          </div>
         </div>
         <div className="category-card-body scores-card">
           <div className="user-block pt-2 pb-2">
